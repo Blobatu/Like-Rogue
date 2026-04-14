@@ -7,10 +7,9 @@ from pathlib import Path
 
 class Actor:
 
-    health = 1
-
-    def __init__(self, health = 1):
+    def __init__(self, name, health = 1):
         """
         description: Constructeur
         """
         self.health = health
+        self.name = name
