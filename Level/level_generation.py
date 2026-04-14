@@ -6,7 +6,7 @@
 # import
 
 from tileset import tileset as ts
-
+import random as rd
 
 # fonctions
 
@@ -53,3 +53,7 @@ test_1 = [['end_b','','','','crnr_rb','3way_lrb','3way_lrb','strgt_horz','end_l'
 
 #print_room(test_1)
 #print_room_as_list(test_1)
+
+
+# generation de niveau aléatoire 
+
