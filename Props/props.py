@@ -1,20 +1,18 @@
 import random as r
-"""
-
-"""
+import props_interaction as prop_int
 
 
-def barrel():
-    pass
-def chest(player_interaction):
-    if player_interaction == True:
-        item = r.randint(0,3)
-    else:
-        return()
+chest = {
+
+    "sprite":"[]",
+    "interaction":prop_int.chest()
     
-    file = open("chest_item_list")
-    file = file.readlines()
-    item = file[item]
-    return (item,"break_chest")
 
-print(chest(True))
+
+}
+barrel = {
+    "sprite":"()",
+    "interaction":prop_int.barrel()
+
+
+}
