@@ -1,0 +1,7 @@
+ Props
+    [] = chest 
+    () = barrel
+    # = mur
+    . = vide
+    || = porte
+Ennemis
