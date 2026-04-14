@@ -7,3 +7,6 @@
     △ = spike trap
     ' ' = void
 Ennemis
+
+Joueur
+    @ = Joueur
