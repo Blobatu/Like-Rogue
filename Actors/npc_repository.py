@@ -4,7 +4,7 @@ import public
 listof_npc = {
     "Goblin": npc.NPC(name = "Goblin", 
                       health = public.scale,
-                      damage = 1, 
+                      damage = public.scale, 
                       size = 1,
                       zone = 1),
     "Orc": npc.NPC(name = "Orc",
