@@ -16,3 +16,17 @@ barrel = {
 
 
 }
+door = {
+    "sprite":"||",
+    "interaction":prop_int.door()
+
+}
+spike_trap = {
+    
+    "sprite":"△",
+    "interaction":prop_int.spike_trap(),
+}
+void = {
+    "sprite":" ",
+    "interaction":prop_int.void(),
+}

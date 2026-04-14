@@ -27,3 +27,9 @@ def spike_trap(player_interaction,health):
         return health
     else:
         return health
+def void (player_interaction,health):
+    if player_interaction == True:
+        health == 0
+        return health
+    else:
+        return health
