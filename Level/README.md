@@ -57,9 +57,7 @@ def read_single_tile(tile):  # input the tile to print
 ### currently missing tiles
 through testing, i have found that, in some cases, special tiles would be requiered, such as:
 
-- two opposite corners (both orientations)
-- a door with a wall by it's side (basically a 3-way with a corner cut off) (would taye ages due to needing mirrored versions of all 4 rotations, that's 8 tiles, it will take a while, besides, how on earth do I label them all to be clear, fast to type and unique)
-
+- none, they have all been added
 
 ## plan for level generation
   ### steps to generate a level
