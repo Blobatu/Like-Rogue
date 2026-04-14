@@ -5,4 +5,5 @@
     . = vide
     || = porte
     △ = spike trap
+    ' ' = void
 Ennemis
