@@ -11,10 +11,11 @@ class NPC(a.Actor):
                  name: str, 
                  position: tuple[int, int], 
                  health: int = 1, 
-                 damage: int = 1):
+                 damage: int = 1,
+                 size: int = 1):
         """
         description: Constructeur
         """
-        super().__init__(name, position, health, damage)
+        super().__init__(name, position, health, damage, size)
         self.zone = zone
         

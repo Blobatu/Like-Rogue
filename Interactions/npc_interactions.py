@@ -1,6 +1,4 @@
 import Actors.npc as npc
+import Actors.npc_repository as repo 
 
-gob = npc.NPC(name = "Goblin", 
-              health = 1, 
-              damage = 1, 
-              zone = 1)
+gob = repo.listof_npc["Goblin"]
