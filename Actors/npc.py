@@ -9,7 +9,7 @@ class NPC(a.Actor):
     def __init__(self,
                  zone: int, 
                  name: str,
-                 symbol: str,
+                 sprite: str,
                  position: tuple[int, int], 
                  health: int, 
                  damage: int,
@@ -17,6 +17,6 @@ class NPC(a.Actor):
         """
         description: Constructeur
         """
-        super().__init__(name, symbol, position, health, damage, size)
+        super().__init__(name, sprite, position, health, damage, size)
         self.zone = zone
         
