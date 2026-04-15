@@ -57,3 +57,29 @@ test_1 = [['end_b','','','','crnr_rb','3way_lrb','3way_lrb','strgt_horz','end_l'
 
 # generation de niveau aléatoire 
 
+tiles = []              # crée une liste des tuiles pour les choisir aléatoirement
+for t in ts:            #
+    tiles.append(t)     #
+
+def valid(x, y, maze,):
+    width = len(maze[0])
+    height = len(maze)
+
+    left = maze[y][x-1] if x > 0 else 'void'
+    right = maze[y][x+1] if x < width - 1 else 'void'
+    up = maze[y-1][x] if y > 0 else 'void'
+    down = maze[y+1][x] if y < height - 1 else 'void'
+
+    
+
+
+def generate_level(width, height):
+    maze = []
+    for y in range(height):
+        row = []
+        for x in range(width):
+            row.append(rd.choice(tiles))
+        maze.append(row)
+    return maze
+
+print_room(generate_level(16, 7))

@@ -161,3 +161,9 @@ these ones would be harder to implement but would give much better results, like
                 *not my design, couldn't find author
 ```
 I have no idea how this could be done simply, currently not my problem.
+
+## How tf do I make a maze generator?
+``` Python
+# these notes are purely me planning the system, should not be taken into account
+```
+
