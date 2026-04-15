@@ -8,13 +8,15 @@ class NPC(a.Actor):
     
     def __init__(self,
                  zone: int, 
-                 name: str, 
+                 name: str,
+                 sprite: str,
                  position: tuple[int, int], 
-                 health: int = 1, 
-                 damage: int = 1):
+                 health: int, 
+                 damage: int,
+                 size: int):
         """
         description: Constructeur
         """
-        super().__init__(name, position, health, damage)
+        super().__init__(name, sprite, position, health, damage, size)
         self.zone = zone
         
