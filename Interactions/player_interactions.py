@@ -14,7 +14,6 @@ mobs =("player","other_monsters")
 
 
 
-stay = "stay"
 def move_left():
     global test_print
     
@@ -42,18 +41,6 @@ def move_right():
         test_print = "".join(chars)
         print(test_print)
 
-
-
-    
-def current_position():
-    for mobs_position in mobs:
-        return mobs_position
-    
-
-def loop_back():
-    for mobs_position in mobs:
-        last_positions = mobs_position
-    return mobs_position
 
 while True:
     movements = input("up, down, left, right: ")
