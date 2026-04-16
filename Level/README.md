@@ -167,3 +167,6 @@ I have no idea how this could be done simply, currently not my problem.
 # these notes are purely me planning the system, should not be taken into account
 ```
 
+first, generate a random level, then, check it tile by tile to see wether these tiles are legal, if they aren't, regenerate that tile from a list of legal tiles,add that generated tile to a temporary list of "generated tiles", then check again, if that tile works, continue, if it still violates a rule, regenerate it while looking at hte tiles already generated to see that that option wasn't tried, if all legal tiles have been tried, go back one tile and change this one, repeat.
+
+that seems slow but it's my way and it's not like that process has to be constantly running anyways
