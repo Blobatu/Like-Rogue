@@ -65,21 +65,21 @@ def valid(x, y, maze,):
     width = len(maze[0])
     height = len(maze)
 
-    left = maze[y][x-1] if x > 0 else 'out'
-    right = maze[y][x+1] if x < width - 1 else 'out'
-    up = maze[y-1][x] if y > 0 else 'out'
-    down = maze[y+1][x] if y < height - 1 else 'out'
-    uleft = maze[y-1][x-1] if x > 0 and y > 0 else 'out'
-    uright = maze[y-1][x+1] if x < width - 1 and y > 0 else 'out'
-    dleft = maze[y+1][x-1] if x > 0 and y < height - 1 else 'out'
-    dright = maze[y+1][x+1] if x < width - 1 and y < height - 1 else 'out'
+    check = {
+        "left": maze[y][x-1] if x > 0 else "out",
+        "right": maze[y][x+1] if x < width - 1 else "out",
+        "up": maze[y-1][x] if y > 0 else "out",
+        "down": maze[y+1][x] if y < height - 1 else "out",
+        "up_left": maze[y-1][x-1] if x > 0 and y > 0 else "out",
+        "up_right": maze[y-1][x+1] if x < width - 1 and y > 0 else "out",
+        "down_left": maze[y+1][x-1] if x > 0 and y < height - 1 else "out",
+        "down_right": maze[y+1][x+1] if x < width - 1 and y < height - 1 else "out",
+        "current": maze[y][x],
+    }
 
 
 
-    
-
-
-def generate_level(width, height):
+def random_pattern(width, height):
     maze = []
     for y in range(height):
         row = []
@@ -87,5 +87,14 @@ def generate_level(width, height):
             row.append(rd.choice(tiles))
         maze.append(row)
     return maze
+
+
+def generate_level(width, height):
+    maze = random_pattern(width, height)
+    for y in range (height):
+        for x in range (width):
+            valid(x, y, maze)
+    return maze
+
 
 print_room(generate_level(16, 7))
