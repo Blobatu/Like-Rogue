@@ -4,7 +4,10 @@ Date : 14 avril 2026
 Description : TODO
 """
 import Actors.actor as a
-class NPC(a.Actor):
+
+player_instance: Player
+
+class Player(a.Actor):
 
     def __init__(self, 
                  level: int,
@@ -23,3 +26,9 @@ class NPC(a.Actor):
         self.level = level
         self.damage_done = damage_done
         self.damage_received = damage_received
+
+
+def get_player():
+    if(player_instance is None):
+        player_instance = Player(1)
+    return player_instance
