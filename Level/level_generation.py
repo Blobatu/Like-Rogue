@@ -65,10 +65,16 @@ def valid(x, y, maze,):
     width = len(maze[0])
     height = len(maze)
 
-    left = maze[y][x-1] if x > 0 else 'void'
-    right = maze[y][x+1] if x < width - 1 else 'void'
-    up = maze[y-1][x] if y > 0 else 'void'
-    down = maze[y+1][x] if y < height - 1 else 'void'
+    left = maze[y][x-1] if x > 0 else 'out'
+    right = maze[y][x+1] if x < width - 1 else 'out'
+    up = maze[y-1][x] if y > 0 else 'out'
+    down = maze[y+1][x] if y < height - 1 else 'out'
+    uleft = maze[y-1][x-1] if x > 0 and y > 0 else 'out'
+    uright = maze[y-1][x+1] if x < width - 1 and y > 0 else 'out'
+    dleft = maze[y+1][x-1] if x > 0 and y < height - 1 else 'out'
+    dright = maze[y+1][x+1] if x < width - 1 and y < height - 1 else 'out'
+
+
 
     
 
