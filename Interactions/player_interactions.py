@@ -3,8 +3,16 @@ auteur: Léonard Lefebvre
 date:14 avril
 description:to do
 '''
+# ligne 7 a 10 test pour l'instant
+import sys,os
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+from Level.tileset import tileset as ts
+from Level.level_generation import make_lvl_data as ld, print_room as pr
 
-test_print = (". ##. . @ . . \n. . ##. . . . . . .")
+
+test_print = ld.make_lvl_data(7,16)
 print(test_print)
 
 walls = ('#')
@@ -14,7 +22,6 @@ mobs =("player","other_monsters")
 
 
 
-stay = "stay"
 def move_left():
     global test_print
     
@@ -42,18 +49,6 @@ def move_right():
         test_print = "".join(chars)
         print(test_print)
 
-
-
-    
-def current_position():
-    for mobs_position in mobs:
-        return mobs_position
-    
-
-def loop_back():
-    for mobs_position in mobs:
-        last_positions = mobs_position
-    return mobs_position
 
 while True:
     movements = input("up, down, left, right: ")
