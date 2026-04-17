@@ -1,6 +1,6 @@
-from level_generation import make_lvl_data
+from .level_generation import make_lvl_data
 import random as rd
-from tileset import tileset as ts
+from .tileset import tileset as ts
 
 
 # because importing it wouldn't work, somehow
@@ -41,7 +41,7 @@ def valid(x, y, maze,):
     
     for i in check:
         if check[i] == 'void':
-            check[i] = 'out'
+           check[i] = 'out'
 
     if check['left'] == 'out' and check['current'] not in out_left:     ## repeat this style of check for all rules
         return out_left
@@ -76,7 +76,7 @@ def generate_level(width, height):
     for y in range (height):
         for x in range (width):
             current_check = valid(x, y, maze)
-            while current_check != 'ok':            ## check this parrt of the code, it may not be correct
+            while current_check != 'ok':            ## check this part of the code, it may not be correct
                 maze[y][x] = rd.choice(current_check)
                 current_check = valid(x, y, maze)
     return maze

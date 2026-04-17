@@ -1,4 +1,4 @@
-import Actors.npc as npc
+from . import npc
 import public
 
 listof_npc = {

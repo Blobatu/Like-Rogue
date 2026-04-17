@@ -5,7 +5,7 @@
 
 # import
 
-from tileset import tileset as ts
+from .tileset import tileset as ts
 import random as rd
 
 # fonctions

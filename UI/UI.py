@@ -44,3 +44,5 @@ def open_credits():
     credits_button.pack(pady=12, padx=10)
 
     app.mainloop()
+
+    play()

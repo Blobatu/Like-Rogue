@@ -1,34 +1,34 @@
 import random as r
-import props_interaction as prop_int
+from . import props_interaction as prop_int
 
 
 chest = {
 
     "sprite":"[]",
-    "interaction":prop_int.chest()
+    "interaction": prop_int.chest
     
 
 
 }
 barrel = {
     "sprite":"()",
-    "interaction":prop_int.barrel()
+    "interaction": prop_int.barrel
 
 
 }
 door = {
     "sprite":"||",
-    "interaction":prop_int.door()
+    "interaction": prop_int.door
 
 }
 spike_trap = {
     
     "sprite":"△",
-    "interaction":prop_int.spike_trap(),
+    "interaction": prop_int.spike_trap,
 }
 void = {
     "sprite":" ",
-    "interaction":prop_int.void(),
+    "interaction": prop_int.void,
 }
 props = {
 

@@ -3,9 +3,9 @@ Auteur : Luc Desforges
 Date : 14 avril 2026
 Description : TODO
 """
-import Actors.actor as a
+from . import actor as a
 
-player_instance: Player
+player_instance: "Player" = None
 
 class Player(a.Actor):
 
