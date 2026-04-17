@@ -30,3 +30,14 @@ void = {
     "sprite":" ",
     "interaction":prop_int.void(),
 }
+props = {
+
+    "[]":chest,
+    "()":barrel,
+    "||":door,
+    "△":spike_trap,
+    " ":void,
+
+
+
+}
