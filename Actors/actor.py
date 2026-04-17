@@ -21,3 +21,11 @@ class Actor:
         self.health = health
         self.damage = damage
         self.size = size
+
+        self.max_health = health
+
+    def lose_life(self, amount: int):
+        self.health -= amount
+        if(self.health <= 0):
+            return True
+        return False

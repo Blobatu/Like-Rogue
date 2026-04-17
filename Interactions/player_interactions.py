@@ -3,13 +3,15 @@ auteur: Léonard Lefebvre
 date:14 avril
 description:to do
 '''
-
+import Actors.player as p
 walls = ('#')
 player = '@'
 #player_position = player.position
 mobs =("player","other_monsters")
 
 test_print = "####################\n##. . . . . . . . ##\n##. . . . . . . . ##\n##. . . . . . . . ##\n##. . . . @ . . . ##\n##. . . . . . . . ##\n##. . . . . . . . ##\n####################"
+
+player_actor = p.get_player()
 
 def move_left():
     global test_print
