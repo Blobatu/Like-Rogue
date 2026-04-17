@@ -1,6 +1,6 @@
-from .level_generation import make_lvl_data
+from level_generation import make_lvl_data
 import random as rd
-from .tileset import tileset as ts
+from tileset import tileset as ts
 
 
 # because importing it wouldn't work, somehow
