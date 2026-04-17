@@ -6,7 +6,7 @@ Description : TODO
 from . import actor as a
 
 player_instance: Player = None
-
+instanciated = False
 class Player(a.Actor):
 
     def __init__(self, 
@@ -29,6 +29,11 @@ class Player(a.Actor):
 
 
 def get_player():
-    if(player_instance is None):
-        player_instance = Player(1)
+    if(instanciated is False):
+        player_instance = Player(level = 1, 
+                                 damage_received = 0, 
+                                 damage_done = 0,
+                                 name = "Nard", 
+                                 sprite = "@@",
+                                 position = (0, 0))
     return player_instance
