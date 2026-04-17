@@ -5,7 +5,7 @@ Description : TODO
 """
 from . import actor as a
 
-player_instance: "Player" = None
+player_instance: Player = None
 
 class Player(a.Actor):
 
