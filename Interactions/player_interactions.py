@@ -3,24 +3,13 @@ auteur: Léonard Lefebvre
 date:14 avril
 description:to do
 '''
-# ligne 7 a 10 test pour l'instant
-import sys,os
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-sys.path.append(parent_dir)
-from Level.tileset import tileset as ts
-from Level.level_generation import make_lvl_data as ld, print_room as pr
-
-
-test_print = ld.make_lvl_data(7,16)
-print(test_print)
 
 walls = ('#')
 player = '@'
 #player_position = player.position
 mobs =("player","other_monsters")
 
-
+test_print = "####################\n##. . . . . . . . ##\n##. . . . . . . . ##\n##. . . . . . . . ##\n##. . . . @ . . . ##\n##. . . . . . . . ##\n##. . . . . . . . ##\n####################"
 
 def move_left():
     global test_print
@@ -33,7 +22,6 @@ def move_left():
         chars[pos] = "."
         chars[pos-2] = player
         test_print = "".join(chars)
-        print(test_print)
     
     
 def move_right():
@@ -47,10 +35,36 @@ def move_right():
         chars[pos] = "."
         chars[pos+2] = player
         test_print = "".join(chars)
-        print(test_print)
+def move_up():
+    global test_print
+    test_print.splitlines()
+    for lines in test_print.splitlines():
+        if player in lines:
+            pos = lines.index(player)
+            if test_print[test_print.index(lines)-len(lines)+pos-1] == '#':
+                print("You can't move there")
+            else:
+                chars = list(test_print)
+                chars[test_print.index(lines)+pos] = "."
+                chars[test_print.index(lines)-len(lines)+pos-1] = player
+                test_print = "".join(chars)
+def move_down():
+    global test_print
+    test_print.splitlines()
+    for lines in test_print.splitlines():
+        if player in lines:
+            pos = lines.index(player)
+            if test_print[test_print.index(lines)+len(lines)+pos+1] == '#':
+                print("You can't move there")
+            else:
+                chars = list(test_print)
+                chars[test_print.index(lines)+pos] = "."
+                chars[test_print.index(lines)+len(lines)+pos+1] = player
+                test_print = "".join(chars)
 
 
 while True:
+    print(test_print)
     movements = input("up, down, left, right: ")
     if movements == "left":
         move_left()
