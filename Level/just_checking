@@ -1,0 +1,56 @@
+"""
+just an example code I found online to test text in pygame which I modified a litle for our purposes
+"""
+
+import pygame
+import sys
+import level_generation as lg
+
+# Initialize Pygame
+pygame.init()
+
+# Create a window
+width = 1450
+height = 850
+font_size = 10
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Pygame Text Example")
+
+# Set up font
+font = pygame.font.SysFont('Consolas', font_size)
+
+# Function to render centered text
+def draw_centered_text_block(level_data, screen, font):
+    """Draw all lines centered horizontally and vertically."""
+    line_height = font.get_height() + 5  # Font height + gap
+    
+    # Render all texts to measure total block height
+    rendered_texts = [font.render(str(text), True, (255, 255, 255)) for text in level_data]
+    total_height = len(rendered_texts) * line_height
+    
+    # Start y at vertical center minus half block height
+    start_y = (height - total_height) // 2
+    
+    for i, text_surf in enumerate(rendered_texts):
+        # Center each line horizontally
+        text_rect = text_surf.get_rect(center=(width // 2, start_y + i * line_height))
+        screen.blit(text_surf, text_rect)
+
+clock = pygame.time.Clock()
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    # Fill background
+    screen.fill((0, 0, 0))
+
+    # Get data and draw centered block
+    level_data = lg.make_lvl_data(lg.test_1)
+    draw_centered_text_block(level_data, screen, font)
+
+    # Update display
+    pygame.display.flip()
+    clock.tick(60)
