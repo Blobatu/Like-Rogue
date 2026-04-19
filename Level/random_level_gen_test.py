@@ -37,7 +37,7 @@ def valid(x, y, maze,):
     width = len(maze[0])
     height = len(maze)
 
-    check = {
+    c = {
         'left': maze[y][x-1] if x > 0 else 'out',
         'right': maze[y][x+1] if x < width - 1 else 'out',
         'up': maze[y-1][x] if y > 0 else 'out',
@@ -49,21 +49,47 @@ def valid(x, y, maze,):
         'current': maze[y][x],
     }
     
-    for i in check:
-        if check[i] == 'void':
-           check[i] = 'out'
+    for i in c:
+        if c[i] == 'void':
+           c[i] = 'out'
 
-    if check['left'] == 'out' and check['current'] not in out_left:
+    if c['left'] == 'out' and c['current'] not in out_left:
         return out_left
     
-    if check['right'] == 'out' and check['current'] not in out_right:
+    if c['right'] == 'out' and c['current'] not in out_right:
         return out_right
     
-    if check['up'] == 'out' and check['current'] not in out_top:
+    if c['up'] == 'out' and c['current'] not in out_top:
         return out_top
     
-    if check['down'] == 'out' and check['current'] not in out_bottom:
+    if c['down'] == 'out' and c['current'] not in out_bottom:
         return out_bottom
+
+
+    #if c['left'] in big_open_right and c['current'] not in big_open_left:
+    #    return big_open_left
+    
+    #if c['right'] in big_open_left and c['current'] not in big_open_right:
+    #    return big_open_right
+
+    #if c['up'] in big_open_bottom and c['current'] not in big_open_top:
+    #    return open_top
+    
+    #if c['down'] in big_open_top and c['current'] not in big_open_bottom:
+    #    return big_open_bottom
+    
+
+    if c['left'] in open_right and c['current'] not in open_left:
+        return open_left
+    
+    if c['right'] in open_left and c['current'] not in open_right:
+        return open_right
+
+    if c['up'] in open_bottom and c['current'] not in open_top:
+        return open_top
+    
+    if c['down'] in open_top and c['current'] not in open_bottom:
+        return open_bottom
 
 
     else:
