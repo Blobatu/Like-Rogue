@@ -115,10 +115,10 @@ def random_pattern(width, height):
 
 def generate_level(width, height):
     maze = random_pattern(width, height)
-    for y in range (height):
-        for x in range (width):
-            current_check = valid(x, y, maze)
-            while current_check != 'ok':
+    for iteration in range(9):
+        for y in range (height):
+            for x in range (width):
+                current_check = valid(x, y, maze)
                 while current_check != 'ok':
                     maze[y][x] = rd.choice(current_check)
                     current_check = valid(x, y, maze)
