@@ -14,18 +14,23 @@ def print_room(maze):
 tiles = []              # crée une liste des tuiles pour les choisir aléatoirement
 for t in ts:            #
     tiles.append(t)     #
+tiles.remove('full')
+tiles.remove('hollow')
 
+out_left = ['void', 'strgt_vert', 'end_r', 'end_b', 'end_t', 'crnr_rb', 'crnr_rt', '3way_rtb', 'wall_l', 'crnr_wall_rb', 'crnr_wall_rt', 'crnr_door_t_rb', 'crnr_door_b_rt'] 
+out_right = ['void', 'strgt_vert', 'end_l', 'end_b', 'end_t', 'crnr_lb', 'crnr_lt', '3way_ltb', 'wall_r', 'crnr_wall_lb', 'crnr_wall_lt', 'crnr_door_t_lb','crnr_door_b_lt']
+out_top = ['void', 'strgt_horz', 'end_r', 'end_b', 'end_l', 'crnr_rb', 'crnr_lb', '3way_lrb', 'wall_t', 'crnr_wall_rb', 'crnr_wall_lb', 'crnr_door_r_lb', 'crnr_door_l_rb'] 
+out_bottom = ['void', 'strgt_horz', 'end_l', 'end_r', 'end_t', 'crnr_lt', 'crnr_rt', '3way_lrt', 'wall_b', 'crnr_wall_rt', 'crnr_wall_lt', 'crnr_door_r_lt','crnr_door_l_rt']
 
-out_left = ['void', 'full', 'hollow', 'strgt_vert', 'end_r', 'end_b', 'end_t', 'crnr_rb', 'crnr_rt', '3way_rtb', 'wall_l', 'crnr_wall_rb', 'crnr_wall_rt', 'crnr_door_t_rb', 'crnr_door_b_rt'] 
-out_right = ['void', 'full', 'hollow', 'strgt_vert', 'end_l', 'end_b', 'end_t', 'crnr_lb', 'crnr_lt', '3way_ltb', 'wall_r', 'crnr_wall_lb', 'crnr_wall_lt', 'crnr_door_t_lb','crnr_door_b_lt']
-out_top = ['void', 'full', 'hollow', 'strgt_horz', 'end_r', 'end_b', 'end_l', 'crnr_rb', 'crnr_lb', '3way_lrb', 'wall_t', 'crnr_wall_rb', 'crnr_wall_lb', 'crnr_door_r_lb', 'crnr_door_l_rb'] 
-out_bottom = ['void', 'full', 'hollow', 'strgt_horz', 'end_l', 'end_r', 'end_t', 'crnr_lt', 'crnr_rt', '3way_lrt', 'wall_b', 'crnr_wall_rt', 'crnr_wall_lt', 'crnr_door_r_lt','crnr_door_l_rt']
+#open_top = ['cross', 'strgt_vert', 'end_t', 'crnr_lt', 'crnr_rt', '3way_lrt', '3way_ltb', '3way_rtb', 'door_t', 'cross-lb', 'cross-rb', 'crnr_door_t_lb', 'crnr_door_t_rb']
+#open_bottom = ['cross', 'strgt_vert', 'end_b', 'crnr_lb', 'crnr_rb', '3way_lrb', '3way_ltb', '3way_rtb', 'door_b', 'cross-lt', 'cross-rt', 'crnr_door_b_lt', 'crnr_door_b_rt']
+#open_left = ['cross', 'strgt_horz', 'end_l', 'crnr_lt', 'crnr_lb', '3way_lrt', '3way_ltb', '3way_lrb', 'door_l', 'cross-rb', 'cross-rt', 'crnr_door_l_rb', 'crnr_door_l_rt']
+#open_right = ['cross', 'strgt_horz', 'end_r', 'crnr_rt', 'crnr_rb', '3way_lrt', '3way_rtb', '3way_lrb', 'door_r', 'cross-lb', 'cross-lt', 'crnr_door_r_lb', 'crnr_door_r_lt']
 
-open_top = ['cross', 'strgt_vert', 'end_t', 'crnr_lt', 'crnr_rt', '3way_lrt', '3way_ltb', '3way_rtb', 'door_t', 'cross-lb', 'cross-rb', 'crnr_door_t_lb', 'crnr_door_t_rb']
-open_bottom = ['cross', 'strgt_vert', 'end_b', 'crnr_lb', 'crnr_rb', '3way_lrb', '3way_ltb', '3way_rtb', 'door_b', 'cross-lt', 'cross-rt', 'crnr_door_b_lt', 'crnr_door_b_rt']
-open_left = ['cross', 'strgt_horz', 'end_l', 'crnr_lt', 'crnr_lb', '3way_lrt', '3way_ltb', '3way_lrb', 'door_l', 'cross-rb', 'cross-rt', 'crnr_door_l_rb', 'crnr_door_l_rt']
-open_right = ['cross', 'strgt_horz', 'end_r', 'crnr_rt', 'crnr_rb', '3way_lrt', '3way_rtb', '3way_lrb', 'door_r', 'cross-lb', 'cross-lt', 'crnr_door_r_lb', 'crnr_door_r_lt']
-
+open_top = ['cross', 'strgt_vert', 'end_t', 'crnr_lt', 'crnr_rt', '3way_lrt', '3way_ltb', '3way_rtb']
+open_bottom = ['cross', 'strgt_vert', 'end_b', 'crnr_lb', 'crnr_rb', '3way_lrb', '3way_ltb', '3way_rtb']
+open_left = ['cross', 'strgt_horz', 'end_l', 'crnr_lt', 'crnr_lb', '3way_lrt', '3way_ltb', '3way_lrb']
+open_right = ['cross', 'strgt_horz', 'end_r', 'crnr_rt', 'crnr_rb', '3way_lrt', '3way_rtb', '3way_lrb']
 
 big_open_top = ['empty', 'wall_b', 'wall_r', 'wall_l', 'door_b', 'door_l', 'door_r', 'cross-lt', 'cross-rt', 'crnr_wall_lt', 'crnr_wall_rt', 'pillar', 'crnr_door_r_lt', 'crnr_door_l_rt', 'crnr_door_b_lt', 'crnr_door_b_rt']
 big_open_bottom = ['empty', 'wall_t', 'wall_r', 'wall_l', 'door_t', 'door_l', 'door_r', 'cross-lb', 'cross-rb', 'crnr_wall_lb', 'crnr_wall_rb', 'pillar', 'crnr_door_r_lb', 'crnr_door_l_rb', 'crnr_door_t_lb', 'crnr_door_t_rb']
@@ -114,8 +119,9 @@ def generate_level(width, height):
         for x in range (width):
             current_check = valid(x, y, maze)
             while current_check != 'ok':
-                maze[y][x] = rd.choice(current_check)
-                current_check = valid(x, y, maze)
+                while current_check != 'ok':
+                    maze[y][x] = rd.choice(current_check)
+                    current_check = valid(x, y, maze)
     return maze
 
 print_room(generate_level(16, 7))
