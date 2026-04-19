@@ -21,6 +21,17 @@ out_right = ['void', 'full', 'hollow', 'strgt_vert', 'end_l', 'end_b', 'end_t', 
 out_top = ['void', 'full', 'hollow', 'strgt_horz', 'end_r', 'end_b', 'end_l', 'crnr_rb', 'crnr_lb', '3way_lrb', 'wall_t', 'crnr_wall_rb', 'crnr_wall_lb', 'crnr_door_r_lb', 'crnr_door_l_rb'] 
 out_bottom = ['void', 'full', 'hollow', 'strgt_horz', 'end_l', 'end_r', 'end_t', 'crnr_lt', 'crnr_rt', '3way_lrt', 'wall_b', 'crnr_wall_rt', 'crnr_wall_lt', 'crnr_door_r_lt','crnr_door_l_rt']
 
+open_top = ['cross', 'strgt_vert', 'end_t', 'crnr_lt', 'crnr_rt', '3way_lrt', '3way_ltb', '3way_rtb', 'door_t', 'cross-lb', 'cross-rb', 'cross_pillar', 'crnr_door_t_lb', 'crnr_door_t_rb']
+open_bottom = ['cross', 'strgt_vert', 'end_b', 'crnr_lb', 'crnr_rb', '3way_lrb', '3way_ltb', '3way_rtb', 'door_b', 'cross-lt', 'cross-rt', 'cross_pillar', 'crnr_door_b_lt', 'crnr_door_b_rt']
+open_left = ['cross', 'strgt_horz', 'end_l', 'crnr_lt', 'crnr_lb', '3way_lrt', '3way_ltb', '3way_lrb', 'door_l', 'cross-rb', 'cross-rt', 'cross_pillar', 'crnr_door_l_rb', 'crnr_door_l_rt']
+open_right = ['cross', 'strgt_horz', 'end_r', 'crnr_rt', 'crnr_rb', '3way_lrt', '3way_rtb', '3way_lrb', 'door_r', 'cross-lb', 'cross-lt', 'cross_pillar', 'crnr_door_r_lb', 'crnr_door_r_lt']
+
+
+big_open_top = ['empty', 'wall_b', 'wall_r', 'wall_l', 'door_b', 'door_l', 'door_r', 'cross-lt', 'cross-rt', 'crnr_wall_lt', 'crnr_wall_rt', 'pillar', 'crnr_door_r_lt', 'crnr_door_l_rt', 'crnr_door_b_lt', 'crnr_door_b_rt']
+big_open_bottom = ['empty', 'wall_t', 'wall_r', 'wall_l', 'door_t', 'door_l', 'door_r', 'cross-lb', 'cross-rb', 'crnr_wall_lb', 'crnr_wall_rb', 'pillar', 'crnr_door_r_lb', 'crnr_door_l_rb', 'crnr_door_t_lb', 'crnr_door_t_rb']
+big_open_left = ['empty', 'wall_t', 'wall_r', 'wall_b', 'door_t', 'door_b', 'door_r', 'cross-rb', 'cross-rt', 'crnr_wall_lb', 'crnr_wall_lt', 'pillar', 'crnr_door_r_lb', 'crnr_door_r_lt', 'crnr_door_t_lb', 'crnr_door_b_lt']
+big_open_right = ['empty', 'wall_t', 'wall_l', 'wall_b', 'door_t', 'door_b', 'door_l', 'cross-lb', 'cross-lt', 'crnr_wall_rb', 'crnr_wall_rt', 'pillar', 'crnr_door_l_rb', 'crnr_door_l_rt', 'crnr_door_t_rb', 'crnr_door_b_rt']
+
 
 def valid(x, y, maze,):
     width = len(maze[0])

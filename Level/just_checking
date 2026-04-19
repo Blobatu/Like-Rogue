@@ -1,5 +1,6 @@
 """
 just an example code I found online to test text in pygame which I modified a litle for our purposes
+get pygame with "py -3.14 -m pip install pygame-ce"
 """
 
 import pygame
