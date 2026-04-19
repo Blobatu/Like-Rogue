@@ -32,7 +32,7 @@ big_open_bottom = ['empty', 'wall_t', 'wall_r', 'wall_l', 'door_t', 'door_l', 'd
 big_open_left = ['empty', 'wall_t', 'wall_r', 'wall_b', 'door_t', 'door_b', 'door_r', 'cross-rb', 'cross-rt', 'crnr_wall_lb', 'crnr_wall_lt', 'pillar', 'crnr_door_r_lb', 'crnr_door_r_lt', 'crnr_door_t_lb', 'crnr_door_b_lt']
 big_open_right = ['empty', 'wall_t', 'wall_l', 'wall_b', 'door_t', 'door_b', 'door_l', 'cross-lb', 'cross-lt', 'crnr_wall_rb', 'crnr_wall_rt', 'pillar', 'crnr_door_l_rb', 'crnr_door_l_rt', 'crnr_door_t_rb', 'crnr_door_b_rt']
 
-    ##for a second pass, check for corners, for diagonnals and replace some percentage of cross with cross pillar
+##for a second pass, check for corners, for diagonnals and replace some percentage of cross with cross pillar
 
 
 def valid(x, y, maze,):
@@ -90,7 +90,7 @@ def valid(x, y, maze,):
         return open_top
     
     #if c['up'] in big_open_bottom and c['current'] not in big_open_top:
-    #    return open_top
+    #    return big_open_top
     
 
     else:
@@ -117,6 +117,5 @@ def generate_level(width, height):
                 maze[y][x] = rd.choice(current_check)
                 current_check = valid(x, y, maze)
     return maze
-
 
 print_room(generate_level(16, 7))
