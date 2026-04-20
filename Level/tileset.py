@@ -463,3 +463,264 @@ tileset = {
         7: '##############',
     },
 }
+
+
+# rules for all the tiles, where their exits are and what type they are
+
+tile_rules = {
+    'void': {
+        'gen': None,
+        'wall' : None,
+        'big' : None,
+    },
+    'empty': {
+        'gen': None,
+        'wall' : None,
+        'big' : ['up', 'down', 'left', 'right']
+    },
+    'full': {
+        'gen': None,
+        'wall' : ['up', 'down', 'left', 'right'],
+        'big' : None,
+    },
+    'hollow': {
+        'gen': None,
+        'wall' : ['up', 'down', 'left', 'right'],
+        'big' : None,
+    },
+    'cross': {
+        'gen': ['up', 'down', 'left', 'right'],
+        'wall' : None,
+        'big' : None,
+    },
+    'strgt_horz': {
+        'gen': ['left', 'right'],
+        'wall' : ['up', 'down'],
+        'big' : None,
+    },
+    'strgt_vert': {
+        'gen': ['up', 'down'],
+        'wall' : ['left', 'right'],
+        'big' : None,
+    },
+    'end_l': {
+        'gen': ['left'],
+        'wall' : ['up', 'down', 'right'],
+        'big' : None,
+    },
+    'end_r': {
+        'gen': ['right'],
+        'wall' : ['up', 'down', 'left'],
+        'big' : None,
+    },
+    'end_b': {
+        'gen': ['down'],
+        'wall' : ['up', 'left', 'right'],
+        'big' : None,
+    },
+    'end_t': {
+        'gen': ['up'],
+        'wall' : ['down', 'left', 'right'],
+        'big' : None,
+    },
+    'crnr_lb': {
+        'gen': ['down', 'left'],
+        'wall' : ['up', 'right'],
+        'big' : None,
+    },
+    'crnr_lt': {
+        'gen': ['up', 'left'],
+        'wall' : ['down', 'right'],
+        'big' : None,
+    },
+    'crnr_rb': {
+        'gen': ['down', 'right'],
+        'wall' : ['up', 'left'],
+        'big' : None,
+    },
+    'crnr_rt': {
+        'gen': ['up',  'right'],
+        'wall' : ['down', 'left',],
+        'big' : None,
+    },
+    '3way_lrt': {
+        'gen': ['up', 'left', 'right'],
+        'wall' : ['down',],
+        'big' : None,
+    },
+    '3way_lrb': {
+        'gen': ['down', 'left', 'right'],
+        'wall' : ['up'],
+        'big' : None,
+    },
+    '3way_ltb': {
+        'gen': ['up', 'down', 'left'],
+        'wall' : ['right'],
+        'big' : None,
+    },
+    '3way_rtb': {
+        'gen': ['up', 'down', 'right'],
+        'wall' : ['left'],
+        'big' : None,
+    },
+    'wall_b': {
+        'gen': None,
+        'wall' : ['down'],
+        'big' : ['up', 'left', 'right'],
+    },
+    'wall_t': {
+        'gen': None,
+        'wall' : ['up'],
+        'big' : ['down', 'left', 'right'],
+    },
+    'wall_r': {
+        'gen': None,
+        'wall' : ['right'],
+        'big' : ['up', 'down', 'left'],
+    },
+    'wall_l': {
+        'gen': None,
+        'wall' : ['left'],
+        'big' : ['up', 'down', 'right'],
+    },
+    'door_b': {
+        'gen': ['down'],
+        'wall' : None,
+        'big' : ['up', 'left', 'right'],
+    },
+    'door_t': {
+        'gen': ['up'],
+        'wall' : None,
+        'big' : ['down', 'left', 'right'],
+    },
+    'door_r': {
+        'gen': ['right'],
+        'wall' : None,
+        'big' : ['up', 'down', 'left'],
+    },
+    'door_l': {
+        'gen': ['left'],
+        'wall' : None,
+        'big' : ['up', 'down', 'right'],
+    },
+    'cross-lt': {
+        'gen': ['down', 'right'],
+        'wall' : None,
+        'big' : ['up', 'left'],
+    },
+    'cross-rt': {
+        'gen': ['down', 'left'],
+        'wall' : None,
+        'big' : ['up', 'right'],
+    },
+    'cross-lb': {
+        'gen': ['down', 'left',],
+        'wall' : None,
+        'big' : ['down', 'left'],
+    },
+    'cross-rb': {
+        'gen': ['up', 'left'],
+        'wall' : None,
+        'big' : ['down', 'right'],
+    },
+    'empty+lb': {
+        'gen': None,
+        'wall' : None,
+        'big' : ['up', 'down', 'left', 'right'],
+    },
+    'empty+lt': {
+        'gen': None,
+        'wall' : None,
+        'big' : ['up', 'down', 'left', 'right'],
+    },
+    'empty+rb': {
+        'gen': None,
+        'wall' : None,
+        'big' : ['up', 'down', 'left', 'right'],
+    },
+    'empty+rt': {
+        'gen': None,
+        'wall' : None,
+        'big' : ['up', 'down', 'left', 'right'],
+    },
+    'crnr_wall_lb': {
+        'gen': None,
+        'wall' : ['up', 'right'],
+        'big' : ['down', 'left'],
+    },
+    'crnr_wall_lt': {
+        'gen': None,
+        'wall' : ['down', 'right'],
+        'big' : ['up', 'left'],
+    },
+    'crnr_wall_rb': {
+        'gen': None,
+        'wall' : ['up', 'left'],
+        'big' : ['down', 'right'],
+    },
+    'crnr_wall_rt': {
+        'gen': None,
+        'wall' : ['down', 'left'],
+        'big' : ['up', 'right'],
+    },
+    'cross_pillar': {
+        'gen': ['up', 'down', 'left', 'right'],
+        'wall' : None,
+        'big' : None,
+    },
+    'pillar': {
+        'gen': None,
+        'wall' : None,
+        'big' : ['up', 'down', 'left', 'right'],
+    },
+    'opp_lb_rt': {
+        'gen': None,
+        'wall' : None,
+        'big' : ['up', 'down', 'left', 'right'],
+    },
+    'opp_lt_rb': {
+        'gen': None,
+        'wall' : None,
+        'big' : ['up', 'down', 'left', 'right'],
+    },
+    'crnr_door_t_lb': {
+        'gen': ['up'],
+        'wall' : ['right'],
+        'big' : ['down', 'left'],
+    },
+    'crnr_door_r_lb': {
+        'gen': ['right'],
+        'wall' : ['up'],
+        'big' : ['down', 'left'],
+    },
+    'crnr_door_r_lt': {
+        'gen': ['right'],
+        'wall' : ['down'],
+        'big' : ['up', 'left'],
+    },
+    'crnr_door_b_lt': {
+        'gen': ['down'],
+        'wall' : ['right'],
+        'big' : ['up', 'left'],
+    },
+    'crnr_door_t_rb': {
+        'gen': ['up'],
+        'wall' : ['left'],
+        'big' : ['down' 'right'],
+    },
+    'crnr_door_l_rb': {
+        'gen': ['left'],
+        'wall' : ['up'],
+        'big' : ['down', 'right'],
+    },
+    'crnr_door_b_rt': {
+        'gen': ['down'],
+        'wall' : ['left'],
+        'big' : ['up', 'right'],
+    },
+    'crnr_door_l_rt': {
+        'gen': ['left'],
+        'wall' : ['down'],
+        'big' : ['up', 'right'],
+    },
+}
