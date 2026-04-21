@@ -1,7 +1,7 @@
 import random as r
 import pygame as pg
-import Actors.player as player
-from UI.UI import Button
+import Actors.player as p
+#from UI.UI import Button
 """
 author : emmanuel Bissonnette
 Goal : ce fichier contien les fonctions dinteraction avec les props 
@@ -9,7 +9,7 @@ Goal : ce fichier contien les fonctions dinteraction avec les props
 """
 
 
-def chest(player:player.Player):
+def chest():
         item = r.randint(0,3)
         path = "Props/chest_item_list"
         file = open(path)
@@ -17,43 +17,39 @@ def chest(player:player.Player):
         item = file[item]
         item.strip()
         if item != "health_pot":
-           current_weapon = player.weapon
-           while True:
-                pass
+           current_weapon = p.player_instance.weapon
+           awnser = input(f"Vous avez trouve {item} voulez vous remplacer votre {current_weapon} Y ou N")
+           if awnser == "Y" :
+                p.player_instance.weapon = item
+           elif awnser == "N":
+                p.player_instance.weapon = current_weapon
         else:
-             player.health +=5
+             p.player_instance.health +=5
     
     
 def barrel ():
     pass
-def door (player:player.Player):
-    player.level +=1 
-def spike_trap(player:player.Player):
-        player.lose_life(r.randint(3,10))
-def void (player:player.Player):
-        remaining_life = player.health
-        player.lose_life(remaining_life)
+def door ():
+   p.player_instance.level +=1 
+def spike_trap():
+        p.player_instance.lose_life(r.randint(3,10))
+        print("yay")
+def void ():
+        remaining_life = p.player_instance.health
+        p.player_instance.lose_life(remaining_life)
         
-def interaction_check(player_pos):
-    if False:
-        for item in props:
-            if item == player_pos:
-                current_prop = item
-                break
-            else:
-                pass
-    _player = player.get_player()
+def interaction_check(player_pos:str):
     match player_pos:
         case "[]":
-            chest(_player)
+            chest()
         case "()":
-            barrel(_player)
+            barrel()
         case "||":
-            door(_player)
+            door()
         case "△.":
-            spike_trap(_player)
+            spike_trap()
         case "  ":
-            void(_player)                    
+            void()                    
 
 chest_dic = {
 
@@ -94,4 +90,3 @@ props = {
 
 
 }
-interaction_check("[]")
