@@ -5,14 +5,18 @@ import sys
 pygame.init()
 
 #Création de UI
-width = 1350
-height = 800
+width = 1300
+height = 750
 font_size = 11
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Like-Rogue")
 
 # Template de font pour les boutons
 font = pygame.font.SysFont('Consolas', font_size)
+
+# Création du titre
+font = pygame.font.SysFont('comicsansms', 75)
+text = font.render('Like-Rogue', True, ("#FFFFFFFF"))
 
 class Button:
     def __init__(self, text, width, height, pos, elevation):
@@ -24,7 +28,7 @@ class Button:
 
         # Rectangle du bouton
         self.top_rect = pygame.Rect(pos, (width, height))
-        self.top_color = '#475F77'
+        self.top_color = "#000000"
 
         # Texte du bouton
         self.text_surf = my_font.render(text, True, "#000202FF")
@@ -43,7 +47,7 @@ class Button:
     def check_click(self):
         mouse_pos = pygame.mouse.get_pos()
         if self.top_rect.collidepoint(mouse_pos):
-            self.top_color = '#D74B4B'
+            self.top_color = "#005501"
             if pygame.mouse.get_pressed()[0]:
                 self.dynamic_elev = 0
                 self.press = True
@@ -59,7 +63,7 @@ class Button:
 
 # Création du bouton + loop d'affichage
 my_font = pygame.font.Font(None, 35)
-button = Button('Play!', 200, 40, (600, 300), 5)
+button = Button('Play!', 200, 40, (545, 400), 5)
 
 running = True
 while running:
@@ -68,7 +72,8 @@ while running:
             pygame.quit()
             sys.exit()
 
-    screen.fill("#00C3FE")
+    screen.fill("#000000")
+    screen.blit(text, (width // 2 - text.get_width() // 2, height // 4 - text.get_height() // 2))
     button.draw()
 
     pygame.display.update()
