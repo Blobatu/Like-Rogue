@@ -2,7 +2,7 @@
     [] = chest 
     () = barrel
     # = mur
-    . = vide
+    . = sol
     || = porte
     △ = spike trap
     ' ' = void

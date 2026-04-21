@@ -1,39 +1,87 @@
 import random as r
-from pathlib import Path
+import Actors.player as player
 """
 author : emmanuel Bissonnette
 Goal : ce fichier contien les fonctions dinteraction avec les props 
 
 """
 
-DATA_DIR = Path(__file__).resolve().parent
 
-def chest(player_interaction):
-    if player_interaction == True:
-        item = r.randint(0, 3)
-        file_path = DATA_DIR / "chest_item_list"
-        with open(file_path, "r", encoding="utf-8") as file:
-            items = file.readlines()
-        item = items[item].strip()
-        return item, "break_chest"
-
-    else:
-        return()
+def chest():
+        item = r.randint(0,3)
+        file = open("chest_item_list")
+        file = file.readlines()
+        item = file[item]
+        item.strip()
+        return (item,"break_chest")
     
     
 def barrel ():
     pass
 def door ():
     pass
-def spike_trap(player_interaction,health):
-    if player_interaction == True:
-        health = health - r.randint(1,10)
-        return health
-    else:
-        return health
-def void (player_interaction,health):
-    if player_interaction == True:
-        health == 0
-        return health
-    else:
-        return health
+def spike_trap(player:player.Player):
+        player.lose_life(r.randint(3,10))
+def void (player:player.Player):
+        remaining_life = player.health
+        player.lose_life(remaining_life)
+        
+def interaction_check(player_pos):
+    if False:
+        for item in props:
+            if item == player_pos:
+                current_prop = item
+                break
+            else:
+                pass
+    match player_pos:
+        case "[]":
+            chest(player.get_player())
+        case "()":
+            barrel(player.get_player())
+        case "||":
+            door(player.get_player())
+        case "△":
+            spike_trap(player.get_player())
+        case " ":
+            void(player.get_player())                    
+
+chest_dic = {
+
+    "sprite":"[]",
+    "interaction": chest,
+    
+
+
+}
+barrel_dic = {
+    "sprite":"()",
+    "interaction": barrel,
+
+
+}
+door_dic = {
+    "sprite":"||",
+    "interaction": door,
+
+}
+spike_trap_dic = {
+    
+    "sprite":"△",
+    "interaction": spike_trap,
+}
+void_dic = {
+    "sprite":" ",
+    "interaction": void,
+}
+props = {
+
+    "[]":chest_dic,
+    "()":barrel_dic,
+    "||":door_dic,
+    "△":spike_trap_dic,
+    " ":void_dic,
+
+
+
+}
