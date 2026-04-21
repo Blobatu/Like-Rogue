@@ -10,9 +10,15 @@ player = '@'
 mobs =("player","other_monsters")
 
 test_print = "####################\n##. . . . . . . . ##\n##. . . . . . . . ##\n##. . . . . . . . ##\n##. . . . @ . . . ##\n##. . . . . . . . ##\n##. . . . . . . . ##\n####################"
+<<<<<<< Updated upstream
 
 player_actor = p.get_player()
 
+=======
+"""
+def move up
+"""
+>>>>>>> Stashed changes
 def move_left():
     global test_print
     
@@ -39,7 +45,9 @@ def move_right():
         test_print = "".join(chars)
 def move_up():
     global test_print
+    
     test_print.splitlines()
+    
     for lines in test_print.splitlines():
         if player in lines:
             pos = lines.index(player)
@@ -65,6 +73,7 @@ def move_down():
                 test_print = "".join(chars)
 
 
+
 while True:
     print(test_print)
     movements = input("up, down, left, right: ")
@@ -76,5 +85,3 @@ while True:
         move_up()
     elif movements == "down":
         move_down()
-    
-
