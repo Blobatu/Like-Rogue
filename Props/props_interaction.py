@@ -44,9 +44,9 @@ def interaction_check(player_pos):
             barrel(player.get_player())
         case "||":
             door(player.get_player())
-        case "△":
+        case "△.":
             spike_trap(player.get_player())
-        case " ":
+        case "  ":
             void(player.get_player())                    
 
 chest_dic = {
