@@ -7,19 +7,22 @@ Goal : ce fichier contien les fonctions dinteraction avec les props
 """
 
 
-def chest():
+def chest(player:player.Player):
         item = r.randint(0,3)
         file = open("chest_item_list")
         file = file.readlines()
         item = file[item]
         item.strip()
-        return (item,"break_chest")
+        if item != "health_pot":
+            player.weapon = item
+        else:
+             player.health +=5
     
     
 def barrel ():
     pass
-def door ():
-    pass
+def door (player:player.Player):
+    player.level +=1 
 def spike_trap(player:player.Player):
         player.lose_life(r.randint(3,10))
 def void (player:player.Player):
@@ -41,9 +44,9 @@ def interaction_check(player_pos):
             barrel(player.get_player())
         case "||":
             door(player.get_player())
-        case "△":
+        case "△.":
             spike_trap(player.get_player())
-        case " ":
+        case "  ":
             void(player.get_player())                    
 
 chest_dic = {

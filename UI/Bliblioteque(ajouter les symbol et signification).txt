@@ -2,10 +2,10 @@
     [] = chest 
     () = barrel
     # = mur
-    . = sol
+    ..= sol
     || = porte
-    △ = spike trap
-    ' ' = void
+    △. = spike trap
+    '  ' = void
 Ennemis
 
 Joueur
