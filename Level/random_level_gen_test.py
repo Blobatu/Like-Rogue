@@ -1,6 +1,6 @@
 from level_generation import make_lvl_data
 import random as rd
-from tileset import tileset as ts
+from cor_tile import tileset as ts
 
 
 # because importing it wouldn't work, somehow
@@ -115,7 +115,7 @@ def random_pattern(width, height):
 
 def generate_level(width, height):
     maze = random_pattern(width, height)
-    for iteration in range(9):
+    for iteration in range(1):
         for y in range (height):
             for x in range (width):
                 current_check = valid(x, y, maze)
