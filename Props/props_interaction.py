@@ -1,5 +1,7 @@
 import random as r
+import pygame as pg
 import Actors.player as player
+from UI.UI import Button
 """
 author : emmanuel Bissonnette
 Goal : ce fichier contien les fonctions dinteraction avec les props 
@@ -9,12 +11,15 @@ Goal : ce fichier contien les fonctions dinteraction avec les props
 
 def chest(player:player.Player):
         item = r.randint(0,3)
-        file = open("chest_item_list")
+        path = "Props/chest_item_list"
+        file = open(path)
         file = file.readlines()
         item = file[item]
         item.strip()
         if item != "health_pot":
-            player.weapon = item
+           current_weapon = player.weapon
+           while True:
+                pass
         else:
              player.health +=5
     
@@ -37,17 +42,18 @@ def interaction_check(player_pos):
                 break
             else:
                 pass
+    _player = player.get_player()
     match player_pos:
         case "[]":
-            chest(player.get_player())
+            chest(_player)
         case "()":
-            barrel(player.get_player())
+            barrel(_player)
         case "||":
-            door(player.get_player())
+            door(_player)
         case "△.":
-            spike_trap(player.get_player())
+            spike_trap(_player)
         case "  ":
-            void(player.get_player())                    
+            void(_player)                    
 
 chest_dic = {
 
@@ -88,3 +94,4 @@ props = {
 
 
 }
+interaction_check("[]")
