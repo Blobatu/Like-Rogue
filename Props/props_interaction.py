@@ -1,17 +1,21 @@
 import random as r
-""""
+from pathlib import Path
+"""
 author : emmanuel Bissonnette
 Goal : ce fichier contien les fonctions dinteraction avec les props 
 
 """
 
+DATA_DIR = Path(__file__).resolve().parent
+
 def chest(player_interaction):
     if player_interaction == True:
-        item = r.randint(0,3)
-        file = open("chest_item_list")
-        file = file.readlines()
-        item = file[item]
-        return (item,"break_chest")
+        item = r.randint(0, 3)
+        file_path = DATA_DIR / "chest_item_list"
+        with open(file_path, "r", encoding="utf-8") as file:
+            items = file.readlines()
+        item = items[item].strip()
+        return item, "break_chest"
 
     else:
         return()
