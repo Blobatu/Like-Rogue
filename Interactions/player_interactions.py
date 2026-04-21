@@ -22,49 +22,57 @@ test_print = ["####################",
 global player_actor
 player_actor = p.get_player()
 global player_position
-player_position = (4, 3)  # col 4, row 3
+player_position = (5, 3)  # col 5, row 3
 player_actor.position = player_position
 
 def is_wall(col, row):
     if row < 0 or row >= len(test_print) or col < 0 or col >= 10:
+        print("You can't move there")
         return True
-    return test_print[row][col*2:col*2+2] == walls
+    if test_print[row][col*2:col*2+2] == walls:
+        print("You can't move there")
+        return True
+    return False
 
 def move_up():
-    global test_print, player_position
-    col, row = player_actor.position
-    new_row = row - 1
-    if is_wall(col, new_row):
-        print("You can't move there")
-    else:
-        # clear old position
-        test_print[row] = test_print[row][:col*2] + air + test_print[row][col*2+2:]
-        # set new position
-        test_print[new_row] = test_print[new_row][:col*2] + player + test_print[new_row][col*2+2:]
-        player_actor.position = (col, new_row)
-        player_position = player_actor.position
+    move(is_vertical = True, 
+         is_negative = True)
+
 
 def move_down():
+    move(is_vertical = True, 
+         is_negative = False)
+
+
+def move_left():
+    move(is_vertical = False, 
+         is_negative = True)
+
+
+def move_right():
+    move(is_vertical = False, 
+         is_negative = False)
+
+
+def move(is_vertical:bool, is_negative:bool):
     global test_print, player_position
     col, row = player_actor.position
-    new_row = row + 1
-    if is_wall(col, new_row):
-        print("You can't move there")
-    else:
+    
+    if(is_vertical is True):
+        new_row = new_position_value(row, is_negative)
+        if is_wall(col, new_row):
+            return
         # clear old position
         test_print[row] = test_print[row][:col*2] + air + test_print[row][col*2+2:]
         # set new position
         test_print[new_row] = test_print[new_row][:col*2] + player + test_print[new_row][col*2+2:]
         player_actor.position = (col, new_row)
         player_position = player_actor.position
-
-def move_left():
-    global test_print, player_position
-    col, row = player_actor.position
-    new_col = col - 1
-    if is_wall(new_col, row):
-        print("You can't move there")
     else:
+        new_col = new_position_value(col, is_negative)
+
+        if is_wall(new_col, row):
+            return
         # clear old position
         test_print[row] = test_print[row][:col*2] + air + test_print[row][col*2+2:]
         # set new position
@@ -72,19 +80,13 @@ def move_left():
         player_actor.position = (new_col, row)
         player_position = player_actor.position
 
-def move_right():
-    global test_print, player_position
-    col, row = player_actor.position
-    new_col = col + 1
-    if is_wall(new_col, row):
-        print("You can't move there")
+def new_position_value(original_value:int, is_negative:bool):
+    if(is_negative is True):
+        return original_value - 1
     else:
-        # clear old position
-        test_print[row] = test_print[row][:col*2] + air + test_print[row][col*2+2:]
-        # set new position
-        test_print[row] = test_print[row][:new_col*2] + player + test_print[row][new_col*2+2:]
-        player_actor.position = (new_col, row)
-        player_position = player_actor.position
+        return original_value + 1
+
+
 
 
 
