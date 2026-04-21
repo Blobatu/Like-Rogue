@@ -27,5 +27,6 @@ class Actor:
     def lose_life(self, amount: int):
         self.health -= amount
         if(self.health <= 0):
+            self.health = 0
             return True
         return False
