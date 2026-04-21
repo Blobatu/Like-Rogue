@@ -1,4 +1,4 @@
-import random as r
+
 import props_interaction as prop_int
 
 
