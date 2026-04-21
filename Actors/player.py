@@ -40,7 +40,7 @@ def get_player():
                                  damage_received = 0, 
                                  damage_done = 0,
                                  name = "Nard", 
-                                 sprite = "@@",
+                                 sprite = "@ ",
                                  position = (0, 0))
     return player_instance
 
