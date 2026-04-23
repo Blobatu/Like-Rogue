@@ -31,26 +31,16 @@ class Player(a.Actor):
         self.weapon = weapon
         self.potion_count = potion_count
 
-player_instance: Player = Player(weapon = None,
-                                 potion_count = 3,
-                                 level = 1, 
-                                 damage_received = 0, 
-                                 damage_done = 0,
-                                 name = "Nard", 
-                                 sprite = "@ ",
-                                 position = (0, 0))
-def get_player():
-    if(instanciated is False):
-        player_instance = Player(weapon = None,
-                                 potion_count = 3,
-                                 level = 1, 
-                                 damage_received = 0, 
-                                 damage_done = 0,
-                                 name = "Nard", 
-                                 sprite = "@ ",
-                                 position = (0, 0))
-    return player_instance
+player_instance: Player = Player(weapon=None,
+                                 potion_count=3,
+                                 level=1, 
+                                 damage_received=0, 
+                                 damage_done=0,
+                                 name="Nard", 
+                                 sprite="@ ",
+                                 position=(0, 0))
+
 
 class Weapon:
-    def __init__(self, name:str,):
+    def __init__(self, name: str,):
         self.name = name

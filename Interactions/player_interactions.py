@@ -24,6 +24,7 @@ global player_position
 player_position = (5, 3)  # col 5, row 3
 p.player_instance.position = player_position
 
+
 def is_wall(col, row):
     if row < 0 or row >= len(test_print) or col < 0 or col >= 10:
         print("You can't move there")
@@ -33,27 +34,28 @@ def is_wall(col, row):
         return True
     return False
 
+
 def move_up():
-    move(is_vertical = True, 
-         is_negative = True)
+    move(is_vertical=True, 
+         is_negative=True)
 
 
 def move_down():
-    move(is_vertical = True, 
-         is_negative = False)
+    move(is_vertical=True, 
+         is_negative=False)
 
 
 def move_left():
-    move(is_vertical = False, 
-         is_negative = True)
+    move(is_vertical=False, 
+         is_negative=True)
 
 
 def move_right():
-    move(is_vertical = False, 
-         is_negative = False)
+    move(is_vertical=False, 
+         is_negative=False)
 
 
-def move(is_vertical:bool, is_negative:bool):
+def move(is_vertical: bool, is_negative: bool):
     global test_print, player_position
     col, row = p.player_instance.position
     
@@ -62,9 +64,9 @@ def move(is_vertical:bool, is_negative:bool):
         if is_wall(col, new_row):
             return
         # clear old position
-        test_print[row] = test_print[row][:col*2] + air + test_print[row][col*2+2:]
+        clear_old_position(col, row)
         # set new position
-        test_print[new_row] = test_print[new_row][:col*2] + player + test_print[new_row][col*2+2:]
+        set_new_position(col, new_row)
         p.player_instance.position = (col, new_row)
         player_position = p.player_instance.position
     else:
@@ -73,21 +75,30 @@ def move(is_vertical:bool, is_negative:bool):
         if is_wall(new_col, row):
             return
         # clear old position
-        test_print[row] = test_print[row][:col*2] + air + test_print[row][col*2+2:]
+        clear_old_position(col, row)
         # set new position
-        test_print[row] = test_print[row][:new_col*2] + player + test_print[row][new_col*2+2:]
+        set_new_position(new_col, row)
         p.player_instance.position = (new_col, row)
         player_position = p.player_instance.position
 
-def new_position_value(original_value:int, is_negative:bool):
+
+def new_position_value(original_value: int, is_negative: bool):
     if(is_negative is True):
         return original_value - 1
     else:
         return original_value + 1
 
 
+def clear_old_position(col: int, row: int):
+    insert_at_position(col, row, air)
 
 
+def set_new_position(col: int, row: int):
+    insert_at_position(col, row, player)
+
+
+def insert_at_position(col: int, row: int, value: str):
+    test_print[row] = test_print[row][:col*2] + value + test_print[row][col*2+2:]
 
 """
 def move_left():

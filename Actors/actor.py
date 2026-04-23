@@ -26,7 +26,9 @@ class Actor:
 
     def lose_life(self, amount: int):
         self.health -= amount
+        print(f"Health:{self.health}/{self.max_health}")
         if(self.health <= 0):
             self.health = 0
+            print(f"{self.name} is dead")
             return True
         return False
