@@ -5,8 +5,8 @@ Description : TODO
 """
 from . import actor as a
 
-
 instanciated = False
+
 class Player(a.Actor):
 
     def __init__(self, 
