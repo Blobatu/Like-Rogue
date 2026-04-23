@@ -4,19 +4,19 @@ date:14 avril
 description:to do
 '''
 import Actors.player as p
-walls = "##"
-player = "@ "
-air = ". "
+wall_sprite = "##"
+player_sprite = "@ "
+air_sprite = ". "
 #player_position = player.position
 mobs =("player","other_monsters")
 
-global test_print
-test_print = ["####################",
-              "##. . . . . . . . ##",
-              "##. . . . . . . . ##",
-              "##. . . . @ . . . ##",
-              "##. . . . . . . . ##",
-              "####################"]
+global console_tile
+console_tile = ["####################",
+                "##. . . . . . . . ##",
+                "##. . . . . . . . ##",
+                "##. . . . @ . . . ##",
+                "##. . . . . . . . ##",
+                "####################"]
 
 # position du player pour les tests, à enlever plus tard
 
@@ -53,7 +53,7 @@ def move(is_vertical: bool, is_negative: bool):
         is_vertical: Verifie si le mouvement est vertical,
         is_negative: Vrai si le mouvement va vers le haut ou la gauche
     """
-    global test_print, player_position
+    global console_tile, player_position
     col, row = p.player_instance.position
     new_col, new_row = col, row
 
@@ -92,9 +92,9 @@ def is_wall(col, row):
     """
     if(col < 0 or col >= 10):
         return True
-    if(row < 0 or row >= len(test_print)):
+    if(row < 0 or row >= len(console_tile)):
         return True
-    if(test_print[row][col*2:col*2+2] == walls):
+    if(console_tile[row][col*2:col*2+2] == wall_sprite):
         return True
         
     return False
@@ -105,21 +105,21 @@ def message_wall():
 
 
 def clear_old_position(col: int, row: int):
-    insert_at_position(col, row, air)
+    insert_at_position(col, row, air_sprite)
 
 
 def set_new_position(col: int, row: int):
-    insert_at_position(col, row, player)
+    insert_at_position(col, row, player_sprite)
 
 
 def insert_at_position(col: int, row: int, value: str):
-    before_value = test_print[row][:col*2]
-    after_value = test_print[row][col*2+2:]
-    test_print[row] = before_value + value + after_value
+    before_value = console_tile[row][:col*2]
+    after_value = console_tile[row][col*2+2:]
+    console_tile[row] = before_value + value + after_value
 
 
 while True:
-    print('\n'.join(test_print))
+    print('\n'.join(console_tile))
     movements = input("up, down, left, right: ")
 
     if movements == "left":
