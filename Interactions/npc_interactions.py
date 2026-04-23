@@ -8,9 +8,6 @@ is_dead = False
 while (is_dead is False):
 
     is_dead = orc.lose_life(public.scale(1))
-    print(f"\nHealth:{orc.health}/{orc.max_health}")
+    
     if(is_dead is True):
         break
-    print(f"{orc.name} is not dead")
-
-print(f"{orc.name} is dead")
