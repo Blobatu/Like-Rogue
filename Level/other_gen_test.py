@@ -78,9 +78,7 @@ def mk_lvl(hgt=lvl_hgt, len_=lvl_len):
 
 
 def gen_maze(hgt=lvl_hgt, len=lvl_len):
-    
-
-    return
+    None
 
 
 
