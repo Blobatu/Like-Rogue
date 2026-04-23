@@ -68,7 +68,6 @@ def move(is_vertical: bool, is_negative: bool):
         clear_old_position(col, row)
         set_new_position(col, new_row)
         p.player_instance.position = (col, new_row)
-        player_position = p.player_instance.position
 
     else:
         new_col = new_position_value(col, is_negative)
@@ -79,7 +78,8 @@ def move(is_vertical: bool, is_negative: bool):
         clear_old_position(col, row)
         set_new_position(new_col, row)
         p.player_instance.position = (new_col, row)
-        player_position = p.player_instance.position
+    
+    player_position = p.player_instance.position
 
 
 def new_position_value(original_value: int, is_negative: bool):
