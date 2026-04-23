@@ -1,7 +1,7 @@
 '''
-auteur: Léonard Lefebvre
-date:14 avril
-description:to do
+Auteur: Léonard Lefebvre
+Date: 14 avril
+Description: to do
 '''
 import Actors.player as p
 wall_sprite = "##"
