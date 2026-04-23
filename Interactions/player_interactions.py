@@ -61,22 +61,22 @@ def move(is_vertical: bool, is_negative: bool):
     
     if(is_vertical is True):
         new_row = new_position_value(row, is_negative)
+
         if is_wall(col, new_row):
             return
-        # clear old position
+        
         clear_old_position(col, row)
-        # set new position
         set_new_position(col, new_row)
         p.player_instance.position = (col, new_row)
         player_position = p.player_instance.position
+
     else:
         new_col = new_position_value(col, is_negative)
 
         if is_wall(new_col, row):
             return
-        # clear old position
+        
         clear_old_position(col, row)
-        # set new position
         set_new_position(new_col, row)
         p.player_instance.position = (new_col, row)
         player_position = p.player_instance.position
@@ -85,6 +85,7 @@ def move(is_vertical: bool, is_negative: bool):
 def new_position_value(original_value: int, is_negative: bool):
     if(is_negative is True):
         return original_value - 1
+    
     else:
         return original_value + 1
 
