@@ -8,8 +8,9 @@ size = (16, 7)
 
 def choose_dir(x, y, maze, row):
     width, height = size
-    while True:
-        wall = rd.choice(dir_)
+    candidates = []
+
+    for wall in dir_:
         if y == 0 and wall == 'u':
             continue
         if y == height - 1 and wall == 'd':
@@ -22,18 +23,27 @@ def choose_dir(x, y, maze, row):
             continue
         if x > 0 and wall == 'l' and row[x-1] == 'r':
             continue
-        
-        return wall
+        candidates.append(wall)
+
+    if not candidates:
+        candidates = choose_dir(x, y, maze, row)
+
+    return rd.choice(candidates)
 
 
 def gen_template():
-    maze = []
-    for y in range(size[1]):
-        row = []
-        for x in range(size[0]):
-            wall = choose_dir(x, y, maze, row)
-            row.append(wall)
-        maze.append(row)
+    while True:
+        try:
+            maze = []
+            for y in range(size[1]):
+                row = []
+                for x in range(size[0]):
+                    wall = choose_dir(x, y, maze, row)
+                    row.append(wall)
+                maze.append(row)
+            break
+        except:
+            continue
     return maze
 
 
@@ -61,10 +71,9 @@ def gen_maze():
     for y in range(len(plan)):
         for x in range(len(plan[y])):
             tiles = get_near(plan, x, y)
-            print(tiles)
             #match tiles:
             #    case  
 
 print_template()
 
-gen_maze()
+#gen_maze()
