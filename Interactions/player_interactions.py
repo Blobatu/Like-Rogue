@@ -25,16 +25,6 @@ player_position = (5, 3)  # col 5, row 3
 p.player_instance.position = player_position
 
 
-def is_wall(col, row):
-    if row < 0 or row >= len(test_print) or col < 0 or col >= 10:
-        print("You can't move there")
-        return True
-    if test_print[row][col*2:col*2+2] == walls:
-        print("You can't move there")
-        return True
-    return False
-
-
 def move_up():
     move(is_vertical=True, 
          is_negative=True)
@@ -58,27 +48,21 @@ def move_right():
 def move(is_vertical: bool, is_negative: bool):
     global test_print, player_position
     col, row = p.player_instance.position
-    
+    new_col, new_row = col, row
+
     if(is_vertical is True):
         new_row = new_position_value(row, is_negative)
-
-        if is_wall(col, new_row):
-            return
-        
-        clear_old_position(col, row)
-        set_new_position(col, new_row)
-        p.player_instance.position = (col, new_row)
 
     else:
         new_col = new_position_value(col, is_negative)
 
-        if is_wall(new_col, row):
-            return
+    if is_wall(new_col, new_row):
+        message_wall()
+        return
         
-        clear_old_position(col, row)
-        set_new_position(new_col, row)
-        p.player_instance.position = (new_col, row)
-    
+    clear_old_position(col, row)
+    set_new_position(new_col, new_row)
+    p.player_instance.position = (new_col, new_row)
     player_position = p.player_instance.position
 
 
@@ -88,6 +72,21 @@ def new_position_value(original_value: int, is_negative: bool):
     
     else:
         return original_value + 1
+
+
+def is_wall(col, row):
+    if(col < 0 or col >= 10):
+        return True
+    if(row < 0 or row >= len(test_print)):
+        return True
+    if(test_print[row][col*2:col*2+2] == walls):
+        return True
+        
+    return False
+
+
+def message_wall():
+    print("You can't move there")
 
 
 def clear_old_position(col: int, row: int):
