@@ -113,7 +113,9 @@ def set_new_position(col: int, row: int):
 
 
 def insert_at_position(col: int, row: int, value: str):
-    test_print[row] = test_print[row][:col*2] + value + test_print[row][col*2+2:]
+    before_value = test_print[row][:col*2]
+    after_value = test_print[row][col*2+2:]
+    test_print[row] = before_value + value + after_value
 
 """
 def move_left():
@@ -174,11 +176,19 @@ def move_down():
 while True:
     print('\n'.join(test_print))
     movements = input("up, down, left, right: ")
+
     if movements == "left":
         move_left()
-    elif movements == "right":
+        continue
+
+    if movements == "right":
         move_right()
-    elif movements == "up":
+        continue
+
+    if movements == "up":
         move_up()
-    elif movements == "down":
+        continue
+
+    if movements == "down":
         move_down()
+        continue
