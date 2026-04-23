@@ -46,6 +46,13 @@ def move_right():
 
 
 def move(is_vertical: bool, is_negative: bool):
+    """
+    But: Permet de déplacer le joueur
+
+    Entrées: 
+        is_vertical: Verifie si le mouvement est vertical,
+        is_negative: Vrai si le mouvement va vers le haut ou la gauche
+    """
     global test_print, player_position
     col, row = p.player_instance.position
     new_col, new_row = col, row
@@ -75,6 +82,14 @@ def new_position_value(original_value: int, is_negative: bool):
 
 
 def is_wall(col, row):
+    """
+    But: Permet de verifier si le joueur va vers un mur
+
+    Entrées: 
+        col: La colonne à vérifier,
+        row: La rangée à vérifier,
+    Sortie: Vrai si le joueur va vers un mur, sinon Faux
+    """
     if(col < 0 or col >= 10):
         return True
     if(row < 0 or row >= len(test_print)):
