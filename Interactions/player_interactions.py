@@ -4,6 +4,8 @@ Date: 14 avril
 Description: to do
 '''
 import Actors.player as p
+import keyboard as k
+
 wall_sprite = "##"
 player_sprite = "@ "
 air_sprite = ". "
@@ -118,22 +120,20 @@ def insert_at_position(col: int, row: int, value: str):
     console_tile[row] = before_value + value + after_value
 
 
-while True:
-    print('\n'.join(console_tile))
-    movements = input("up, down, left, right: ")
 
-    if movements == "left":
+print('\n'.join(console_tile))
+while True:
+    k.read_event()
+    if k.is_pressed('a'):
         move_left()
         continue
-
-    if movements == "right":
+    if k.is_pressed('d'):
         move_right()
         continue
-
-    if movements == "up":
+    if k.is_pressed('w'):
         move_up()
         continue
-
-    if movements == "down":
+    if k.is_pressed('s'):
         move_down()
         continue
+    print('\n'.join(console_tile))
