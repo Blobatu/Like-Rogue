@@ -26,7 +26,7 @@ global player_position
 player_position = (5, 3)  # col 5, row 3
 p.player_instance.position = player_position
 
-
+# mouvement 
 def move_up():
     move(is_vertical=True, 
          is_negative=True)
