@@ -48,8 +48,8 @@ while True:
     # Fill background
     screen.fill((0, 0, 0))
 
-    # Get data and draw centered block
-    level_data = lg.make_lvl_data(lg.test_1)
+    # Get data and draw centered block 
+    level_data = lg.level()
     draw_centered_text_block(level_data, screen, font)
 
     # Update display
