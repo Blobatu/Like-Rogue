@@ -9,8 +9,7 @@ from cor_tile import tileset as ts
 import random as rd
 
 
-#constantes/variables
-dir_ = ['u', 'd', 'l', 'r']
+# constantes/variables
 size = (16, 7)
 
 
@@ -51,7 +50,7 @@ def print_room_as_list(maze):
     """
     print(make_lvl_data(maze))
 
-def choose_dir(x, y, maze, row):
+def choose_dir(x, y, maze, row, dir_ =['u', 'd', 'l', 'r']):
     width, height = size
     candidates = []
 
