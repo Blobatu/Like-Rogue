@@ -1,3 +1,7 @@
+from cor_tile import tileset as ts
+from levels import levels as lev
+import random as rd
+
 def make_lvl_data(maze):
     lvl_data = []
     for line in maze:
@@ -20,79 +24,107 @@ def get_near(plan, x, y):
         neighbors['br'] = plan[y+1][x+1]
     return neighbors
 
+
+def get_near(plan, x, y):
+    height = len(plan)
+    width = len(plan[0])
+    neighbors = {'tl': None, 'tr': None, 'bl': None, 'br': None}
+     
+    if height == 0:
+        return {'tl': None, 'tr': None, 'bl': None, 'br': None}
+    if 0 <= y < height and 0 <= x < width:
+        neighbors['tl'] = plan[y][x]
+    if 0 <= y < height and 0 <= x + 1 < width:
+        neighbors['tr'] = plan[y][x + 1]
+    if 0 <= y + 1 < height and 0 <= x < width:
+        neighbors['bl'] = plan[y + 1][x]
+    if 0 <= y + 1 < height and 0 <= x + 1 < width:
+        neighbors['br'] = plan[y + 1][x + 1]
+
+    return neighbors
+
+
 def gen_level():
+    """
+    Generate a level from the vector grid.
+    Hard-coded all possible combinations based on which walls are OPEN.
+    
+    A wall is OPEN if the corner vector points parallel to it:
+    - Left/Right wall: open if corner points 'l' or 'r'
+    - Top/Bottom wall: open if corner points 'u' or 'd'
+    """
     plan = gen_template()
+    
+    room_height = len(plan) - 1
+    room_width = len(plan[0]) - 1
+    
     level = []
-    for y in range(len(plan)):
-        if y == len(plan):
-            continue
+    for y in range(room_height):
         row = []
-        for x in range(len(plan[y])):
-            if x == len(plan[y]):
-                continue
-            w = get_near(plan, x, y)
-            # Assign tiles based on the combination of walls around
-            # r = right, l = left, u = up, d = down
-            # corners: tl, tr, bl, br
-            # If all directions open
-            if w['tl'] in ('r', 'd', 'l', 'u'):
-                # Cross (all open)
-                if w['tl'] == 'r' and w['tr'] == 'd' and w['bl'] == 'u' and w['br'] == 'l':
-                    row.append('hollow')
-                # Horizontal straight
-                elif w['tl'] == 'r' and w['tr'] == 'r' and w['bl'] == 'r' and w['br'] == 'r':
-                    row.append('strgt_horz')
-                # Vertical straight
-                elif w['tl'] == 'd' and w['tr'] == 'd' and w['bl'] == 'd' and w['br'] == 'd':
-                    row.append('strgt_vert')
-                # End right
-                elif w['tl'] == 'r' and w['tr'] != 'd' and w['bl'] == 'u' and w['br'] == 'l':
-                    row.append('end_r')
-                # End left
-                elif w['tl'] == 'l' and w['tr'] == 'd' and w['bl'] == 'u' and w['br'] != 'l':
-                    row.append('end_l')
-                # End bottom
-                elif w['tl'] == 'd' and w['tr'] == 'd' and w['bl'] != 'u' and w['br'] == 'l':
-                    row.append('end_b')
-                # End top
-                elif w['tl'] == 'u' and w['tr'] == 'd' and w['bl'] == 'u' and w['br'] != 'l':
-                    row.append('end_t')
-                # Corner left-bottom
-                elif w['tl'] == 'l' and w['tr'] == 'd' and w['bl'] != 'u' and w['br'] == 'l':
-                    row.append('crnr_lb')
-                # Corner left-top
-                elif w['tl'] == 'l' and w['tr'] == 'l' and w['bl'] == 'u' and w['br'] == 'l':
-                    row.append('crnr_lt')
-                # Corner right-bottom
-                elif w['tl'] == 'r' and w['tr'] == 'd' and w['bl'] == 'r' and w['br'] != 'l':
-                    row.append('crnr_rb')
-                # Corner right-top
-                elif w['tl'] == 'r' and w['tr'] == 'r' and w['bl'] == 'u' and w['br'] == 'r':
-                    row.append('crnr_rt')
-                # 3-way left-right-top
-                elif w['tl'] == 'l' and w['tr'] == 'l' and w['bl'] == 'u' and w['br'] == 'r':
-                    row.append('3way_lrt')
-                # 3-way left-right-bottom
-                elif w['tl'] == 'l' and w['tr'] == 'd' and w['bl'] == 'l' and w['br'] == 'l':
-                    row.append('3way_lrb')
-                # 3-way left-top-bottom
-                elif w['tl'] == 'l' and w['tr'] == 'l' and w['bl'] == 'd' and w['br'] == 'l':
-                    row.append('3way_ltb')
-                # 3-way right-top-bottom
-                elif w['tl'] == 'r' and w['tr'] == 'd' and w['bl'] == 'r' and w['br'] == 'd':
-                    row.append('3way_rtb')
-                # Cross
-                elif w['tl'] == 'd' and w['tr'] == 'r' and w['bl'] == 'l' and w['br'] == 'u':
-                    row.append('cross')
-                else:
-                    row.append('void')
+        for x in range(room_width):
+            tl = plan[y][x]
+            tr = plan[y][x + 1]
+            bl = plan[y + 1][x]
+            br = plan[y + 1][x + 1]
+            
+            # Determine which walls are OPEN
+            left_open = tl in ('l', 'r')
+            right_open = tr in ('l', 'r')
+            top_open = bl in ('u', 'd')
+            bottom_open = br in ('u', 'd')
+            
+            # All 16 possible combinations of 4 boolean walls
+            # 4 walls open
+            if left_open and right_open and top_open and bottom_open:
+                tile = 'hollow'
+            # 3 walls open
+            elif left_open and right_open and top_open and not bottom_open:
+                tile = '3way_lrb'
+            elif left_open and right_open and bottom_open and not top_open:
+                tile = '3way_lrt'
+            elif left_open and top_open and bottom_open and not right_open:
+                tile = '3way_rtb'
+            elif right_open and top_open and bottom_open and not left_open:
+                tile = '3way_ltb'
+            # 2 walls open - opposite (straight)
+            elif left_open and right_open and not top_open and not bottom_open:
+                tile = 'strgt_horz'
+            elif top_open and bottom_open and not left_open and not right_open:
+                tile = 'strgt_vert'
+            # 2 walls open - adjacent (corner)
+            elif left_open and top_open and not right_open and not bottom_open:
+                tile = 'crnr_rb'
+            elif left_open and bottom_open and not right_open and not top_open:
+                tile = 'crnr_rt'
+            elif right_open and top_open and not left_open and not bottom_open:
+                tile = 'crnr_lb'
+            elif right_open and bottom_open and not left_open and not top_open:
+                tile = 'crnr_lt'
+            # 2 walls open - single opening (dead end)
+            elif left_open and not right_open and not top_open and not bottom_open:
+                tile = 'end_l'
+            elif right_open and not left_open and not top_open and not bottom_open:
+                tile = 'end_r'
+            elif top_open and not left_open and not right_open and not bottom_open:
+                tile = 'end_t'
+            elif bottom_open and not left_open and not right_open and not top_open:
+                tile = 'end_b'
+            # 1 wall open
+            elif left_open:
+                tile = 'end_l'
+            elif right_open:
+                tile = 'end_r'
+            elif top_open:
+                tile = 'end_t'
+            elif bottom_open:
+                tile = 'end_b'
+            # 0 walls open
             else:
-                row.append('void')
+                tile = 'void'
+            
+            row.append(tile)
         level.append(row)
     return level
-from cor_tile import tileset as ts
-from levels import levels as lev
-import random as rd
 
 
 def get_size():
@@ -152,9 +184,11 @@ def print_template(maze = gen_template()):
     for i in maze:
         print(i)
 
-
+    for i in make_lvl_data(maze):
+        print(i)
 
 # code
 if __name__ == "__main__":
-    print_template()
-    print(sz_to_wall_sz())
+    #print_template()
+    #print(sz_to_wall_sz())
+    print_level()
