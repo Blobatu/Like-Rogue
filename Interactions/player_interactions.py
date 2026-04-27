@@ -136,4 +136,5 @@ while True:
     if k.is_pressed('s'):
         move_down()
         continue
+    print("\033[H\033[J", end="")
     print('\n'.join(console_tile))
