@@ -5,7 +5,8 @@
 import sys
 sys.path.append(r"c:\Users\Elitebook\OneDrive - Cegep de Sherbrooke\Documents\Sessiion 2\Programmation\Exercise et Projet\Projet 3")
 
-from Progression import actor
+if __name__ == '__main__':
+    from Progression import actor
 
 levels = {
     'level_1' : {
@@ -16,6 +17,16 @@ levels = {
     'level_2' : {
         'size' : (16, 7),
         'difficulty' : 3,
+        'custom' : False,
+    },
+    'level_3' : {
+        'size' : (16, 7),
+        'difficulty' : 5,
+        'custom' : False,
+    },
+    'level_4' : {
+        'size' : (16, 7),
+        'difficulty' : 7,
         'custom' : False,
     },
 }
