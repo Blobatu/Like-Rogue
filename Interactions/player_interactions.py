@@ -3,9 +3,11 @@ Auteur: Léonard Lefebvre
 Date: 14 avril
 Description: to do
 '''
+from pandas import col
+
 from Actors import player as p
 from Level.level_generation import make_lvl_data, gen_maze
-from .random_npc import npc as r_npc
+from .random_npc import r_npc
 from Actors import npc
 import keyboard as k
 wall_sprite = "##"
@@ -15,13 +17,15 @@ air_sprite = ". "
 mobs =("player","other_monsters")
 
 global console_tile
+
+console_tile = make_lvl_data(gen_maze())
+
 # console_tile = ["####################",
 #                 "##. . . . . . . . ##",
 #                 "##. . . . . . . . ##",
 #                 "##. . . . @ . . . ##",
 #                 "##. . . . . . . . ##",
 #                 "####################"]
-console_tile = make_lvl_data(gen_maze())
 
 # position du player pour les tests, à enlever plus tard
 
@@ -73,9 +77,22 @@ def move(is_vertical: bool, is_negative: bool):
         return
         
     clear_old_position(col, row)
-    set_new_position(new_col, new_row)
+    set_new_position(new_col, new_row, player_sprite)
     p.player_instance.position = (new_col, new_row)
     player_position = p.player_instance.position
+    if(r_npc.position[0] + 1 == p.player_instance.position[0] 
+       and (r_npc.position[1] == p.player_instance.position[1] or
+            r_npc.position[1] + 1 == p.player_instance.position[1] or
+            r_npc.position[1] - 1 == p.player_instance.position[1]) or                         
+       r_npc.position[0] - 1 == p.player_instance.position[0]
+       and (r_npc.position[1] == p.player_instance.position[1] or
+            r_npc.position[1] + 1 == p.player_instance.position[1] or
+            r_npc.position[1] - 1 == p.player_instance.position[1]) or
+       r_npc.position[0] == p.player_instance.position[0] 
+       and (r_npc.position[1] + 1 == p.player_instance.position[1] or
+            r_npc.position[1] - 1 == p.player_instance.position[1])
+    ):
+        print("Combat !")
 
 
 def new_position_value(original_value: int, is_negative: bool):
@@ -110,16 +127,29 @@ def message_wall():
 
 
 def clear_old_position(col: int, row: int):
-    insert_at_position(col, row, air_sprite)
+    move_at_position(col, row, air_sprite)
 
 
-def set_new_position(col: int, row: int):
-    insert_at_position(col, row, player_sprite)
+def set_new_position(col: int, row: int, value: str):
+    move_at_position(col, row, value)
 
 
-def insert_at_position(col: int, row: int, value: str):
+def move_at_position(col: int, row: int, value: str):
     before_value = console_tile[row][:col*2]
     after_value = console_tile[row][col*2+2:]
+    insert_at_position(row, before_value, after_value, value)
+
+
+def replace_at_position(col: int, row: int, value: str):
+    before_value = console_tile[row][:col]
+    after_value = console_tile[row][col+2:]
+    insert_at_position(row, before_value, after_value, value)
+
+
+def insert_at_position(row: int, 
+                       before_value: str, 
+                       after_value: str, 
+                       value: str):
     console_tile[row] = before_value + value + after_value
 
 

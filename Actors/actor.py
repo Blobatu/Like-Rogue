@@ -7,7 +7,7 @@ class Actor:
 
     def __init__(self, 
                  name: str,
-                 symbol: str, 
+                 sprite: str,
                  position: tuple[int, int], 
                  health: int, 
                  damage: int,
@@ -16,7 +16,7 @@ class Actor:
         description: Constructeur
         """
         self.name = name
-        self.symbol = symbol
+        self.sprite = sprite
         self.position = position
         self.health = health
         self.damage = damage

@@ -22,7 +22,7 @@ def make_lvl_data(maze):
     in: list of lists of rooms from maze generator
     out: list of strings, each list is a line of the level
     """
-    lvl_data = []
+    lvl_data: list[str] = []
     for line in maze:
         for i in range(1, 8):
             lvl_data.append('')
@@ -30,6 +30,16 @@ def make_lvl_data(maze):
                 if room =='':
                     room = 'void'   
                 lvl_data[-1] += ts[room][i]
+                #print(ts[room][i])
+                #print("["+str(ts[room][i][4])+"]")
+                if(ts[room][i][6]=='.' and rd.randint(0, 90) == 0):
+                    #print(True)
+                    before_value = ts[room][i][:4*2]
+                    after_value = ts[room][i][4*2+2:]
+                    ts[room][i] = before_value + "& " + after_value
+
+                #print(ts[room][i])
+                #print("bob")
     return lvl_data
 
 

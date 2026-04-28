@@ -1,21 +1,18 @@
-from Interactions.player_interactions import clear_old_position, new_position_value, insert_at_position, console_tile, is_wall, message_wall, player_sprite, air_sprite
-from Actors.npc_repository import listof_npc as n
+from . import player_interactions as p_i
 from Actors import player as p
-from .monster_spawn import npc as npc
+from Actors import npc
+from .random_npc import r_npc
 
-global player_position
-col, row = p.player_instance.position
-new_col, new_row = col, row
 # nom = placeholder 
 
 def Yplayer_distance():
-    npc.position[1]-p.player_instance.position[1]==Yplayer_distance
-    return Yplayer_distance(int)
+    print("y"+str(r_npc.position[1] - p.player_instance.position[1]))
+    return r_npc.position[1] - p.player_instance.position[1]
 
 
-def Xplayer_distance ():
-    npc.position[0]-p.player_instance.position[0]==Xplayer_distance
-    return Xplayer_distance(int)
+def Xplayer_distance():
+    print("x"+str(r_npc.position[0] - p.player_instance.position[0]))
+    return r_npc.position[0] - p.player_instance.position[0]
 
 def move_up():
     move(is_vertical=True, 
@@ -39,64 +36,99 @@ def move_right():
 
 def move(is_vertical: bool, is_negative: bool):
     """
-    But: Permet de déplacer le joueur
+    But: Permet de déplacer le npc
 
     Entrées: 
         is_vertical: Verifie si le mouvement est vertical,
         is_negative: Vrai si le mouvement va vers le haut ou la gauche
     """
-
+    col, row = r_npc.position
+    new_col, new_row = col, row
 
     if(is_vertical is True):
-        new_row = new_position_value(row, is_negative)
+        new_row = p_i.new_position_value(row, is_negative)
 
     else:
-        new_col = new_position_value(col, is_negative)
+        new_col = p_i.new_position_value(col, is_negative)
 
-    if is_wall(new_col, new_row):
-        message_wall()
+    if p_i.is_wall(new_col, new_row):
+        p_i.message_wall()
         return
         
-    clear_old_position(col, row)
-    insert_at_position(new_col, new_row, npc.sprite)
+    p_i.clear_old_position(col, row)
+    p_i.set_new_position(new_col, new_row, r_npc.sprite)
     # monster position = (new_col, new_row)
-    npc.position = (new_col, new_row)
+    r_npc.position = (new_col, new_row)
+    if(r_npc.position[0] + 1 == p.player_instance.position[0] 
+       and (r_npc.position[1] == p.player_instance.position[1] or
+            r_npc.position[1] + 1 == p.player_instance.position[1] or
+            r_npc.position[1] - 1 == p.player_instance.position[1]) or                         
+       r_npc.position[0] - 1 == p.player_instance.position[0]
+       and (r_npc.position[1] == p.player_instance.position[1] or
+            r_npc.position[1] + 1 == p.player_instance.position[1] or
+            r_npc.position[1] - 1 == p.player_instance.position[1]) or
+       r_npc.position[0] == p.player_instance.position[0] 
+       and (r_npc.position[1] + 1 == p.player_instance.position[1] or
+            r_npc.position[1] - 1 == p.player_instance.position[1])
+    ):
+        print("Combat !")
 
 
 # valeur par défaut pour les positions de monstre
-col = -1
-row = -1
+col_wow = -1
+row_wow = -1
 
-while True:
-    for i in console_tile:
-        col =i.find(npc.sprite) 
-        if col != -1:
-            row = i
-            break
+def algorithm():
+    global row_wow
+    global col_wow
+    row_count = -1
+    for i in p_i.console_tile:
+        row_count += 1
+        col_wow = i.find(r_npc.sprite) 
+        if col_wow == -1:
+            # print("ERROR")
+            # print(col_wow)
+            # print(r_npc.sprite)
+            continue
+        if col_wow != -1:
+            print("GOOD")
+            print(col_wow)
+            print(r_npc.sprite)
+            row_wow = row_count
         
-        if 0<Xplayer_distance<5 and -2>Yplayer_distance>2:
-            if npc.position[0]+1==p.player_instance.position[0] and npc.position[1] == p.player_instance.position[1]:
+        if 0 <= Xplayer_distance() < 5 and -2 > Yplayer_distance() > 2:
+            print("1")
+            if r_npc.position[0] + 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
                 break
             move_right()
             #move right
  
  
-        if 0>Xplayer_distance>-3 and -2>Yplayer_distance>2:
-            if npc.position[0]-1 == p.player_instance.position[0] and npc.position[1] == p.player_instance.position[1]:
+        if 0 >= Xplayer_distance() > -3 and -2 > Yplayer_distance() > 2:
+            print("2")
+            if r_npc.position[0] - 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
                     break
             move_left()
             #move left
  
  
-        if 0<Xplayer_distance<3 and -2<Yplayer_distance<2:
-            if npc.position[1]+1 == p.player_instance.position[1] and npc.position[0] == p.player_instance.position[0]:
+        if 0 < Xplayer_distance() < 3 and -2 < Yplayer_distance() < 2:
+            print("3")
+            if r_npc.position[1] - 1 == p.player_instance.position[1] and r_npc.position[0] == p.player_instance.position[0]:
                 break
-            move_down()
+            move_up()
+            if r_npc.position[0] - 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
+                break
+            move_left()
+
             #move down
  
  
-        if 0>Xplayer_distance>-3 and -2<Yplayer_distance<2:
-            if npc.position[1]-1 == p.player_instance.position[1] and npc.position[0] == p.player_instance.position[0]:
+        if 0 > Xplayer_distance() > -3 and -2 < Yplayer_distance() < 2:
+            if r_npc.position[1] + 1 == p.player_instance.position[1] and r_npc.position[0] == p.player_instance.position[0]:
                 break
-            move_up()
+            move_down()
+            if r_npc.position[0] + 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
+                break
+            move_right()
             #move_up
