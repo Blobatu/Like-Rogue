@@ -199,10 +199,6 @@ def level(maze = gen_maze()):
     level = make_lvl_data(maze)
     return level
 
-import random as rd
-
-import random as rd
-
 def full_level(maze=gen_maze(), enn_spwn = int(lv[current_level]['difficulty'] * 2.5), loot = int(lv[current_level]['difficulty'] + 1), traps = int(lv[current_level]['difficulty'] * 1.5)):
     lvl_data = make_lvl_data(maze)
     
@@ -238,7 +234,7 @@ def full_level(maze=gen_maze(), enn_spwn = int(lv[current_level]['difficulty'] *
         if (y, tile_x) in chest_positions:
             new_data[y][tile_x:tile_x+2] = list('[]')
         elif (y, tile_x) in all_selected[enn_count + chest_count:]:
-            new_data[y][tile_x:tile_x+2] = ['△', '.']
+            new_data[y][tile_x:tile_x+2] = ['△', ' ']
         else:
             new_data[y][tile_x:tile_x+2] = ['&', '&']
     

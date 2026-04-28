@@ -5,8 +5,9 @@ Description: to do
 '''
 from Actors import player as p
 from Level.level_generation import make_lvl_data, gen_maze
+from .monster_spawn import npc as npc
+from Actors import npc
 import keyboard as k
-
 wall_sprite = "##"
 player_sprite = "@ "
 air_sprite = ". "
@@ -125,6 +126,7 @@ def insert_at_position(col: int, row: int, value: str):
 
 print('\n'.join(console_tile))
 while True:
+    print(npc.position)
     k.read_event()
     if k.is_pressed('a'):
         move_left()
