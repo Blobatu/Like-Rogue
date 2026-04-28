@@ -1,6 +1,6 @@
 import random as r
 import pygame,time 
-import Actors.player as p
+from Actors import player as p
 
 #from UI.UI import Button
 """
