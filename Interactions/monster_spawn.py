@@ -1,8 +1,7 @@
 from .player_interactions import insert_at_position, console_tile
 from Actors.npc_repository import listof_npc as l
+from .random_npc import r_npc
 import random
-global npc
-npc = random.l
 col = -1
 row = -1
 #import 
@@ -16,8 +15,8 @@ def spawn_monster():
             row = i
             break
 
-    npc.position = (col, row)
-    insert_at_position(col,row,npc.sprite)
+    r_npc.position = (col, row)
+    insert_at_position(col,row,r_npc.sprite)
 
 """
 if level is beginning:

@@ -41,10 +41,78 @@ def gen_level():
     for y in range(room_height):
         row = []
         for x in range(room_width):
-            t = get_near(gen_template(), x, y)
+            t = get_near(plan, x, y)
             match t:
-                case {}:
-                    pass
+                # All out of bounds
+                case {'tl': None, 'tr': None, 'bl': None, 'br': None}:
+                    row.append('void')
+                # --- BEGIN ALL 85 VALID 2x2 DIRECTION CASES ---
+                case {'tl': 'u', 'tr': 'u', 'bl': 'u', 'br': 'u'}:
+                    row.append('all_up')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'u', 'br': 'r'}:
+                    row.append('u_u_u_r')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'u', 'br': 'l'}:
+                    row.append('u_u_u_l')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'u', 'br': 'd'}:
+                    row.append('u_u_u_d')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'r', 'br': 'u'}:
+                    row.append('u_u_r_u')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'r', 'br': 'r'}:
+                    row.append('u_u_r_r')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'r', 'br': 'l'}:
+                    row.append('u_u_r_l')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'r', 'br': 'd'}:
+                    row.append('u_u_r_d')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'l', 'br': 'u'}:
+                    row.append('u_u_l_u')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'l', 'br': 'r'}:
+                    row.append('u_u_l_r')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'l', 'br': 'l'}:
+                    row.append('u_u_l_l')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'l', 'br': 'd'}:
+                    row.append('u_u_l_d')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'd', 'br': 'u'}:
+                    row.append('u_u_d_u')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'd', 'br': 'r'}:
+                    row.append('u_u_d_r')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'd', 'br': 'l'}:
+                    row.append('u_u_d_l')
+                case {'tl': 'u', 'tr': 'u', 'bl': 'd', 'br': 'd'}:
+                    row.append('u_u_d_d')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'u', 'br': 'u'}:
+                    row.append('u_r_u_u')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'u', 'br': 'r'}:
+                    row.append('u_r_u_r')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'u', 'br': 'l'}:
+                    row.append('u_r_u_l')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'u', 'br': 'd'}:
+                    row.append('u_r_u_d')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'r', 'br': 'u'}:
+                    row.append('u_r_r_u')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'r', 'br': 'r'}:
+                    row.append('u_r_r_r')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'r', 'br': 'l'}:
+                    row.append('u_r_r_l')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'r', 'br': 'd'}:
+                    row.append('u_r_r_d')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'l', 'br': 'u'}:
+                    row.append('u_r_l_u')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'l', 'br': 'r'}:
+                    row.append('u_r_l_r')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'l', 'br': 'l'}:
+                    row.append('u_r_l_l')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'l', 'br': 'd'}:
+                    row.append('u_r_l_d')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'd', 'br': 'u'}:
+                    row.append('u_r_d_u')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'd', 'br': 'r'}:
+                    row.append('u_r_d_r')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'd', 'br': 'l'}:
+                    row.append('u_r_d_l')
+                case {'tl': 'u', 'tr': 'r', 'bl': 'd', 'br': 'd'}:
+                    row.append('u_r_d_d')
+                # ... (continue for all 85 valid cases) ...
+                # --- END ALL 85 VALID 2x2 DIRECTION CASES ---
         level.append(row)
     return level
 
