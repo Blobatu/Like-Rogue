@@ -10,7 +10,7 @@ import random as rd
 
 
 # constantes/variables
-current_level = 'level_2'
+current_level = 'level_4'
 size = lv[current_level]['size']
 
 
@@ -199,23 +199,53 @@ def level(maze = gen_maze()):
     level = make_lvl_data(maze)
     return level
 
-def spawn_points(maze = gen_maze(), num_spawns = int(lv[current_level]['difficulty'] * 3.5)):
+import random as rd
+
+import random as rd
+
+def full_level(maze=gen_maze(), enn_spwn=int(lv[current_level]['difficulty'] * 1.5), loot=int(lv[current_level]['difficulty']), traps=int(lv[current_level]['difficulty'] * 1.5)):
     lvl_data = make_lvl_data(maze)
-    open_positions = [(y, x) for y, line in enumerate(lvl_data) for x, char in enumerate(line) if char != '#']
     
-    if num_spawns is None:
-        num_spawns = max(1, int(len(open_positions) * (100 - lv[current_level]['difficulty']) / 100))
+    tile_positions = [(y, tile_x) for y, line in enumerate(lvl_data) for tile_x in range(0, len(line), 2) if tile_x + 1 < len(line) and line[tile_x] != '#' and line[tile_x + 1] != '#']
     
-    selected = rd.sample(open_positions, min(num_spawns, len(open_positions)))
+    chest_positions = [(y, tile_x) for y, tile_x in tile_positions if y > 0 and lvl_data[y-1][tile_x:tile_x+2] == '##']
+    
+    trap_positions = []
+    for y, tile_x in tile_positions:
+        is_isolated = True
+        if tile_x > 1 and (y, tile_x-2) in tile_positions: is_isolated = False
+        if tile_x + 2 < len(lvl_data[0]) and (y, tile_x+2) in tile_positions: is_isolated = False
+        if is_isolated:
+            trap_positions.append((y, tile_x))
+    
+    total_tiles = len(tile_positions)
+    enn_count = min(enn_spwn, total_tiles // 3) 
+    chest_count = min(loot, len(chest_positions) // 2)
+    trap_count = min(traps, len(trap_positions) // 2)
+    
+    all_selected = []
+    if enn_count > 0:
+        all_selected.extend(rd.sample(tile_positions, enn_count))
+    if chest_count > 0:
+        available = [p for p in chest_positions if p not in all_selected]
+        all_selected.extend(rd.sample(available, min(chest_count, len(available))))
+    if trap_count > 0 and lv[current_level]['difficulty'] <= 5:
+        available = [p for p in trap_positions if p not in all_selected]
+        all_selected.extend(rd.sample(available, min(trap_count, len(available))))
     
     new_data = [list(line) for line in lvl_data]
-    for y, x in selected:
-        new_data[y][x] = '&'
+    for y, tile_x in all_selected:
+        if (y, tile_x) in chest_positions:
+            new_data[y][tile_x:tile_x+2] = list('[]')
+        elif (y, tile_x) in trap_positions:
+            new_data[y][tile_x:tile_x+2] = ['△', '.']
+        else:
+            new_data[y][tile_x:tile_x+2] = ['&', '&']
     
     return [''.join(line) for line in new_data]
 
 def print_spawn():
-    for i in spawn_points():
+    for i in full_level():
         print(i)
 
 # test
