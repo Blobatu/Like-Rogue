@@ -1,7 +1,7 @@
 from Interactions.player_interactions import clear_old_position, new_position_value, insert_at_position, console_tile, is_wall, message_wall, player_sprite, air_sprite
-import Actors.npc_repository.listof_npc as n
-import Actors.player as p
-import monster_spawn.npc as npc
+from Actors.npc_repository import listof_npc as n
+from Actors import player as p
+from .monster_spawn import npc as npc
 
 global player_position
 col, row = p.player_instance.position
