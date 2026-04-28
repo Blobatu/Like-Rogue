@@ -96,7 +96,7 @@ def is_wall(col, row):
         return True
     if(row < 0 or row >= len(console_tile)):
         return True
-    if(console_tile[row][col*2:col*2+2] == wall_sprite):
+    if(console_tile [row] [col * 2 : col * 2 + 2 ] == wall_sprite):
         return True
         
     return False
