@@ -14,12 +14,13 @@ air_sprite = ". "
 mobs =("player","other_monsters")
 
 global console_tile
-console_tile = ["####################",
-                "##. . . . . . . . ##",
-                "##. . . . . . . . ##",
-                "##. . . . @ . . . ##",
-                "##. . . . . . . . ##",
-                "####################"]
+# console_tile = ["####################",
+#                 "##. . . . . . . . ##",
+#                 "##. . . . . . . . ##",
+#                 "##. . . . @ . . . ##",
+#                 "##. . . . . . . . ##",
+#                 "####################"]
+console_tile = make_lvl_data(gen_maze())
 
 # position du player pour les tests, à enlever plus tard
 
