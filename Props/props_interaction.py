@@ -1,7 +1,7 @@
 import random as r
 import pygame,time 
 from Actors import player as p
-
+import asyncio
 #from UI.UI import Button
 """
 author : emmanuel Bissonnette
@@ -53,16 +53,12 @@ def interaction_check(player_pos:str):
             void()     
 async def bomb_interaction():
     bomb_position = p.player_instance.position
-    await timer(r.randint(5,10))
-    player_bomb_check = (p.player_instance.position[0]+5,p.player_instance[1]-5)
-    if bomb_position[0] < player_bomb_check[0] and bomb_position[1]>player_bomb_check[1]:
+    await asyncio.sleep(10)
+    player_bomb_check = (p.player_instance.position[0]+5,p.player_instance.position[1]-5)
+    if player_bomb_check[0] < bomb_position[0] > player_bomb_check[1] and player_bomb_check[0]<bomb_position[1]>player_bomb_check[1]:
          print("yay")
-    pass
-async def timer(time_sleep):
-        time.sleep(time_sleep)
-        print("bananasleep")
-    
-
+    else :
+         print("sad :(")
 
 chest_dic = {
 
