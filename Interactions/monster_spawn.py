@@ -1,5 +1,5 @@
-from Interactions.player_interactions import insert_at_position,console_tile
-import Actors.npc_repository.listof_npc as l
+from .player_interactions import insert_at_position, console_tile
+from Actors.npc_repository import listof_npc as l
 import random
 global npc
 npc = random.l
