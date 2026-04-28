@@ -99,7 +99,7 @@ stats_menu = pygame_menu.Menu('Stats!', 600, 400, theme=pygame_menu.themes.THEME
 running = True
 while running:
         if settings_menu.is_enabled():
-            settings_menu.update(events)
+            settings_menu.update(pygame.event.get())
             settings_menu.draw(screen)
 
         for event in pygame.event.get():

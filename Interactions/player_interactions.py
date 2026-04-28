@@ -124,21 +124,17 @@ def insert_at_position(col: int, row: int, value: str):
 
 
 def run():
-    print('\n'.join(console_tile))
-    while True:
-        print(r_npc.position)
-        k.read_event()
-        if k.is_pressed('a'):
-            move_left()
-            continue
-        if k.is_pressed('d'):
-            move_right()
-            continue
-        if k.is_pressed('w'):
-            move_up()
-            continue
-        if k.is_pressed('s'):
-            move_down()
-            continue
-        print("\033[H\033[J", end="")
-        print('\n'.join(console_tile))
+    #print(r_npc.position)
+    k.read_event()
+    if k.is_pressed('a'):
+        move_left()
+        return
+    if k.is_pressed('d'):
+        move_right()
+        return
+    if k.is_pressed('w'):
+        move_up()
+        return
+    if k.is_pressed('s'):
+        move_down()
+        return
