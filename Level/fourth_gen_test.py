@@ -14,18 +14,6 @@ def make_lvl_data(maze):
     return lvl_data
 
 def get_near(plan, x, y):
-    width = len(plan[0]) if plan else 0
-    height = len(plan)
-    neighbors = {'tl': None, 'tr': None, 'bl': None, 'br': None}
-    if x != width and y != height:
-        neighbors['tl'] = plan[y][x]
-        neighbors['tr'] = plan[y][x+1]
-        neighbors['bl'] = plan[y+1][x]
-        neighbors['br'] = plan[y+1][x+1]
-    return neighbors
-
-
-def get_near(plan, x, y):
     height = len(plan)
     width = len(plan[0])
     neighbors = {'tl': None, 'tr': None, 'bl': None, 'br': None}
@@ -45,16 +33,7 @@ def get_near(plan, x, y):
 
 
 def gen_level():
-    """
-    Generate a level from the vector grid.
-    Hard-coded all possible combinations based on which walls are OPEN.
-    
-    A wall is OPEN if the corner vector points parallel to it:
-    - Left/Right wall: open if corner points 'l' or 'r'
-    - Top/Bottom wall: open if corner points 'u' or 'd'
-    """
     plan = gen_template()
-    
     room_height = len(plan) - 1
     room_width = len(plan[0]) - 1
     
@@ -62,67 +41,20 @@ def gen_level():
     for y in range(room_height):
         row = []
         for x in range(room_width):
-            tl = plan[y][x]
-            tr = plan[y][x + 1]
-            bl = plan[y + 1][x]
-            br = plan[y + 1][x + 1]
-            
-            # Determine which walls are OPEN
-            left_open = tl in ('l', 'r')
-            right_open = tr in ('l', 'r')
-            top_open = bl in ('u', 'd')
-            bottom_open = br in ('u', 'd')
-            
-            # All 16 possible combinations of 4 boolean walls
-            # 4 walls open
-            if left_open and right_open and top_open and bottom_open:
-                tile = 'hollow'
-            # 3 walls open
-            elif left_open and right_open and top_open and not bottom_open:
-                tile = '3way_lrb'
-            elif left_open and right_open and bottom_open and not top_open:
-                tile = '3way_lrt'
-            elif left_open and top_open and bottom_open and not right_open:
-                tile = '3way_rtb'
-            elif right_open and top_open and bottom_open and not left_open:
-                tile = '3way_ltb'
-            # 2 walls open - opposite (straight)
-            elif left_open and right_open and not top_open and not bottom_open:
-                tile = 'strgt_horz'
-            elif top_open and bottom_open and not left_open and not right_open:
-                tile = 'strgt_vert'
-            # 2 walls open - adjacent (corner)
-            elif left_open and top_open and not right_open and not bottom_open:
-                tile = 'crnr_rb'
-            elif left_open and bottom_open and not right_open and not top_open:
-                tile = 'crnr_rt'
-            elif right_open and top_open and not left_open and not bottom_open:
-                tile = 'crnr_lb'
-            elif right_open and bottom_open and not left_open and not top_open:
-                tile = 'crnr_lt'
-            # 2 walls open - single opening (dead end)
-            elif left_open and not right_open and not top_open and not bottom_open:
-                tile = 'end_l'
-            elif right_open and not left_open and not top_open and not bottom_open:
-                tile = 'end_r'
-            elif top_open and not left_open and not right_open and not bottom_open:
-                tile = 'end_t'
-            elif bottom_open and not left_open and not right_open and not top_open:
-                tile = 'end_b'
-            # 1 wall open
-            elif left_open:
-                tile = 'end_l'
-            elif right_open:
-                tile = 'end_r'
-            elif top_open:
-                tile = 'end_t'
-            elif bottom_open:
-                tile = 'end_b'
-            # 0 walls open
-            else:
-                tile = 'void'
-            
-            row.append(tile)
+            t = get_near(gen_template(), x, y)
+            if t['tl'] == 'r':
+                if t['tr'] == 'd' and t['br'] == 'l' and t['bl'] == 'u':
+                    row.append('hollow')
+                if (t['tr'] != 'd' and t['br'] == 'l' and t['bl'] != 'u') or (t['tr'] != 'd' and t['br'] != 'l' and t['bl'] == 'r'):
+                    row.append('strgt_horz')
+                if (t['tr'] == 'd' and t['br'] == 'l' and t['bl'] != 'u') or (t['tr'] != 'd' and t['br'] == 'u' and t['bl'] == 'r'):
+                    row.append('end_l')
+                if (t['tr'] != 'd' and t['br'] == 'l' and t['bl'] == 'u'):
+                    row.append('end_r')
+            if t['tl'] == 'd': 
+                pass #delete after the ifs are done
+            if t['tl'] == 'u' or t['tl'] == 'r':
+                pass #delete after the ifs are done
         level.append(row)
     return level
 
