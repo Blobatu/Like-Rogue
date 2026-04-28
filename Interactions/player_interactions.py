@@ -3,7 +3,8 @@ Auteur: Léonard Lefebvre
 Date: 14 avril
 Description: to do
 '''
-import Actors.player as p
+from Actors import player as p
+from Level.level_generation import make_lvl_data, gen_maze
 import keyboard as k
 
 wall_sprite = "##"
