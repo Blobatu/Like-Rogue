@@ -5,8 +5,9 @@ Description: to do
 '''
 from Actors import player as p
 from Level.level_generation import make_lvl_data, gen_maze
+from .random_npc import r_npc
+from Actors import npc
 import keyboard as k
-
 wall_sprite = "##"
 player_sprite = "@ "
 air_sprite = ". "
@@ -14,12 +15,13 @@ air_sprite = ". "
 mobs =("player","other_monsters")
 
 global console_tile
-console_tile = ["####################",
-                "##. . . . . . . . ##",
-                "##. . . . . . . . ##",
-                "##. . . . @ . . . ##",
-                "##. . . . . . . . ##",
-                "####################"]
+# console_tile = ["####################",
+#                 "##. . . . . . . . ##",
+#                 "##. . . . . . . . ##",
+#                 "##. . . . @ . . . ##",
+#                 "##. . . . . . . . ##",
+#                 "####################"]
+console_tile = make_lvl_data(gen_maze())
 
 # position du player pour les tests, à enlever plus tard
 
@@ -124,6 +126,7 @@ def insert_at_position(col: int, row: int, value: str):
 
 print('\n'.join(console_tile))
 while True:
+    print(npc.position)
     k.read_event()
     if k.is_pressed('a'):
         move_left()
