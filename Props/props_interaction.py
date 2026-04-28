@@ -46,7 +46,7 @@ def interaction_check(player_pos:str):
             barrel()
         case "||":
             door()
-        case "△.":
+        case "△ ":
             spike_trap()
         case "  ":
             void()                    
