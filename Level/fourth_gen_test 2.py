@@ -1,5 +1,5 @@
-from .cor_tile import tileset as ts
-from .levels import levels as lev
+from cor_tile import tileset as ts
+from levels import levels as lev
 import random as rd
 
 def make_lvl_data(maze):
@@ -51,6 +51,10 @@ def gen_level():
                     row.append('end_l')
                 if (t['tr'] != 'd' and t['br'] == 'l' and t['bl'] == 'u'):
                     row.append('end_r')
+                if (t['tr'] == 'd' and t['br'] != 'l' and t['bl'] == 'u') or (t['tr'] != 'd' and t['br'] == 'u' and t['bl'] == 'u'):
+                    row.append('end_b')
+                if (t['tr'] == 'd' and t['br'] != 'l' and t['bl'] != 'u') or (t['tr'] != 'd' and t['br'] == 'u' and t['bl'] == 'r'):
+                    row.append('crnr_lb')
             if t['tl'] == 'd': 
                 pass #delete after the ifs are done
             if t['tl'] == 'u' or t['tl'] == 'r':
