@@ -42,23 +42,9 @@ def gen_level():
         row = []
         for x in range(room_width):
             t = get_near(gen_template(), x, y)
-            if t['tl'] == 'r':
-                if t['tr'] == 'd' and t['br'] == 'l' and t['bl'] == 'u':
-                    row.append('hollow')
-                if (t['tr'] != 'd' and t['br'] == 'l' and t['bl'] != 'u') or (t['tr'] != 'd' and t['br'] != 'l' and t['bl'] == 'r'):
-                    row.append('strgt_horz')
-                if (t['tr'] == 'd' and t['br'] == 'l' and t['bl'] != 'u') or (t['tr'] != 'd' and t['br'] == 'u' and t['bl'] == 'r'):
-                    row.append('end_l')
-                if (t['tr'] != 'd' and t['br'] == 'l' and t['bl'] == 'u'):
-                    row.append('end_r')
-                if (t['tr'] == 'd' and t['br'] != 'l' and t['bl'] == 'u') or (t['tr'] != 'd' and t['br'] == 'u' and t['bl'] == 'u'):
-                    row.append('end_b')
-                if (t['tr'] == 'd' and t['br'] != 'l' and t['bl'] != 'u') or (t['tr'] != 'd' and t['br'] == 'u' and t['bl'] == 'r'):
-                    row.append('crnr_lb')
-            if t['tl'] == 'd': 
-                pass #delete after the ifs are done
-            if t['tl'] == 'u' or t['tl'] == 'r':
-                pass #delete after the ifs are done
+            match t:
+                case {}:
+                    pass
         level.append(row)
     return level
 
