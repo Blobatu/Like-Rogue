@@ -203,7 +203,7 @@ import random as rd
 
 import random as rd
 
-def full_level(maze=gen_maze(), enn_spwn = int(lv[current_level]['difficulty'] * 1.5), loot = int(lv[current_level]['difficulty']), traps = int(lv[current_level]['difficulty'] * 1.5)):
+def full_level(maze=gen_maze(), enn_spwn = int(lv[current_level]['difficulty'] * 2.5), loot = int(lv[current_level]['difficulty'] + 1), traps = int(lv[current_level]['difficulty'] * 1.5)):
     lvl_data = make_lvl_data(maze)
     
     tile_positions = [(y, tile_x) for y, line in enumerate(lvl_data) for tile_x in range(0, len(line), 2) if tile_x + 1 < len(line) and line[tile_x] != '#' and line[tile_x + 1] != '#']
@@ -211,9 +211,10 @@ def full_level(maze=gen_maze(), enn_spwn = int(lv[current_level]['difficulty'] *
     chest_positions = [(y, tile_x) for y, tile_x in tile_positions if y > 0 and lvl_data[y-1][tile_x:tile_x+2] == '##']
     
     total_tiles = len(tile_positions)
-    enn_count = min(enn_spwn, total_tiles // 4)
-    chest_count = min(loot, len(chest_positions) // 2)
-    trap_count = min(traps, total_tiles // 4)    
+    enn_count = min(enn_spwn, total_tiles // 2)
+    chest_count = min(loot, len(chest_positions))
+    trap_count = min(traps, total_tiles // 5)
+    
     all_selected = []
     
     if enn_count > 0:
@@ -230,17 +231,20 @@ def full_level(maze=gen_maze(), enn_spwn = int(lv[current_level]['difficulty'] *
             all_selected.extend(rd.sample(available, min(trap_count, len(available))))
     
     new_data = [list(line) for line in lvl_data]
+    enemy_positions = all_selected[:enn_count]
+    chest_selected = all_selected[enn_count:enn_count + chest_count]
+    
     for y, tile_x in all_selected:
         if (y, tile_x) in chest_positions:
             new_data[y][tile_x:tile_x+2] = list('[]')
-        elif any((y, tile_x) == p for p in all_selected[3:]):
-            new_data[y][tile_x:tile_x+2] = ['△', ' ']
+        elif (y, tile_x) in all_selected[enn_count + chest_count:]:
+            new_data[y][tile_x:tile_x+2] = ['△', '.']
         else:
             new_data[y][tile_x:tile_x+2] = ['&', '&']
     
     return [''.join(line) for line in new_data]
 
-def print_spawn():
+def print_full():
     for i in full_level():
         print(i)
 
@@ -254,4 +258,4 @@ test_1 = [['end_b','','','','crnr_rb','3way_lrb','3way_lrb','strgt_horz','end_l'
 
 if __name__ == "__main__":
     #print_level()
-    print_spawn()
+    print_full()
