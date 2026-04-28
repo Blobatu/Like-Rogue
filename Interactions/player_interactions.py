@@ -95,7 +95,7 @@ def is_wall(col, row):
         row: La rangée à vérifier,
     Sortie: Vrai si le joueur va vers un mur, sinon Faux
     """
-    if(col < 0 or col >= 10):
+    if(col < 0 or col >= len(console_tile[0])):
         return True
     if(row < 0 or row >= len(console_tile)):
         return True
@@ -123,22 +123,18 @@ def insert_at_position(col: int, row: int, value: str):
     console_tile[row] = before_value + value + after_value
 
 
-
-print('\n'.join(console_tile))
-while True:
-    print(r_npc.position)
+def run():
+    #print(r_npc.position)
     k.read_event()
     if k.is_pressed('a'):
         move_left()
-        continue
+        return
     if k.is_pressed('d'):
         move_right()
-        continue
+        return
     if k.is_pressed('w'):
         move_up()
-        continue
+        return
     if k.is_pressed('s'):
         move_down()
-        continue
-    print("\033[H\033[J", end="")
-    print('\n'.join(console_tile))
+        return
