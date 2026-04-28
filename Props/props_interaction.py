@@ -1,6 +1,7 @@
 import random as r
-import pygame as pg
+import pygame,time 
 import Actors.player as p
+
 #from UI.UI import Button
 """
 author : emmanuel Bissonnette
@@ -28,12 +29,12 @@ def chest():
     
     
 def barrel ():
+    
     pass
 def door ():
    p.player_instance.level +=1 
 def spike_trap():
         p.player_instance.lose_life(r.randint(3,10))
-        print("yay")
 def void ():
         remaining_life = p.player_instance.health
         p.player_instance.lose_life(remaining_life)
@@ -49,7 +50,19 @@ def interaction_check(player_pos:str):
         case "△ ":
             spike_trap()
         case "  ":
-            void()                    
+            void()     
+async def bomb_interaction():
+    bomb_position = p.player_instance.position
+    await timer(r.randint(5,10))
+    player_bomb_check = (p.player_instance.position[0]+5,p.player_instance[1]-5)
+    if bomb_position[0] < player_bomb_check[0] and bomb_position[1]>player_bomb_check[1]:
+         print("yay")
+    pass
+async def timer(time_sleep):
+        time.sleep(time_sleep)
+        print("bananasleep")
+    
+
 
 chest_dic = {
 
