@@ -1,7 +1,8 @@
 from turtle import pos
 from typing import Self
 
-import pygame 
+import pygame
+import pygame_menu
 import sys
 
 #Initialisation de pygame
@@ -76,7 +77,12 @@ buttons = [
     Button('Stats!', 150, 40, (570, 500), 5)
 ]
 
+#Création du menu de settings
+settings_menu = pygame_menu.Menu('Settings', 600, 400, theme=pygame_menu.themes.THEME_DARK)
 
+
+#Création du menu de stats
+stats_menu = pygame_menu.Menu('Stats', 600, 400, theme=pygame_menu.themes.THEME_DARK)
 
 running = True
 while running:
