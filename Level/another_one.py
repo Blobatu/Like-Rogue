@@ -1,5 +1,6 @@
 from cor_tile import tileset as ts
 from levels import levels as lev
+from cor_tile import tile_rules as tr
 import random as rd
 
 def make_lvl_data(maze):
@@ -32,7 +33,9 @@ def get_near(plan, x, y):
     return neighbors
 
 
-def gen_level():
+
+
+def make_level():
     plan = gen_template()
     room_height = len(plan) - 1
     room_width = len(plan[0]) - 1
@@ -42,80 +45,29 @@ def gen_level():
         row = []
         for x in range(room_width):
             t = get_near(plan, x, y)
-            match t:
-                # All out of bounds
-                case {'tl': None, 'tr': None, 'bl': None, 'br': None}:
-                    row.append('void')
-                # --- BEGIN ALL 85 VALID 2x2 DIRECTION CASES ---
-                case {'tl': 'u', 'tr': 'u', 'bl': 'u', 'br': 'u'}:
-                    row.append('all_up')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'u', 'br': 'r'}:
-                    row.append('u_u_u_r')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'u', 'br': 'l'}:
-                    row.append('u_u_u_l')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'u', 'br': 'd'}:
-                    row.append('u_u_u_d')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'r', 'br': 'u'}:
-                    row.append('u_u_r_u')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'r', 'br': 'r'}:
-                    row.append('u_u_r_r')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'r', 'br': 'l'}:
-                    row.append('u_u_r_l')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'r', 'br': 'd'}:
-                    row.append('u_u_r_d')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'l', 'br': 'u'}:
-                    row.append('u_u_l_u')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'l', 'br': 'r'}:
-                    row.append('u_u_l_r')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'l', 'br': 'l'}:
-                    row.append('u_u_l_l')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'l', 'br': 'd'}:
-                    row.append('u_u_l_d')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'd', 'br': 'u'}:
-                    row.append('u_u_d_u')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'd', 'br': 'r'}:
-                    row.append('u_u_d_r')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'd', 'br': 'l'}:
-                    row.append('u_u_d_l')
-                case {'tl': 'u', 'tr': 'u', 'bl': 'd', 'br': 'd'}:
-                    row.append('u_u_d_d')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'u', 'br': 'u'}:
-                    row.append('u_r_u_u')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'u', 'br': 'r'}:
-                    row.append('u_r_u_r')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'u', 'br': 'l'}:
-                    row.append('u_r_u_l')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'u', 'br': 'd'}:
-                    row.append('u_r_u_d')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'r', 'br': 'u'}:
-                    row.append('u_r_r_u')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'r', 'br': 'r'}:
-                    row.append('u_r_r_r')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'r', 'br': 'l'}:
-                    row.append('u_r_r_l')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'r', 'br': 'd'}:
-                    row.append('u_r_r_d')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'l', 'br': 'u'}:
-                    row.append('u_r_l_u')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'l', 'br': 'r'}:
-                    row.append('u_r_l_r')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'l', 'br': 'l'}:
-                    row.append('u_r_l_l')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'l', 'br': 'd'}:
-                    row.append('u_r_l_d')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'd', 'br': 'u'}:
-                    row.append('u_r_d_u')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'd', 'br': 'r'}:
-                    row.append('u_r_d_r')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'd', 'br': 'l'}:
-                    row.append('u_r_d_l')
-                case {'tl': 'u', 'tr': 'r', 'bl': 'd', 'br': 'd'}:
-                    row.append('u_r_d_d')
-                # ... (continue for all 85 valid cases) ...
-                # --- END ALL 85 VALID 2x2 DIRECTION CASES ---
+            wall = []
+            gen = []
+            if t['tl'] == 'r' or t['tr'] == 'l':
+                wall.append('up')
+            else:
+                gen.append('up')
+            if t['bl'] == 'r' or t['br'] == 'l':
+                wall.append('down')
+            else:
+                gen.append('down')
+            if t['tl'] == 'd' or t['bl'] == 'u':
+                wall.append('left')
+            else:
+                gen.append('left')
+            if t['tr'] == 'd' or t['br'] == 'u':
+                wall.append('right')
+            else:
+                gen.append('right')
+            for i in tr:
+                if tr[i]['gen'] == gen and tr[i]['wall'] == wall:
+                    row.append(i)
         level.append(row)
     return level
-
 
 def get_size():
     size = lev['level_1']['size']
@@ -174,7 +126,7 @@ def print_template(maze = gen_template()):
     for i in maze:
         print(i)
 
-def print_level(maze = gen_level()):
+def print_level(maze = make_level()):
     for i in make_lvl_data(maze):
         print(i)
 
