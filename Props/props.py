@@ -1,4 +1,5 @@
-import Props.props_interaction as p
+
+from Props import props_interaction as p
 from Actors import player as pl
 import time as t
 p.interaction_check("△ ")
