@@ -1,3 +1,4 @@
+from asyncio import events
 from turtle import pos
 from typing import Self
 
@@ -23,6 +24,16 @@ my_font = pygame.font.Font(None, 35)
 # Création du titre
 font = pygame.font.SysFont('comicsansms', 75)
 text = font.render('Like-Rogue', True, ("#FFFFFFFF"))
+
+# Création de variables de settings
+settings = {
+    "difficulty": "Normal"
+}
+
+# Retour de fonction de settings
+def set_difficulty(value, difficulty):
+    settings["difficulty"] = difficulty
+    print(f"Difficulty set to: {settings['difficulty']}")
 
 class Button:
     def __init__(self, text, width, height, pos, elevation):
@@ -78,25 +89,31 @@ buttons = [
 ]
 
 #Création du menu de settings
-settings_menu = pygame_menu.Menu('Settings', 600, 400, theme=pygame_menu.themes.THEME_DARK)
-
+settings_menu = pygame_menu.Menu('Settings!', 600, 400, theme=pygame_menu.themes.THEME_DARK)
+settings_menu.add.selector("Difficulty", [("Easy", "Easy"), ("Normal", "Normal"), ("Hard", "Hard")], onchange=set_difficulty)
+settings_menu.add.button("Back", pygame_menu.events.BACK)
 
 #Création du menu de stats
-stats_menu = pygame_menu.Menu('Stats', 600, 400, theme=pygame_menu.themes.THEME_DARK)
+stats_menu = pygame_menu.Menu('Stats!', 600, 400, theme=pygame_menu.themes.THEME_DARK)
 
 running = True
 while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+        if settings_menu.is_enabled():
+            settings_menu.update(events)
+            settings_menu.draw(screen)
 
-    screen.fill("#000000")
-    screen.blit(text, (width // 2 - text.get_width() // 2, height // 4 - text.get_height() // 2))
-    for btn in buttons:
-        btn.draw()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
 
-    pygame.display.update()
+
+        screen.fill("#000000")
+        screen.blit(text, (width // 2 - text.get_width() // 2, height // 4 - text.get_height() // 2))
+        for btn in buttons:
+            btn.draw()
+
+        pygame.display.update()
 
 
 
