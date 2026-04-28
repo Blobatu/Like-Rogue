@@ -3,10 +3,15 @@ Auteur: Léonard Lefebvre
 Date: 14 avril
 Description: to do
 '''
+<<<<<<< Updated upstream
 from Actors import player as p
 from Level.level_generation import make_lvl_data, gen_maze
+=======
+from Actors import npc
+import Actors.player as p
+>>>>>>> Stashed changes
 import keyboard as k
-
+import monster_spawn.npc as npc
 wall_sprite = "##"
 player_sprite = "@ "
 air_sprite = ". "
@@ -18,6 +23,13 @@ console_tile = ["####################",
                 "##. . . . . . . . ##",
                 "##. . . . . . . . ##",
                 "##. . . . @ . . . ##",
+                "##. . . . . . . . ##",
+                "##. . . . . . . . ##",
+                "##. . . . . . . . ##",
+                "##. . . . . . . . ##",
+                "##. . . . . . . . ##",
+                "##. . . . . . . . ##",
+                "##. . . oC. . . . ##",
                 "##. . . . . . . . ##",
                 "####################"]
 
@@ -124,6 +136,7 @@ def insert_at_position(col: int, row: int, value: str):
 
 print('\n'.join(console_tile))
 while True:
+    print(npc.position)
     k.read_event()
     if k.is_pressed('a'):
         move_left()

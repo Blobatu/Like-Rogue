@@ -9,12 +9,12 @@ new_col, new_row = col, row
 # nom = placeholder 
 
 def Yplayer_distance():
-    n.position[1]-p.player_instance.position[1]==Yplayer_distance
+    npc.position[1]-p.player_instance.position[1]==Yplayer_distance
     return Yplayer_distance(int)
 
 
 def Xplayer_distance ():
-    n.position[0]-p.player_instance.position[0]==Xplayer_distance
+    npc.position[0]-p.player_instance.position[0]==Xplayer_distance
     return Xplayer_distance(int)
 
 def move_up():
@@ -67,36 +67,36 @@ def move(is_vertical: bool, is_negative: bool):
 col = -1
 row = -1
 
-
-for i in console_tile:
-    col =i.find(npc.sprite) 
-    if col != -1:
-        row = i
-        break
-
-    if 0<Xplayer_distance<5 and -2>Yplayer_distance>2:
-        if n.position[0]+1==p.player_instance.position[0] and n.position[1] == p.player_instance.position[1]:
+while True:
+    for i in console_tile:
+        col =i.find(npc.sprite) 
+        if col != -1:
+            row = i
             break
-        move_right()
-        #move right
- 
- 
-    if 0>Xplayer_distance>-5 and -2>Yplayer_distance>2:
-        if n.position[0]-1 == p.player_instance.position[0] and n.position[1] == p.player_instance.position[1]:
+
+        if 0<Xplayer_distance<5 and -2>Yplayer_distance>2:
+            if npc.position[0]+1==p.player_instance.position[0] and npc.position[1] == p.player_instance.position[1]:
                 break
-        move_left()
-        #move left
+            move_right()
+            #move right
  
  
-    if 0<Xplayer_distance<5 and -2<Yplayer_distance<2:
-        if n.position[1]+1 == p.player_instance.position[1] and n.position[0] == p.player_instance.position[0]:
-            break
-        move_down()
-        #move down
+        if 0>Xplayer_distance>-5 and -2>Yplayer_distance>2:
+            if npc.position[0]-1 == p.player_instance.position[0] and npc.position[1] == p.player_instance.position[1]:
+                    break
+            move_left()
+            #move left
  
  
-    if 0>Xplayer_distance>-5 and -2<Yplayer_distance<2:
-        if n.position[1]-1 == p.player_instance.position[1] and n.position[0] == p.player_instance.position[0]:
-            break
-        move_up()
-        #move_up
+        if 0<Xplayer_distance<5 and -2<Yplayer_distance<2:
+            if npc.position[1]+1 == p.player_instance.position[1] and npc.position[0] == p.player_instance.position[0]:
+                break
+            move_down()
+            #move down
+ 
+ 
+        if 0>Xplayer_distance>-5 and -2<Yplayer_distance<2:
+            if npc.position[1]-1 == p.player_instance.position[1] and npc.position[0] == p.player_instance.position[0]:
+                break
+            move_up()
+            #move_up
