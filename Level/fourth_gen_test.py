@@ -184,6 +184,7 @@ def print_template(maze = gen_template()):
     for i in maze:
         print(i)
 
+def print_level(maze = gen_level()):
     for i in make_lvl_data(maze):
         print(i)
 

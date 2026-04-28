@@ -4,13 +4,14 @@
 
 
 # import
-
+from levels import levels as lv
 from cor_tile import tileset as ts
 import random as rd
 
 
 # constantes/variables
-size = (16, 7)
+current_level = 'level_2'
+size = lv[current_level]['size']
 
 
 # fonctions
@@ -197,6 +198,26 @@ def print_level(maze = gen_maze()):
 def level(maze = gen_maze()):
     level = make_lvl_data(maze)
     return level
+
+def spawn_points(maze = gen_maze(), num_spawns = int(lv[current_level]['difficulty'] * 3.5)):
+    lvl_data = make_lvl_data(maze)
+    open_positions = [(y, x) for y, line in enumerate(lvl_data) for x, char in enumerate(line) if char != '#']
+    
+    if num_spawns is None:
+        num_spawns = max(1, int(len(open_positions) * (100 - lv[current_level]['difficulty']) / 100))
+    
+    selected = rd.sample(open_positions, min(num_spawns, len(open_positions)))
+    
+    new_data = [list(line) for line in lvl_data]
+    for y, x in selected:
+        new_data[y][x] = '&'
+    
+    return [''.join(line) for line in new_data]
+
+def print_spawn():
+    for i in spawn_points():
+        print(i)
+
 # test
 
 fullscreen_layout_template = [[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]]
@@ -206,4 +227,5 @@ test_1 = [['end_b','','','','crnr_rb','3way_lrb','3way_lrb','strgt_horz','end_l'
 #print_room_as_list(test_1)
 
 if __name__ == "__main__":
-    print_level()
+    #print_level()
+    print_spawn()

@@ -6,7 +6,7 @@ levels = {
     },
     'level_2' : {
         'size' : (16, 7),
-        'difficulty' : 2,
+        'difficulty' : 3,
         'custom' : False,
     },
 }
