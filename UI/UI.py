@@ -16,6 +16,8 @@ pygame.display.set_caption("Like-Rogue")
 
 # Template de font pour les boutons
 font = pygame.font.SysFont('Consolas', font_size)
+my_font = pygame.font.Font(None, 35)
+
 
 # Création du titre
 font = pygame.font.SysFont('comicsansms', 75)
@@ -60,81 +62,19 @@ class Button:
                     self.press = False
                     # Indication du bouton, lorsqu'il est pressé
                     print('Play Pressed!')
+                    print('Settings Pressed!')
+                    print('Stats Pressed!')
         else:
             self.dynamic_elev = self.elevation
             self.top_color = "#038D05"
 
-            
+           
 #Création du bouton + loop d'affichage
-my_font = pygame.font.Font(None, 35)
-button = Button('Play!', 200, 40, (545, 400), 5)
-"""
-class Button_Settings:
-    def __init__(self, text, width, height, pos, elevation):
-        # Attributs de base
-        self.press = False
-        self.elevation = elevation
-        self.dynamic_elev = elevation
-        self.original_y_pos = pos[1]
-
-        # Rectangle du bouton
-        self.top_rect = pygame.Rect(pos, (width, height))
-        self.top_color = "#000000"
-
-        # Texte du bouton
-        self.text_surf = my_font.render(text, True, "#000202FF")
-        self.text_rect = self.text_surf.get_rect(center=self.top_rect.center)
-
-    def draw_settings(self):
-        # logique de l'élévation
-        self.top_rect.y = self.original_y_pos - self.dynamic_elev
-        self.text_rect.center = self.top_rect.center
-
-        pygame.draw.rect(screen, self.top_color, self.top_rect, border_radius=12)
-        screen.blit(self.text_surf, self.text_rect)
-
-        self.check_click_settings()
-
-    def check_click_settings(self):
-        mouse_pos = pygame.mouse.get_pos()
-        if self.top_rect.collidepoint(mouse_pos):
-            self.top_color = "#000055"
-            if pygame.mouse.get_pressed()[0]:
-                self.dynamic_elev = 0
-                self.press = True
-            else:
-                self.dynamic_elev = self.elevation
-                if self.press == True:
-                    self.press = False
-                    # Indication du bouton, lorsqu'il est pressé
-                    print('Settings Pressed!')
-        else:
-            self.dynamic_elev = self.elevation
-            self.top_color = "#0F03B5"
-
-            
-
-# Création du bouton + loop d'affichage
-my_font = pygame.font.Font(None, 35)
-button = Button_Settings('Settings!', 300, 40, (545, 450), 5)
-"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+buttons = [
+    Button('Play!', 200, 40, (545, 400), 5),
+    Button('Settings!', 300, 40, (495, 450), 5),
+    Button('Stats!', 150, 40, (570, 500), 5)
+]
 
 
 
@@ -147,7 +87,8 @@ while running:
 
     screen.fill("#000000")
     screen.blit(text, (width // 2 - text.get_width() // 2, height // 4 - text.get_height() // 2))
-    button.draw()
+    for btn in buttons:
+        btn.draw()
 
     pygame.display.update()
 
