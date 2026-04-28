@@ -93,6 +93,8 @@ def move(is_vertical: bool, is_negative: bool):
             r_npc.position[1] - 1 == p.player_instance.position[1])
     ):
         print("Combat !")
+        print("player position : " + str(p.player_instance.position))
+        print("monster position : " + str(r_npc.position))
 
 
 def new_position_value(original_value: int, is_negative: bool):
