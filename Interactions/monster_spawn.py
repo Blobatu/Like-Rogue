@@ -1,6 +1,6 @@
 from .player_interactions import insert_at_position, console_tile
 from Actors.npc_repository import listof_npc as l
-from .random_npc import r_npc
+from .random_npc import npc as r_npc
 import random
 col = -1
 row = -1
