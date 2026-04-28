@@ -4,8 +4,8 @@
 
 
 # import
-from levels import levels as lv
-from cor_tile import tileset as ts
+from .levels import levels as lv
+from .cor_tile import tileset as ts
 import random as rd
 
 

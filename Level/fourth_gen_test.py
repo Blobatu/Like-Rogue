@@ -1,5 +1,5 @@
-from cor_tile import tileset as ts
-from levels import levels as lev
+from .cor_tile import tileset as ts
+from .levels import levels as lev
 import random as rd
 
 def make_lvl_data(maze):

@@ -1,5 +1,5 @@
-from cor_tile import tileset as ts
-from cor_tile import tile_rules as tr
+from .cor_tile import tileset as ts
+from .cor_tile import tile_rules as tr
 import random as rd
 
 dir_ = ['u', 'd', 'l', 'r']
