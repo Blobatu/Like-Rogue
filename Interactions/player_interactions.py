@@ -5,7 +5,7 @@ Description: to do
 '''
 from Actors import player as p
 from Level.level_generation import make_lvl_data, gen_maze
-from .monster_spawn import npc as npc
+from .random_npc import r_npc
 from Actors import npc
 import keyboard as k
 wall_sprite = "##"

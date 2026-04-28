@@ -73,7 +73,7 @@ while True:
         if col != -1:
             row = i
             break
-
+        
         if 0<Xplayer_distance<5 and -2>Yplayer_distance>2:
             if npc.position[0]+1==p.player_instance.position[0] and npc.position[1] == p.player_instance.position[1]:
                 break
@@ -81,21 +81,21 @@ while True:
             #move right
  
  
-        if 0>Xplayer_distance>-5 and -2>Yplayer_distance>2:
+        if 0>Xplayer_distance>-3 and -2>Yplayer_distance>2:
             if npc.position[0]-1 == p.player_instance.position[0] and npc.position[1] == p.player_instance.position[1]:
                     break
             move_left()
             #move left
  
  
-        if 0<Xplayer_distance<5 and -2<Yplayer_distance<2:
+        if 0<Xplayer_distance<3 and -2<Yplayer_distance<2:
             if npc.position[1]+1 == p.player_instance.position[1] and npc.position[0] == p.player_instance.position[0]:
                 break
             move_down()
             #move down
  
  
-        if 0>Xplayer_distance>-5 and -2<Yplayer_distance<2:
+        if 0>Xplayer_distance>-3 and -2<Yplayer_distance<2:
             if npc.position[1]-1 == p.player_instance.position[1] and npc.position[0] == p.player_instance.position[0]:
                 break
             move_up()
