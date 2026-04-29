@@ -17,8 +17,6 @@ air_sprite = ". "
 mobs =("player","other_monsters")
 
 global console_tile
-<<<<<<< Updated upstream
-=======
 # vieile map utilisée pour les tests.
 # console_tile = ["####################",
 #                 "##. . . . . . . . ##",
@@ -27,7 +25,7 @@ global console_tile
 #                 "##. . . . . . . . ##",
 #                 "####################"]
 console_tile = make_lvl_data(gen_maze())
->>>>>>> Stashed changes
+
 
 console_tile = make_lvl_data(gen_maze())
 
@@ -161,14 +159,26 @@ def run():
     #print(r_npc.position)
     k.read_event()
     if k.is_pressed('a'):
-        move_left()
+        if is_wall(p.player_instance.position[0] - 1, p.player_instance.position[1]):
+            message_wall()
+        else:
+            move_left()
         return
     if k.is_pressed('d'):
-        move_right()
+        if is_wall(p.player_instance.position[0] + 1, p.player_instance.position[1]):
+            message_wall()
+        else:
+            move_right()
         return
     if k.is_pressed('w'):
-        move_up()
+        if is_wall(p.player_instance.position[0], p.player_instance.position[1] - 1):
+            message_wall()
+        else:
+            move_up()
         return
     if k.is_pressed('s'):
-        move_down()
+        if is_wall(p.player_instance.position[0], p.player_instance.position[1] + 1):
+            message_wall()
+        else:
+            move_down()
         return
