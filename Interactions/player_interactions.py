@@ -20,15 +20,6 @@ global console_tile
 
 console_tile = make_lvl_data(gen_maze())
 
-# console_tile = ["####################",
-#                 "##. . . . . . . . ##",
-#                 "##. . . . . . . . ##",
-#                 "##. . . . @ . . . ##",
-#                 "##. . . . . . . . ##",
-#                 "####################"]
-
-# position du player pour les tests, à enlever plus tard
-
 global player_position
 player_position = (5, 3)  # col 5, row 3
 p.player_instance.position = player_position
