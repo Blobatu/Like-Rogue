@@ -17,6 +17,17 @@ air_sprite = ". "
 mobs =("player","other_monsters")
 
 global console_tile
+<<<<<<< Updated upstream
+=======
+# vieile map utilisée pour les tests.
+# console_tile = ["####################",
+#                 "##. . . . . . . . ##",
+#                 "##. . . . . . . . ##",
+#                 "##. . . . @ . . . ##",
+#                 "##. . . . . . . . ##",
+#                 "####################"]
+console_tile = make_lvl_data(gen_maze())
+>>>>>>> Stashed changes
 
 console_tile = make_lvl_data(gen_maze())
 
