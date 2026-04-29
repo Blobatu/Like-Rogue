@@ -57,6 +57,8 @@ def move(is_vertical: bool, is_negative: bool):
     p_i.move_at_position(new_col, new_row, r_npc.sprite)
     # monster position = (new_col, new_row)
     r_npc.position = (new_col, new_row)
+
+    # luc pourquoi tu as mis ça ?
     if(r_npc.position[0] + 1 == p.player_instance.position[0] 
        and (r_npc.position[1] == p.player_instance.position[1] or
             r_npc.position[1] + 1 == p.player_instance.position[1] or
@@ -90,25 +92,23 @@ def algorithm():
             row_wow = row_count
         
         if -2 < Yplayer_distance() <2 and -4 < Xplayer_distance() < 0:
-            if r_npc.position[0] + 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
-                break
-            move_down()
-            if r_npc.position[0] - 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
-                break
+            if r_npc.position[1] + 1 != p.player_instance.position[1]:
+                move_down()
+            break
             #move down
  
  
         if -2 < Yplayer_distance() <2 and 0 < Xplayer_distance() < 4:
-            if r_npc.position[0] - 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
-                    break
-            move_up()
-            if r_npc.position[0] - 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
-                break
+            if r_npc.position[1] - 1 != p.player_instance.position[1] :
+
+                move_up()
+            break
             #move up
  
  
         if -2 < Xplayer_distance() < 2 and -4 < Yplayer_distance() < 0:
             if r_npc.position[0] - 1 != p.player_instance.position[0]:
+
                 move_right()
             break
 
