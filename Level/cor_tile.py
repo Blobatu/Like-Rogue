@@ -173,7 +173,7 @@ tileset = {
 tile_rules = {
     'cross': {
         'gen': ['up', 'down', 'left', 'right'],
-        'wall' : [''],
+        'wall' : [],
     },
     'strgt_horz': {
         'gen': ['left', 'right'],
