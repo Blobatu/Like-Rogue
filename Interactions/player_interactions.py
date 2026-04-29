@@ -80,6 +80,13 @@ def move(is_vertical: bool, is_negative: bool):
     set_new_position(new_col, new_row, player_sprite)
     p.player_instance.position = (new_col, new_row)
     player_position = p.player_instance.position
+    
+    
+    # luc est-ce que tu peux expliquer pourquoi tu as mis ça ?
+    # pourquoi vraiment... 
+    # why did you put this ?
+
+    
     if(r_npc.position[0] + 1 == p.player_instance.position[0] 
        and (r_npc.position[1] == p.player_instance.position[1] or
             r_npc.position[1] + 1 == p.player_instance.position[1] or
