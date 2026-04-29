@@ -1,7 +1,7 @@
 from .random_npc import r_npc
 from Actors import player as p
 
-def detected():
+def detection_check():
     if(r_npc.position[0] + 1 == p.player_instance.position[0] 
        and (r_npc.position[1] == p.player_instance.position[1] or
             r_npc.position[1] + 1 == p.player_instance.position[1] or
