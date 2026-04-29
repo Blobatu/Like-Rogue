@@ -72,9 +72,9 @@ def move(is_vertical: bool, is_negative: bool):
     else:
         new_col = new_position_value(col, is_negative)
 
-    # if is_wall(new_col, new_row):
-    #     message_wall()
-    #     return
+    if is_wall(new_col, new_row):
+        message_wall()
+        return
         
     clear_old_position(col, row)
     set_new_position(new_col, new_row, player_sprite)
@@ -166,26 +166,14 @@ def run():
     #print(r_npc.position)
     k.read_event()
     if k.is_pressed('a'):
-        if is_wall(p.player_instance.position[0] - 1, p.player_instance.position[1]):
-            message_wall()
-        else:
-            move_left()
+        move_left()
         return
     if k.is_pressed('d'):
-        if is_wall(p.player_instance.position[0] + 1, p.player_instance.position[1]):
-            message_wall()
-        else:
-            move_right()
+        move_right()
         return
     if k.is_pressed('w'):
-        if is_wall(p.player_instance.position[0], p.player_instance.position[1] - 1):
-            message_wall()
-        else:
-            move_up()
+        move_up()
         return
     if k.is_pressed('s'):
-        if is_wall(p.player_instance.position[0], p.player_instance.position[1] + 1):
-            message_wall()
-        else:
-            move_down()
+        move_down()
         return
