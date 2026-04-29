@@ -6,6 +6,7 @@ Description: to do
 from pandas import col
 
 from Actors import player as p
+from Interactions.aura_behavior import detection_check
 from Level.level_generation import full_level as fl
 from .random_npc import r_npc
 from Actors import npc
@@ -86,23 +87,7 @@ def move(is_vertical: bool, is_negative: bool):
     # pourquoi vraiment... 
     # why did you put this ?
 
-    
-    if(r_npc.position[0] + 1 == p.player_instance.position[0] 
-       and (r_npc.position[1] == p.player_instance.position[1] or
-            r_npc.position[1] + 1 == p.player_instance.position[1] or
-            r_npc.position[1] - 1 == p.player_instance.position[1]) or                         
-       r_npc.position[0] - 1 == p.player_instance.position[0]
-       and (r_npc.position[1] == p.player_instance.position[1] or
-            r_npc.position[1] + 1 == p.player_instance.position[1] or
-            r_npc.position[1] - 1 == p.player_instance.position[1]) or
-       r_npc.position[0] == p.player_instance.position[0] 
-       and (r_npc.position[1] + 1 == p.player_instance.position[1] or
-            r_npc.position[1] - 1 == p.player_instance.position[1])
-    ):
-        print("Combat !")
-        print("player position : " + str(p.player_instance.position))
-        print("monster position : " + str(r_npc.position))
-
+    detection_check()
 
 def new_position_value(original_value: int, is_negative: bool):
     if(is_negative is True):
