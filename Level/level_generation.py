@@ -6,13 +6,15 @@
 # import
 from .levels import levels as lv
 from .cor_tile import tileset as ts
+from .cor_tile import tile_rules as tr
 import random as rd
 
 
 # constantes/variables
 current_level = 'level_3'
 size = lv[current_level]['size']
-
+WALL = '#'
+PATH = ' '
 
 # fonctions
 
@@ -59,142 +61,103 @@ def print_room_as_list(maze: list[list[str]]):
     """
     print(make_lvl_data(maze))
 
-def choose_dir(x, y, maze: list[list[str]], row, dir_ =['u', 'd', 'l', 'r']):
-    width, height = size
-    candidates = []
+def generate_maze(width, height):
+    maze_width = width * 3
+    maze_height = height * 3
+    maze = [[WALL for _ in range(maze_width)] for _ in range(maze_height)]
 
-    for wall in dir_:
-        if y == 0 and wall == 'u':
-            continue
-        if y == height - 1 and wall == 'd':
-            continue
-        if x == 0 and wall == 'l':
-            continue
-        if x == width - 1 and wall == 'r':
-            continue
-        if y > 0 and wall == 'u' and maze[y-1][x] == 'd':
-            continue
-        if x > 0 and wall == 'l' and row[x-1] == 'r':
-            continue
-        candidates.append(wall)
+    def carve_passages(cx, cy):
+        maze_center_y = cy * 3 + 1
+        maze_center_x = cx * 3 + 1
+        maze[maze_center_y][maze_center_x] = PATH
+        
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        rd.shuffle(directions)
 
-    if not candidates:
-        candidates = choose_dir(x, y, maze, row)
-
-    return rd.choice(candidates)
-
-
-def gen_template():
-    while True:
-        try:
-            maze = []
-            for y in range(size[1]):
-                row = []
-                for x in range(size[0]):
-                    wall = choose_dir(x, y, maze, row)
-                    row.append(wall)
-                maze.append(row)
-            break
-        except:
-            continue
+        for dx, dy in directions:
+            nx, ny = cx + dx, cy + dy
+            if 0 <= nx < width and 0 <= ny < height:
+                neighbor_center_y = ny * 3 + 1
+                neighbor_center_x = nx * 3 + 1
+                if maze[neighbor_center_y][neighbor_center_x] == WALL:
+                    if dx == 1:
+                        maze[maze_center_y][maze_center_x + 1] = PATH
+                        maze[neighbor_center_y][neighbor_center_x - 1] = PATH
+                    elif dx == -1:
+                        maze[maze_center_y][maze_center_x - 1] = PATH
+                        maze[neighbor_center_y][neighbor_center_x + 1] = PATH
+                    elif dy == 1:
+                        maze[maze_center_y + 1][maze_center_x] = PATH
+                        maze[neighbor_center_y - 1][neighbor_center_x] = PATH
+                    elif dy == -1:
+                        maze[maze_center_y - 1][maze_center_x] = PATH
+                        maze[neighbor_center_y + 1][neighbor_center_x] = PATH
+                    
+                    carve_passages(nx, ny)
+    
+    carve_passages(0, 0)
     return maze
 
 
-def get_near(plan, x, y):
-    width = len(plan[0]) if plan else 0
-    height = len(plan)
-    neighbors = {'u': None, 'd': None, 'l': None, 'r': None, 's': None}
-    if y > 0:
-        neighbors['u'] = plan[y-1][x]
-    if y < height - 1:
-        neighbors['d'] = plan[y+1][x]
-    if x > 0:
-        neighbors['l'] = plan[y][x-1]
-    if x < width - 1:
-        neighbors['r'] = plan[y][x+1]
-    neighbors['s'] = plan[y][x]
+def check_around(maze, pos):
+    height = len(maze)
+    width = len(maze[0])
+    x, y = pos 
+    
+    neighbors = {'u': None, 'd': None, 'l': None, 'r': None}
+    
+    if 0 <= y-1 < height and 0 <= x < width:
+        neighbors['u'] = maze[y-1][x]
+    if 0 <= y+1 < height and 0 <= x < width:
+        neighbors['d'] = maze[y+1][x]
+    if 0 <= y < height and 0 <= x-1 < width:
+        neighbors['l'] = maze[y][x-1]
+    if 0 <= y < height and 0 <= x+1 < width:
+        neighbors['r'] = maze[y][x+1]
+    
     return neighbors
 
-def gen_maze() -> list[list[str]]:
-    plan = gen_template()
-    maze = []#['' for i in range(len(plan))]
-    for y in range(len(plan)):
-        row = []#['' for i in range(len(plan[y]))]
-        for x in range(len(plan[y])):
-            t = get_near(plan, x, y)
-            if t['s'] == 'u':
-                if t['d'] == 'u' and t['l'] == 'r' and t['r'] == 'l':
-                    row.append('cross')
-                if t['d'] != 'u' and t['l'] == 'r' and t['r'] == 'l':
-                    row.append('3way_lrt')
-                if t['d'] == 'u' and t['l'] != 'r' and t['r'] == 'l':
-                    row.append('3way_rtb')
-                if t['d'] == 'u' and t['l'] == 'r' and t['r'] != 'l':
-                    row.append('3way_ltb')
-                if t['d'] != 'u' and t['l'] != 'r' and t['r'] == 'l':
-                    row.append('crnr_rt')
-                if t['d'] != 'u' and t['l'] == 'r' and t['r'] != 'l':
-                    row.append('crnr_lt')
-                if t['d'] == 'u' and t['l'] != 'r' and t['r'] != 'l':
-                    row.append('strgt_vert')
-                if t['d'] != 'u' and t['l'] != 'r' and t['r'] != 'l':
-                    row.append('end_t')
-            if t['s'] == 'd':
-                if t['u'] == 'd' and t['l'] == 'r' and t['r'] == 'l':
-                    row.append('cross')
-                if t['u'] != 'd' and t['l'] == 'r' and t['r'] == 'l':
-                    row.append('3way_lrb')
-                if t['u'] == 'd' and t['l'] != 'r' and t['r'] == 'l':
-                    row.append('3way_rtb')
-                if t['u'] == 'd' and t['l'] == 'r' and t['r'] != 'l':
-                    row.append('3way_ltb')
-                if t['u'] != 'd' and t['l'] != 'r' and t['r'] == 'l':
-                    row.append('crnr_rb')
-                if t['u'] != 'd' and t['l'] == 'r' and t['r'] != 'l':
-                    row.append('crnr_lb')
-                if t['u'] == 'd' and t['l'] != 'r' and t['r'] != 'l':
-                    row.append('strgt_vert')
-                if t['u'] != 'd' and t['l'] != 'r' and t['r'] != 'l':
-                    row.append('end_b')
-            if t['s'] == 'l':
-                if t['d'] == 'u' and t['u'] == 'd' and t['r'] == 'l':
-                    row.append('cross')
-                if t['d'] != 'u' and t['u'] == 'd' and t['r'] == 'l':
-                    row.append('3way_lrt')
-                if t['d'] == 'u' and t['u'] != 'd' and t['r'] == 'l':
-                    row.append('3way_lrb')
-                if t['d'] == 'u' and t['u'] == 'd' and t['r'] != 'l':
-                    row.append('3way_ltb')
-                if t['d'] != 'u' and t['u'] != 'd' and t['r'] == 'l':
-                    row.append('strgt_horz')
-                if t['d'] != 'u' and t['u'] == 'd' and t['r'] != 'l':
-                    row.append('crnr_lt')
-                if t['d'] == 'u' and t['u'] != 'd' and t['r'] != 'l':
-                    row.append('crnr_lb')
-                if t['d'] != 'u' and t['u'] != 'd' and t['r'] != 'l':
-                    row.append('end_l')
-            if t['s'] == 'r':
-                if t['d'] == 'u' and t['u'] == 'd' and t['l'] == 'r':
-                    row.append('cross')
-                if t['d'] != 'u' and t['u'] == 'd' and t['l'] == 'r':
-                    row.append('3way_lrt')
-                if t['d'] == 'u' and t['u'] != 'd' and t['l'] == 'r':
-                    row.append('3way_lrb')
-                if t['d'] == 'u' and t['u'] == 'd' and t['l'] != 'r':
-                    row.append('3way_rtb')
-                if t['d'] != 'u' and t['u'] != 'd' and t['l'] == 'r':
-                    row.append('strgt_horz')
-                if t['d'] != 'u' and t['u'] == 'd' and t['l'] != 'r':
-                    row.append('crnr_rt')
-                if t['d'] == 'u' and t['u'] != 'd' and t['l'] != 'r':
-                    row.append('crnr_rb')
-                if t['d'] != 'u' and t['u'] != 'd' and t['l'] != 'r':
-                    row.append('end_r')
-        maze.append(row)
-    return maze
+def make_level(maze=generate_maze(size[0], size[1])):
+    center_rows = [row for i, row in enumerate(maze) if i % 3 == 1]
+    
+    center_positions = []
+    for row_idx, row in enumerate(center_rows):
+        center_row = [cell for j, cell in enumerate(row) if j % 3 == 1]
+        for col_idx, cell in enumerate(center_row):
+            full_y = row_idx * 3 + 1
+            full_x = col_idx * 3 + 1
+            center_positions.append((full_x, full_y))
+    
+    level = []
+    for pos in center_positions:
+        t = check_around(maze, pos)
+        wall = []
+        gen = []
+        
+        if t['u'] == '#': wall.append('up')
+        else: gen.append('up')
+        if t['d'] == '#': wall.append('down')
+        else: gen.append('down')
+        if t['l'] == '#': wall.append('left')
+        else: gen.append('left')
+        if t['r'] == '#': wall.append('right')
+        else: gen.append('right')
+        
+        matching_tile = 'void'
+        for tile_name, rules in tr.items():
+            if sorted(rules['gen']) == sorted(gen) and sorted(rules['wall']) == sorted(wall):
+                matching_tile = tile_name
+                break
+        
+        level.append(matching_tile)
+    
+    level_grid = [level[i:i+16] for i in range(0, len(level), 16)]
+    return level_grid
 
 
-def print_level(maze: list[list[str]] = gen_maze()):
+
+
+def print_level(maze: list[list[str]] = make_level()):
     """
     prints the actual level as it will appears in the game
     in: list of lists of rooms from maze generator
@@ -203,11 +166,11 @@ def print_level(maze: list[list[str]] = gen_maze()):
     for i in make_lvl_data(maze):
         print(i)
 
-def level(maze: list[list[str]] = gen_maze()):
+def level(maze: list[list[str]] = make_level()):
     level = make_lvl_data(maze)
     return level
 
-def full_level(maze: list[list[str]] = gen_maze(), 
+def full_level(maze: list[list[str]] = make_level(), 
                enn_spwn = int(lv[current_level]['difficulty'] * 2.5), 
                loot = int(lv[current_level]['difficulty'] + 1), 
                traps = int(lv[current_level]['difficulty'] * 1.5)):
