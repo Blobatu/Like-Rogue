@@ -6,12 +6,10 @@ from .random_npc import r_npc
 # nom = placeholder 
 
 def Yplayer_distance():
-    print("y"+str(r_npc.position[1] - p.player_instance.position[1]))
     return r_npc.position[1] - p.player_instance.position[1]
 
 
 def Xplayer_distance():
-    print("x"+str(r_npc.position[0] - p.player_instance.position[0]))
     return r_npc.position[0] - p.player_instance.position[0]
 
 def move_up():
@@ -55,8 +53,8 @@ def move(is_vertical: bool, is_negative: bool):
         p_i.message_wall()
         return
         
-    p_i.clear_old_position(col, row)
-    p_i.set_new_position(new_col, new_row, r_npc.sprite)
+    p_i.move_at_position(col, row, p_i.air_sprite)
+    p_i.move_at_position(new_col, new_row, r_npc.sprite)
     # monster position = (new_col, new_row)
     r_npc.position = (new_col, new_row)
     if(r_npc.position[0] + 1 == p.player_instance.position[0] 
@@ -77,29 +75,21 @@ def move(is_vertical: bool, is_negative: bool):
 
 
 # valeur par défaut pour les positions de monstre
-col_wow = -1
-row_wow = -1
+
 
 def algorithm():
-    global row_wow
-    global col_wow
+    col_wow = -1
+    row_wow = -1
     row_count = -1
     for i in p_i.console_tile:
         row_count += 1
         col_wow = i.find(r_npc.sprite) 
         if col_wow == -1:
-            # print("ERROR")
-            # print(col_wow)
-            # print(r_npc.sprite)
             continue
         if col_wow != -1:
-            print("GOOD")
-            print(col_wow)
-            print(r_npc.sprite)
             row_wow = row_count
         
         if 0 <= Xplayer_distance() < 5 and -2 > Yplayer_distance() > 2:
-            print("1")
             if r_npc.position[0] + 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
                 break
             move_right()
@@ -107,7 +97,6 @@ def algorithm():
  
  
         if 0 >= Xplayer_distance() > -3 and -2 > Yplayer_distance() > 2:
-            print("2")
             if r_npc.position[0] - 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
                     break
             move_left()
@@ -115,7 +104,6 @@ def algorithm():
  
  
         if 0 < Xplayer_distance() < 3 and -2 < Yplayer_distance() < 2:
-            print("3")
             if r_npc.position[1] - 1 == p.player_instance.position[1] and r_npc.position[0] == p.player_instance.position[0]:
                 break
             move_up()

@@ -1,4 +1,4 @@
-from .player_interactions import console_tile, replace_at_position
+from .player_interactions import console_tile, move_at_position, replace_at_position
 from Actors import npc
 
 from .random_npc import r_npc
@@ -10,7 +10,7 @@ row = -1
 #import 
 monster_list: list[npc.NPC] = []
 
-monster_spawn = "& "
+monster_spawn = "&"
 def spawn_monster():
     global row
     global col
@@ -27,8 +27,8 @@ def spawn_monster():
             row = row_count
             break
     
-    r_npc.position = (col, row)
-    #print(r_npc.position)
+    r_npc.position = (int(col / 2), row)
+    print(r_npc.position)
     #clear_old_position(r_npc.position[0], r_npc.position[1])
-    replace_at_position(r_npc.position[0], r_npc.position[1], r_npc.sprite)
+    move_at_position(r_npc.position[0], r_npc.position[1], r_npc.sprite)
     monster_list.append(r_npc)  

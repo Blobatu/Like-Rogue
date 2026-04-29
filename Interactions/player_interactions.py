@@ -63,9 +63,9 @@ def move(is_vertical: bool, is_negative: bool):
     else:
         new_col = new_position_value(col, is_negative)
 
-    if is_wall(new_col, new_row):
-        message_wall()
-        return
+    # if is_wall(new_col, new_row):
+    #     message_wall()
+    #     return
         
     clear_old_position(col, row)
     set_new_position(new_col, new_row, player_sprite)
