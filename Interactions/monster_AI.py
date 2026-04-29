@@ -5,11 +5,11 @@ from .random_npc import r_npc
 
 # nom = placeholder 
 
-def Yplayer_distance():
+def Xplayer_distance():
     return r_npc.position[1] - p.player_instance.position[1]
 
 
-def Xplayer_distance():
+def Yplayer_distance():
     return r_npc.position[0] - p.player_instance.position[0]
 
 def move_up():
@@ -82,43 +82,43 @@ def algorithm():
     row_wow = -1
     row_count = -1
     for i in p_i.console_tile:
-        row_count += 1
+        row_wow += 1
         col_wow = i.find(r_npc.sprite) 
         if col_wow == -1:
             continue
         if col_wow != -1:
             row_wow = row_count
         
-        if 0 <= Xplayer_distance() < 5 and -2 > Yplayer_distance() > 2:
+        if -2 < Yplayer_distance() <2 and -4 < Xplayer_distance() < 0:
             if r_npc.position[0] + 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
                 break
-            move_right()
-            #move right
- 
- 
-        if 0 >= Xplayer_distance() > -3 and -2 > Yplayer_distance() > 2:
-            if r_npc.position[0] - 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
-                    break
-            move_left()
-            #move left
- 
- 
-        if 0 < Xplayer_distance() < 3 and -2 < Yplayer_distance() < 2:
-            if r_npc.position[1] - 1 == p.player_instance.position[1] and r_npc.position[0] == p.player_instance.position[0]:
-                break
-            move_up()
+            move_down()
             if r_npc.position[0] - 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
                 break
-            move_left()
-
             #move down
  
  
-        if 0 > Xplayer_distance() > -3 and -2 < Yplayer_distance() < 2:
-            if r_npc.position[1] + 1 == p.player_instance.position[1] and r_npc.position[0] == p.player_instance.position[0]:
+        if -2 < Yplayer_distance() <2 and 0 < Xplayer_distance() < 4:
+            if r_npc.position[0] - 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
+                    break
+            move_up()
+            if r_npc.position[0] - 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
                 break
-            move_down()
-            if r_npc.position[0] + 1 == p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
-                break
-            move_right()
-            #move_up
+            #move up
+ 
+ 
+        if -2 < Xplayer_distance() < 2 and -4 < Yplayer_distance() < 0:
+            if r_npc.position[0] - 1 != p.player_instance.position[0] and r_npc.position[1] == p.player_instance.position[1]:
+                move_right()
+            break
+
+            #move right
+ 
+ 
+        if -2 < Xplayer_distance() < 2 and 0 < Yplayer_distance() < 4:
+            if r_npc.position[1] + 1 != p.player_instance.position[1] and r_npc.position[0] == p.player_instance.position[0]:
+                
+                move_left()
+            break
+            
+            #move_left
