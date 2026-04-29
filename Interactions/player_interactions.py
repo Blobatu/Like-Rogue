@@ -6,7 +6,7 @@ Description: to do
 from pandas import col
 
 from Actors import player as p
-from Level.level_generation import make_lvl_data, make_level
+from Level.level_generation import full_level as fl
 from .random_npc import r_npc
 from Actors import npc
 import keyboard as k
@@ -24,10 +24,10 @@ global console_tile
 #                 "##. . . . @ . . . ##",
 #                 "##. . . . . . . . ##",
 #                 "####################"]
-console_tile = make_lvl_data(make_level())
+console_tile = fl()
 
 
-console_tile = make_lvl_data(make_level())
+console_tile = fl()
 
 global player_position
 player_position = (5, 3)  # col 5, row 3

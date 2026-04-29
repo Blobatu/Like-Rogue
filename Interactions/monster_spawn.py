@@ -10,7 +10,7 @@ row = -1
 #import 
 monster_list: list[npc.NPC] = []
 
-monster_spawn = "&"
+monster_spawn = ".&"
 def spawn_monster():
     global row
     global col
