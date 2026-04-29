@@ -16,7 +16,7 @@ size = lv[current_level]['size']
 
 # fonctions
 
-def make_lvl_data(maze):
+def make_lvl_data(maze: list[list[str]]) -> list[str]:
     """
     gets a list from the maze generator and stitches rooms together to create the actual level data
     in: list of lists of rooms from maze generator
@@ -30,9 +30,7 @@ def make_lvl_data(maze):
                 if room =='':
                     room = 'void'   
                 lvl_data[-1] += ts[room][i]
-                #print(ts[room][i])
                 #print("["+str(ts[room][i][4])+"]")
-                if(ts[room][i][6]=='.' and rd.randint(0, 90) == 0):
                     #print(True)
                     before_value = ts[room][i][:4*2]
                     after_value = ts[room][i][4*2+2:]
@@ -43,7 +41,7 @@ def make_lvl_data(maze):
     return lvl_data
 
 
-def print_room(maze):
+def print_room(maze: list[list[str]]):
     """
     prints the actual level as it will appears in the game
     in: list of lists of rooms from maze generator
@@ -53,7 +51,7 @@ def print_room(maze):
         print(i)
     
     
-def print_room_as_list(maze):
+def print_room_as_list(maze: list[list[str]]):
     """
     to debug, simply prints the result of maze_to_lvl_data, kinda useless but has clear labeling
     in: list of lists of rooms from maze generator
@@ -61,7 +59,7 @@ def print_room_as_list(maze):
     """
     print(make_lvl_data(maze))
 
-def choose_dir(x, y, maze, row, dir_ =['u', 'd', 'l', 'r']):
+def choose_dir(x, y, maze: list[list[str]], row, dir_ =['u', 'd', 'l', 'r']):
     width, height = size
     candidates = []
 
@@ -117,7 +115,7 @@ def get_near(plan, x, y):
     neighbors['s'] = plan[y][x]
     return neighbors
 
-def gen_maze():
+def gen_maze() -> list[list[str]]:
     plan = gen_template()
     maze = []#['' for i in range(len(plan))]
     for y in range(len(plan)):
@@ -196,7 +194,7 @@ def gen_maze():
     return maze
 
 
-def print_level(maze = gen_maze()):
+def print_level(maze: list[list[str]] = gen_maze()):
     """
     prints the actual level as it will appears in the game
     in: list of lists of rooms from maze generator
@@ -205,11 +203,14 @@ def print_level(maze = gen_maze()):
     for i in make_lvl_data(maze):
         print(i)
 
-def level(maze = gen_maze()):
+def level(maze: list[list[str]] = gen_maze()):
     level = make_lvl_data(maze)
     return level
 
-def full_level(maze=gen_maze(), enn_spwn = int(lv[current_level]['difficulty'] * 2.5), loot = int(lv[current_level]['difficulty'] + 1), traps = int(lv[current_level]['difficulty'] * 1.5)):
+def full_level(maze: list[list[str]] = gen_maze(), 
+               enn_spwn = int(lv[current_level]['difficulty'] * 2.5), 
+               loot = int(lv[current_level]['difficulty'] + 1), 
+               traps = int(lv[current_level]['difficulty'] * 1.5)):
     lvl_data = make_lvl_data(maze)
     
     tile_positions = [(y, tile_x) for y, line in enumerate(lvl_data) for tile_x in range(0, len(line), 2) if tile_x + 1 < len(line) and line[tile_x] != '#' and line[tile_x + 1] != '#']
