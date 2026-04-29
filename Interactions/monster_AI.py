@@ -116,7 +116,7 @@ def algorithm():
  
  
         if -2 < Xplayer_distance() < 2 and 0 < Yplayer_distance() < 4:
-            if r_npc.position[1] + 1 != p.player_instance.position[1] and r_npc.position[0] == p.player_instance.position[0]:
+            if r_npc.position[1] + 1 != p.player_instance.position[1]:
                 
                 move_left()
             break
