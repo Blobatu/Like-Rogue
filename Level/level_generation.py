@@ -211,8 +211,9 @@ def full_level(maze: list[list[str]] = make_level(),
     
     exit_line = center_row_line
     exit_start_col = 222
+    player_start_col = 6
     new_data[exit_line][exit_start_col:exit_start_col+2] = ['|','|']
-    
+    new_data[exit_line][player_start_col:player_start_col+2] = ['@',' ']
     return [''.join(line) for line in new_data]
 
 def print_full():
