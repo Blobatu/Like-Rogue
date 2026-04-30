@@ -1,5 +1,6 @@
 """
-
+Code responsable de la génération des niveaux
+par Antoine D-C
 """
 
 
