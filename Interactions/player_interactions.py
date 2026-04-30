@@ -30,3 +30,4 @@ def run():
     if k.is_pressed('s'):
         a_m.move_down()
         return
+    
