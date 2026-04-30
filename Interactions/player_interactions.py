@@ -26,11 +26,8 @@ global console_tile
 #                 "####################"]
 console_tile = fl()
 
-
-console_tile = fl()
-
 global player_position
-player_position = (5, 3)  # col 5, row 3
+player_position = (3, 25)  # col 3, row 25
 p.player_instance.position = player_position
 
 # mouvement 

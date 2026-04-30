@@ -18,14 +18,13 @@ PATH = ' '
 
 # fonctions
 
-def make_lvl_data(maze: list[list[str]]) -> list[str]:
+def make_lvl_data(maze):
     """
     gets a list from the maze generator and stitches rooms together to create the actual level data
     in: list of lists of rooms from maze generator
     out: list of strings, each list is a line of the level
     """
-    lvl_data: list[str] = []
-    line_count = 0
+    lvl_data = []
     for line in maze:
         for i in range(1, 8):
             lvl_data.append('')
@@ -33,13 +32,6 @@ def make_lvl_data(maze: list[list[str]]) -> list[str]:
                 if room =='':
                     room = 'void'   
                 lvl_data[-1] += ts[room][i]
-                
-                if(ts[room][i][4]=='.' and (i == 1 or rd.randint(0, 90) == 0)):
-                    before_value = ts[room][i][:4]
-                    after_value = ts[room][i][4+2:]
-                    ts[room][i] = before_value + "& " + after_value
-
-        line_count += 1
     return lvl_data
 
 
