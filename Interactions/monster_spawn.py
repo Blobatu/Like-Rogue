@@ -17,15 +17,20 @@ def spawn_monster():
     global row
     global col
     row_count = -1
+    print('\n'.join(a_m.console_tile))
+
     for i in a_m.console_tile:
         row_count += 1
         col = i.find(monster_spawn)
+
+        print(f"{col}, {row_count}")
+        
         if col != -1:
             row = row_count
             r_npc = random.choice(list(l.values()))
-            r_npc.position = (int(col / 2), row)
-            a_m.move_at_position(r_npc.position[0], 
-                             r_npc.position[1], 
-                             r_npc.sprite)
+            r_npc.position = (col, row)
+            a_m.replace_at_position(r_npc.position[0], 
+                                    r_npc.position[1], 
+                                    r_npc.sprite)
             npc_db.add_npc_to_db(r_npc)
   

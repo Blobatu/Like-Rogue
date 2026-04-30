@@ -18,6 +18,7 @@ p_i.position = player_position
 
 def run():
     k.read_event()
+    print(f"player  : {p_i.position}")
     if k.is_pressed('a'):
         a_m.move_left()
         return
