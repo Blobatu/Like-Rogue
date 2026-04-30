@@ -168,6 +168,10 @@ def full_level(maze: list[list[str]] = make_level(),
                loot = int(lv[current_level]['difficulty'] + 1), 
                traps = int(lv[current_level]['difficulty'] * 1.5)):
     lvl_data = make_lvl_data(maze)
+
+
+    center_row_cell = len(maze) // 2
+    center_row_line = center_row_cell * 7 + 3
     
     tile_positions = [(y, tile_x) for y, line in enumerate(lvl_data) for tile_x in range(0, len(line), 2) if tile_x + 1 < len(line) and line[tile_x] != '#' and line[tile_x + 1] != '#']
     
@@ -204,6 +208,10 @@ def full_level(maze: list[list[str]] = make_level(),
             new_data[y][tile_x:tile_x+2] = ['△', ' ']
         else:
             new_data[y][tile_x:tile_x+2] = ['.', '&']
+    
+    exit_line = center_row_line
+    exit_start_col = 222
+    new_data[exit_line][exit_start_col:exit_start_col+2] = ['|','|']
     
     return [''.join(line) for line in new_data]
 
