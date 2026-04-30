@@ -1,16 +1,13 @@
-'''
-Auteur: Léonard Lefebvre
-Date: 14 avril
-Description: to do
-'''
+from pandas import col
 
 from Actors.player import player_instance as p_i
+from Interactions.aura_behavior import detection_check
 from Level.level_generation import full_level as fl
-from . import actor_movement as a_m
-import keyboard as k
+from Actors.npc_database import listof_dbnpc as npc_db
 
-#player_position = player.position
-mobs =("player","other_monsters")
+wall_sprite = "##"
+player_sprite = "@ "
+air_sprite = ". "
 
 global console_tile
 # vieile map utilisée pour les tests.
@@ -20,43 +17,48 @@ global console_tile
 #                 "##. . . . @ . . . ##",
 #                 "##. . . . . . . . ##",
 #                 "####################"]
+
 console_tile = fl()
 
-global player_position
-player_position = (3, 25)  # col 3, row 25
-p.player_instance.position = player_position
+console_tile = fl()
 
-# mouvement 
-def move_up():
+def move_up(id: int = -1):
     move(is_vertical=True, 
-         is_negative=True)
+         is_negative=True,
+         id=id)
 
 
-def move_down():
+def move_down(id: int = -1):
     move(is_vertical=True, 
-         is_negative=False)
+         is_negative=False,
+         id=id)
 
 
-def move_left():
+def move_left(id: int = -1):
     move(is_vertical=False, 
-         is_negative=True)
+         is_negative=True,
+         id=id)
 
 
-def move_right():
+def move_right(id: int = -1 ):
     move(is_vertical=False, 
-         is_negative=False)
+         is_negative=False,
+         id=id)
 
 
-def move(is_vertical: bool, is_negative: bool):
+def move(is_vertical: bool, is_negative: bool, id: int = -1):
     """
-    But: Permet de déplacer le joueur
+    But: Permet de déplacer le npc
 
     Entrées: 
         is_vertical: Verifie si le mouvement est vertical,
         is_negative: Vrai si le mouvement va vers le haut ou la gauche
     """
-    global console_tile, player_position
-    col, row = p.player_instance.position
+    if(id == -1):
+        col, row = p_i.position
+    else:
+        col, row = npc_db[id].position
+
     new_col, new_row = col, row
 
     if(is_vertical is True):
@@ -65,29 +67,22 @@ def move(is_vertical: bool, is_negative: bool):
     else:
         new_col = new_position_value(col, is_negative)
 
-    # if is_wall(new_col, new_row):
-    #     message_wall()
-    #     return
-        
-    clear_old_position(col, row)
-    set_new_position(new_col, new_row, player_sprite)
-    p.player_instance.position = (new_col, new_row)
-    player_position = p.player_instance.position
-    if(r_npc.position[0] + 1 == p.player_instance.position[0] 
-       and (r_npc.position[1] == p.player_instance.position[1] or
-            r_npc.position[1] + 1 == p.player_instance.position[1] or
-            r_npc.position[1] - 1 == p.player_instance.position[1]) or                         
-       r_npc.position[0] - 1 == p.player_instance.position[0]
-       and (r_npc.position[1] == p.player_instance.position[1] or
-            r_npc.position[1] + 1 == p.player_instance.position[1] or
-            r_npc.position[1] - 1 == p.player_instance.position[1]) or
-       r_npc.position[0] == p.player_instance.position[0] 
-       and (r_npc.position[1] + 1 == p.player_instance.position[1] or
-            r_npc.position[1] - 1 == p.player_instance.position[1])
-    ):
-        print("Combat !")
-        print("player position : " + str(p.player_instance.position))
-        print("monster position : " + str(r_npc.position))
+    if is_wall(new_col, new_row):
+        message_wall()
+        return
+
+    if(id == -1):
+        clear_old_position(col, row)
+        set_new_position(new_col, new_row, player_sprite)
+        p_i.position = (new_col, new_row)
+
+    else:
+        move_at_position(col, row, air_sprite)
+        move_at_position(new_col, new_row, npc_db[id].sprite)
+        npc_db[id].position = (new_col, new_row)
+
+    # luc pourquoi tu as mis ça ?
+    detection_check()
 
 
 def new_position_value(original_value: int, is_negative: bool):
@@ -146,19 +141,3 @@ def insert_at_position(row: int,
                        after_value: str, 
                        value: str):
     console_tile[row] = before_value + value + after_value
-
-
-def run():
-    k.read_event()
-    if k.is_pressed('a'):
-        a_m.move_left()
-        return
-    if k.is_pressed('d'):
-        a_m.move_right()  
-        return
-    if k.is_pressed('w'):
-        a_m.move_up()
-        return
-    if k.is_pressed('s'):
-        a_m.move_down()
-        return

@@ -20,4 +20,3 @@ class NPC(a.Actor):
         """
         super().__init__(name, sprite, position, health, damage, size)
         self.zone = zone
-        

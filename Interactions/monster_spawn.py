@@ -1,34 +1,31 @@
-from .player_interactions import console_tile, move_at_position, replace_at_position
-from Actors import npc
 
-from .random_npc import r_npc
-#from Level import full_level as fl
+from Actors import npc
+from Actors import npc_database as npc_db
+from Actors.npc_repository import listof_npc as l
+from . import actor_movement as a_m
+import random
+
 global col
 col = -1
 global row
 row = -1
-#import 
+
 monster_list: list[npc.NPC] = []
 
-monster_spawn = ".&"
+monster_spawn = "&"
 def spawn_monster():
     global row
     global col
     row_count = -1
-    for i in console_tile:
+    for i in a_m.console_tile:
         row_count += 1
-        #print("-r-")
-        #print(i)
-        col = i.find(monster_spawn) 
-        #print("-c-")
-        #print(col)
-        #print(i[col])
+        col = i.find(monster_spawn)
         if col != -1:
             row = row_count
-            break
-    
-    r_npc.position = (int(col / 2), row)
-    print(r_npc.position)
-    #clear_old_position(r_npc.position[0], r_npc.position[1])
-    move_at_position(r_npc.position[0], r_npc.position[1], r_npc.sprite)
-    monster_list.append(r_npc)  
+            r_npc = random.choice(list(l.values()))
+            r_npc.position = (int(col / 2), row)
+            a_m.move_at_position(r_npc.position[0], 
+                             r_npc.position[1], 
+                             r_npc.sprite)
+            npc_db.add_npc_to_db(r_npc)
+  
