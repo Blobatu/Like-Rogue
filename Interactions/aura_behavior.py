@@ -6,19 +6,19 @@ Description :  Comportement de l'aura des NPCs du jeu,
                se trouve à proximité d'un NPC.
 """
 from Actors.npc_database import listof_dbnpc as npc_db
-from Actors import player as p
+from Actors.player import player_instance as p_i
 
 def detection_check(id: int):
     """
     But: Vérifie si le joueur est dans l'aura d'un NPC et 
     lui inflige des dégâts si c'est le cas.
-    
+
     Entrée: id (int) - l'identifiant du NPC à vérifier.
     """
     npc_col = npc_db[id].get_col()
     npc_row = npc_db[id].get_row()
-    player_col = p.player_instance.get_col()
-    player_row = p.player_instance.get_row()
+    player_col = p_i.get_col()
+    player_row = p_i.get_row()
     aura = npc_db[id].aura
     """
     1 2 3 
@@ -37,4 +37,4 @@ def detection_check(id: int):
        and (npc_row + aura == player_row or     #7
             npc_row - aura == player_row)       #2
     ):
-        p.player_instance.lose_life(npc_db[id].damage)
+        p_i.lose_life(npc_db[id].damage)
