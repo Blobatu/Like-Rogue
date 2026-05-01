@@ -25,13 +25,16 @@ class Actor:
         self.max_health = health
 
     def lose_life(self, amount: int):
+        print(f"You lost {amount} health points!")
         self.health -= amount
         print(f"Health:{self.health}/{self.max_health}")
         if(self.health <= 0):
             self.health = 0
-            print(f"{self.name} is dead")
             return True
         return False
+    
+    def is_alive(self) -> bool:
+        return self.health > 0
     
     def set_position(self, position: tuple[int, int]):
         self.position = position

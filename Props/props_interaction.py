@@ -41,11 +41,11 @@ def void ():
         
 def interaction_check(player_pos:str):
     match player_pos:
-        case "[]":
+        case "▤ ":
             chest()
-        case "()":
+        case "! ":
             barrel()
-        case "||":
+        case "| ":
             door()
         case "△ ":
             spike_trap()

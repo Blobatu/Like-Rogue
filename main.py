@@ -19,9 +19,13 @@ def columns_legend():
 
 monster_spawn.spawn_monster()
 while(True):
-    print("\033[H\033[J", end="")
+    if p_i.p_i.is_alive():
+        print("\033[H\033[J", end="")
+        print("".join(columns_legend()))
+        print('\n'.join(a_m.console_tile))
+        p_i.run()
+        monster_AI.algorithm()
+    else:
+        print(f"{p_i.p_i.name} is dead")
+        break
     
-    print("".join(columns_legend()))
-    print('\n'.join(a_m.console_tile))
-    p_i.run()
-    monster_AI.algorithm()

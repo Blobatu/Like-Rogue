@@ -4,10 +4,17 @@ from Actors.player import player_instance as p_i
 from Interactions.aura_behavior import detection_check
 from Level.level_generation import full_level as fl
 from Actors.npc_database import listof_dbnpc as npc_db
+from Props.props_interaction import interaction_check
 
 wall_sprite = "##"
 player_sprite = "@ "
 air_sprite = ". "
+exit_sprite = "|"
+barrel_sprite = "! "
+chest_sprite = "▤ "
+spike_trap_sprite = "△ "
+
+whitelist_sprites = [air_sprite, chest_sprite, barrel_sprite, exit_sprite, spike_trap_sprite]
 
 global console_tile
 # vieile map utilisée pour les tests.
@@ -110,7 +117,9 @@ def is_wall(col, row):
         return True
     
     sprite = console_tile[row][col]
-    if sprite+" " != air_sprite:
+    interaction_check(sprite+" ")
+    
+    if sprite+" " not in whitelist_sprites:
         return True
     
     return False
