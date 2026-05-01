@@ -17,6 +17,7 @@ from .dungeon import air_sprite
 def move_up(id: int = -1):
     """
     But: Permet de déplacer le npc vers le haut
+
     Entrées: 
         id: L'identifiant du NPC à déplacer, -1 pour le joueur
     """
@@ -96,12 +97,12 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
     if(id == -1):
         # Si c'est le joueur qui se déplace, 
         # on met à jour sa position
-        set_new_position(new_col, new_row, player_sprite)
+        replace_at_position(new_col, new_row, player_sprite)
         p_i.set_position(new_col, new_row)
     else:
         # Si c'est un NPC qui se déplace,
         # on met à jour sa position
-        set_new_position(new_col, new_row, npc_db[id].sprite)
+        replace_at_position(new_col, new_row, npc_db[id].sprite)
         npc_db[id].set_position(new_col, new_row)
         
         # Après le déplacement du NPC, 
