@@ -1,7 +1,8 @@
 """
 Auteur : Léonard  & Luc Desforges
 Date : 1 mai 2026
-Description : TODO
+Description : Module pour la gestion de l'IA des monstres du jeu, 
+qui les fait se déplacer vers le joueur s'ils sont à proximité.
 """
 from . import actor_movement as a_m
 from Actors.player import player_instance as p_i
