@@ -1,3 +1,8 @@
+"""
+Auteur : Luc Desforges
+Date : 14 avril 2026
+Description : TODO
+"""
 import sys
 import os
 from Interactions import player_interactions as p_i

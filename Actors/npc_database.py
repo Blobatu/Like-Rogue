@@ -1,3 +1,8 @@
+"""
+Auteur : Luc Desforges
+Date : 14 avril 2026
+Description : TODO
+"""
 from . import npc
 
 dbnpc_id: int = 0

@@ -1,3 +1,8 @@
+"""
+Auteur : Léonard  & Luc Desforges
+Date : 14 avril 2026
+Description : TODO
+"""
 from Actors.player import player_instance as p_i
 from Actors.npc_database import listof_dbnpc as npc_db
 from Actors.npc_repository import listof_npc as listof_type

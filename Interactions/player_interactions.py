@@ -1,9 +1,8 @@
-'''
-Auteur: Léonard Lefebvre
-Date: 14 avril
-Description: to do
-'''
-
+"""
+Auteur : Léonard  & Luc Desforges
+Date : 14 avril 2026
+Description : TODO
+"""
 from Actors.player import player_instance as p_i
 from Level.level_generation import full_level as fl
 from . import actor_movement as a_m

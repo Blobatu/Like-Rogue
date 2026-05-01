@@ -1,3 +1,8 @@
+"""
+Auteur : Luc Desforges
+Date : 14 avril 2026
+Description : TODO
+"""
 import Actors.npc_repository as repo
 import Actors.npc as n 
 import public

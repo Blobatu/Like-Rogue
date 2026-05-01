@@ -8,7 +8,7 @@ from . import actor as a
 class NPC(a.Actor):
     
     def __init__(self,
-                 zone: int,
+                 aura: int,
                  name: str,
                  sprite: str,
                  position: tuple[int, int] = (0, 0), 
@@ -19,4 +19,4 @@ class NPC(a.Actor):
         description: Constructeur
         """
         super().__init__(name, sprite, position, health, damage, size)
-        self.zone = zone
+        self.aura = aura

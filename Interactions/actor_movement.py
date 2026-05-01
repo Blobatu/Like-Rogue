@@ -1,3 +1,8 @@
+"""
+Auteur : Léonard  & Luc Desforges
+Date : 14 avril 2026
+Description : TODO
+"""
 from pandas import col
 
 from Actors.player import player_instance as p_i
@@ -89,7 +94,7 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
         npc_db[id].set_position(new_col, new_row)
 
     # luc pourquoi tu as mis ça ?
-    detection_check()
+    detection_check(id)
 
 
 def new_position_value(original_value: int, is_negative: bool, step: int = 1):

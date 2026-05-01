@@ -1,3 +1,8 @@
+"""
+Auteur : Luc Desforges
+Date : 14 avril 2026
+Description : TODO
+"""
 scale_unit = 1
 difficulty = 1
 
