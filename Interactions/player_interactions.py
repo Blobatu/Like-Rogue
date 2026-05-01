@@ -14,11 +14,11 @@ mobs = ("player","other_monsters")
 
 global player_position
 player_position = (3, 24)  # col 5, row 3
-p_i.position = player_position
+p_i.set_position(3, 24)
 
 def run():
     k.read_event()
-    print(f"player  : {p_i.position}")
+    #print(f"player  : {p_i.position}")
     if k.is_pressed('a'):
         a_m.move_left()
         return

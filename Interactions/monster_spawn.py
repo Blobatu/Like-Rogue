@@ -23,14 +23,15 @@ def spawn_monster():
         row_count += 1
         col = i.find(monster_spawn)
 
-        print(f"{col}, {row_count}")
+        #print(f"{col}, {row_count}")
         
         if col != -1:
             row = row_count
             r_npc = random.choice(list(l.values()))
-            r_npc.position = (col, row)
-            a_m.replace_at_position(r_npc.position[0], 
-                                    r_npc.position[1], 
+            print(r_npc.sprite)
+            r_npc.set_position(col, row)
+            a_m.replace_at_position(r_npc.get_col(), 
+                                    r_npc.get_row(), 
                                     r_npc.sprite)
             npc_db.add_npc_to_db(r_npc)
-  
+            #print(f"npc: {r_npc.position}")

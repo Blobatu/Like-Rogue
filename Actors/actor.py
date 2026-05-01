@@ -32,3 +32,17 @@ class Actor:
             print(f"{self.name} is dead")
             return True
         return False
+    
+    def set_position(self, position: tuple[int, int]):
+        self.position = position
+        print(self.position)
+
+    def set_position(self, col: int, row: int):
+        self.position = (col, row)
+        print(self.position)
+
+    def get_col(self):
+        return self.position[0]
+    
+    def get_row(self):
+        return self.position[1]

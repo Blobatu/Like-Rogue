@@ -23,24 +23,28 @@ console_tile = fl()
 console_tile = fl()
 
 def move_up(id: int = -1):
+    print(f"move up {id}")
     move(is_vertical=True, 
          is_negative=True,
          id=id)
 
 
 def move_down(id: int = -1):
+    print(f"move down {id}")
     move(is_vertical=True, 
          is_negative=False,
          id=id)
 
 
 def move_left(id: int = -1):
+    print(f"move left {id}")
     move(is_vertical=False, 
          is_negative=True,
          id=id)
 
 
 def move_right(id: int = -1 ):
+    print(f"move right {id}")
     move(is_vertical=False, 
          is_negative=False,
          id=id)
@@ -74,12 +78,15 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
     if(id == -1):
         clear_old_position(col, row)
         set_new_position(new_col, new_row, player_sprite)
-        p_i.position = (new_col, new_row)
+        p_i.set_position(new_col, new_row)
 
     else:
-        move_at_position(col, row, air_sprite)
-        move_at_position(new_col, new_row, npc_db[id].sprite)
-        npc_db[id].position = (new_col, new_row)
+        #print(f"b {id} : {npc_db[id].position}")
+        replace_at_position(col+1, row, air_sprite)
+        replace_at_position(new_col, new_row, npc_db[id].sprite)
+        print(npc_db[id].sprite)
+        npc_db[id].set_position(new_col, new_row)
+        #print(f"a {id} : {npc_db[id].position}")
 
     # luc pourquoi tu as mis ça ?
     detection_check()
@@ -106,7 +113,7 @@ def is_wall(col, row):
         return True
     if(row < 0 or row >= len(console_tile)):
         return True
-    if(console_tile [row] [col * 2 : col * 2 + 2 ] == wall_sprite):
+    if(console_tile[row][col * 2 : col * 2 + 2] == wall_sprite):
         return True
         
     return False
