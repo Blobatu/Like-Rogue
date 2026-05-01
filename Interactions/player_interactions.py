@@ -13,12 +13,11 @@ import keyboard as k
 mobs = ("player","other_monsters")
 
 global player_position
-player_position = (6, 24)  # col 5, row 3
+player_position = (6, 24)  # col 6, row 24
 p_i.set_position(6, 24)
 
 def run():
     k.read_event()
-    #print(f"player  : {p_i.position}")
     if k.is_pressed('a'):
         a_m.move_left()
         return

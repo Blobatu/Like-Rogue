@@ -23,28 +23,24 @@ console_tile = fl()
 console_tile = fl()
 
 def move_up(id: int = -1):
-    print(f"move up {id}")
     move(is_vertical=True, 
          is_negative=True,
          id=id)
 
 
 def move_down(id: int = -1):
-    print(f"move down {id}")
     move(is_vertical=True, 
          is_negative=False,
          id=id)
 
 
 def move_left(id: int = -1):
-    print(f"move left {id}")
     move(is_vertical=False, 
          is_negative=True,
          id=id)
 
 
 def move_right(id: int = -1 ):
-    print(f"move right {id}")
     move(is_vertical=False, 
          is_negative=False,
          id=id)
@@ -83,7 +79,6 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
 
     else:
         set_new_position(new_col, new_row, npc_db[id].sprite)
-        print(npc_db[id].sprite)
         npc_db[id].set_position(new_col, new_row)
 
     # luc pourquoi tu as mis ça ?

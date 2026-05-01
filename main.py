@@ -19,7 +19,7 @@ def columns_legend():
 
 monster_spawn.spawn_monster()
 while(True):
-    #print("\033[H\033[J", end="")
+    print("\033[H\033[J", end="")
     
     print("".join(columns_legend()))
     print('\n'.join(a_m.console_tile))
