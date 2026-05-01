@@ -1,7 +1,7 @@
 """
 Auteur : Luc Desforges
-Date : 14 avril 2026
-Description : TODO
+Date : 1 mai 2026
+Description : Classe pour les NPCs du jeu, héritant de la classe Actor.
 """
 from . import actor as a
 

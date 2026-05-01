@@ -1,7 +1,7 @@
 """
 Auteur : Luc Desforges
-Date : 14 avril 2026
-Description : TODO
+Date : 1 mai 2026
+Description : Base de données pour les NPCs du jeu.
 """
 from . import npc
 

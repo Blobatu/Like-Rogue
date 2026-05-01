@@ -1,7 +1,7 @@
 """
 Auteur : Luc Desforges
-Date : 14 avril 2026
-Description : TODO
+Date : 1 mai 2026
+Description : Repository pour les type de NPCs du jeu.
 """
 from . import npc
 import public

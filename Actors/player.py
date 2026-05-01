@@ -1,7 +1,7 @@
 """
 Auteur : Luc Desforges
 Date : 14 avril 2026
-Description : TODO
+Description : Classe pour le joueur du jeu, héritant de la classe Actor.
 """
 from . import actor as a
 
