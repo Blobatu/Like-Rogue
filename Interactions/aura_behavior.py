@@ -29,6 +29,4 @@ def detection_check(id: int):
        and (npc_row + aura == player_row or     #7
             npc_row - aura == player_row)       #2
     ):
-        print("Combat !")
-        print("player position : " + str(p.player_instance.position))
-        print("monster position : " + str(npc_db[id].position))
+        p.player_instance.lose_life(npc_db[id].damage)
