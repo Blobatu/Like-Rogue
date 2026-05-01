@@ -27,7 +27,7 @@ def chest():
            elif awnser == "N":
                 p.player_instance.weapon = current_weapon
         else:
-             p.player_instance.health += public.scale(3)
+             p.player_instance.health += public.scale(5)
     
     
 def barrel ():
@@ -36,7 +36,7 @@ def barrel ():
 def door ():
    p.player_instance.level +=1 
 def spike_trap():
-        p.player_instance.lose_life(public.scale(r.randint(1,3)))
+        p.player_instance.lose_life(r.randint(1,3))
 def void ():
         remaining_life = p.player_instance.health
         p.player_instance.lose_life(remaining_life)
@@ -58,7 +58,7 @@ async def bomb_interaction():
     await asyncio.sleep(r.randint(2,5))
     player_bomb_check = (p.player_instance.position[0]+5,p.player_instance.position[1]-5)
     if player_bomb_check[0] < bomb_position[0] > player_bomb_check[1] and player_bomb_check[0]<bomb_position[1]>player_bomb_check[1]:
-         p.player_instance.lose_life(public.scale(r.randint(1,3)))
+         p.player_instance.lose_life(r.randint(1,3))
 
 
 chest_dic = {

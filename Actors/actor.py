@@ -3,6 +3,9 @@ Auteur : Luc Desforges
 Date : 14 avril 2026
 Description : TODO
 """
+import public
+
+
 class Actor:
 
     def __init__(self, 
@@ -18,15 +21,15 @@ class Actor:
         self.name = name
         self.sprite = sprite
         self.position = position
-        self.health = health
-        self.damage = damage
+        self.health = public.scale(health)
+        self.damage = public.scale(damage)
         self.size = size
 
-        self.max_health = health
+        self.max_health = public.scale(health)
 
     def lose_life(self, amount: int):
         print(f"You lost {amount} health points!")
-        self.health -= amount
+        self.health -= public.scale(amount)
         print(f"Health:{self.health}/{self.max_health}")
         if(self.health <= 0):
             self.health = 0
