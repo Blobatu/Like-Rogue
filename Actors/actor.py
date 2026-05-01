@@ -1,7 +1,8 @@
 """
 Auteur : Luc Desforges
 Date : 1 mai 2026
-Description : Classe de base pour les acteurs du jeu, incluant le joueur et les NPCs.
+Description :   Classe de base pour les acteurs du jeu, 
+                incluant le joueur et les NPCs.
 """
 import public
 

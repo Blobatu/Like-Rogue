@@ -13,6 +13,9 @@ def listen_to_keyboard():
             QE pour les déplacements diagonaux).
     """
     k.read_event()
+    # On vérifie les touches pressées pour 
+    # déterminer la direction du déplacement
+
     if k.is_pressed('a'):
         a_m.move_left()
         return
