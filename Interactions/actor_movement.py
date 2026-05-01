@@ -92,9 +92,9 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
     else:
         set_new_position(new_col, new_row, npc_db[id].sprite)
         npc_db[id].set_position(new_col, new_row)
+        # luc pourquoi tu as mis ça ?
+        detection_check(id)
 
-    # luc pourquoi tu as mis ça ?
-    detection_check(id)
 
 
 def new_position_value(original_value: int, is_negative: bool, step: int = 1):
