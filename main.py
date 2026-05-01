@@ -6,12 +6,11 @@ Description : TODO
 import sys
 import os
 from Interactions.dungeon import dungeon_rows as dungeon
-from Interactions import actor_movement as a_m
+from Actors.player import player_instance as p_i
 from Interactions import player_movement as p_m
 from Interactions import monster_spawn
 from Interactions import monster_AI
 
-from Props import props_interaction as pr_i
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
@@ -24,16 +23,17 @@ def columns_legend():
         legend.append(index)
     return legend
 
-a_m.p_i.set_position(6, 24)
+p_i.set_position(6, 24)
 monster_spawn.spawn_monster()
+
 while(True):
-    if a_m.p_i.is_alive():
+    if p_i.is_alive():
         print("\033[H\033[J", end="")
         print("".join(columns_legend()))
         print('\n'.join(dungeon))
         p_m.listen_to_keyboard()
-        monster_AI.algorithm()
+        monster_AI.react_to_player_movement()
     else:
-        print(f"{a_m.p_i.name} is dead")
+        print(f"{p_i.name} is dead")
         break
     

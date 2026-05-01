@@ -28,7 +28,7 @@ def Xplayer_distance(id: int = -1):
     return npc_db[id].get_col() - p_i.get_col()
 
 
-def algorithm():
+def react_to_player_movement():
     """
     But:    Algorithme de déplacement des NPCs du jeu, 
             qui les fait se déplacer vers le joueur s'ils sont à proximité.
