@@ -18,16 +18,8 @@ def columns_legend():
     return legend
 
 monster_spawn.spawn_monster()
-#print(p_i.r_npc.position)
-#print(p_i.p.player_instance.position)
-print("".join(columns_legend()))
-print('\n'.join(a_m.console_tile))
-p_i.run()
-monster_AI.algorithm()
 while(True):
     #print("\033[H\033[J", end="")
-    #print(p_i.r_npc.position)
-    #print(p_i.p.player_instance.position)
     
     print("".join(columns_legend()))
     print('\n'.join(a_m.console_tile))

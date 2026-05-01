@@ -207,7 +207,7 @@ def full_level(maze: list[list[str]] = make_level(),
         elif (y, tile_x) in all_selected[enn_count + chest_count:]:
             new_data[y][tile_x:tile_x+2] = ['△', ' ']
         else:
-            new_data[y][tile_x:tile_x+2] = ['.', '&']
+            new_data[y][tile_x:tile_x+2] = ['&', ' ']
     
     exit_line = center_row_line
     exit_start_col = 222

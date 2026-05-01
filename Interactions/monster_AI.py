@@ -47,18 +47,30 @@ def algorithm():
                 print(Yplayer_distance(id))
                 print(Xplayer_distance(id))
                 if 0 > Yplayer_distance(id) > -3:
-                    if npc_db[id].get_row() + 1 != p_i.get_row():
+                    new_row = a_m.console_tile[npc_db[id].get_row() + 1]
+                    sprite = new_row[npc_db[id].get_col()]
+                    print(f"sprite: |{sprite}|")
+                    if sprite+" " == a_m.air_sprite:
                         a_m.move_down(id)
                         
                 elif 0 < Yplayer_distance(id) < 3:
-                    if npc_db[id].get_row() - 1 != p_i.get_row():
+                    new_row = a_m.console_tile[npc_db[id].get_row() - 1]
+                    sprite = new_row[npc_db[id].get_col()]
+                    print(f"sprite: |{sprite}|")
+                    if sprite+" " == a_m.air_sprite:
                         a_m.move_up(id)
                         
                 if 0 > Xplayer_distance(id) > -6:
-                    if npc_db[id].get_col() + 2 != p_i.get_col():
+                    new_row = a_m.console_tile[npc_db[id].get_row()]
+                    sprite = new_row[npc_db[id].get_col() + 2]
+                    print(f"sprite: |{sprite}|")
+                    if sprite+" " == a_m.air_sprite:
                         a_m.move_right(id)
                         
                 elif 0 < Xplayer_distance(id) < 6:
-                    if npc_db[id].get_col() - 2 != p_i.get_col():
+                    new_row = a_m.console_tile[npc_db[id].get_row()]
+                    sprite = new_row[npc_db[id].get_col() - 2]
+                    print(f"sprite: |{sprite}|")
+                    if sprite+" " == a_m.air_sprite:
                         a_m.move_left(id)
                         
