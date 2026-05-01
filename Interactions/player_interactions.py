@@ -31,4 +31,12 @@ def run():
     if k.is_pressed('s'):
         a_m.move_down()
         return
+    if k.is_pressed('q'):
+        a_m.move_up()
+        a_m.move_left()
+        return
+    if k.is_pressed('e'):
+        a_m.move_down()
+        a_m.move_right()
+        return
     
