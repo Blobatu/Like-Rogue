@@ -5,6 +5,8 @@ Date : 1 mai 2026
 Description : Module pour la gestion de l'apparition des monstres dans le jeu.
 """
 import random
+
+from Actors.npc import NPC
 from . import actor_movement as a_m
 from Actors import npc_database as npc_db
 from .dungeon import dungeon_rows as dungeon
@@ -19,6 +21,7 @@ def spawn_monster():
     """
     col = -1
     row = -1
+    test = 0
     print('\n'.join(dungeon))
 
     for line in dungeon:
@@ -34,10 +37,20 @@ def spawn_monster():
 
             # On crée une instance du monstre choisi et 
             # on la place de la position du spawn
-            r_npc.set_position(col, row)
-            a_m.replace_at_position(r_npc.get_col(), 
-                                    r_npc.get_row(), 
+            npc_db.listof_dbnpc[test] = NPC(name = r_npc.name,
+                                            sprite = r_npc.sprite,
+                                            health = r_npc.health,
+                                            damage = r_npc.damage,
+                                            size = r_npc.size,
+                                            aura = r_npc.aura,)
+            npc_db.listof_dbnpc[test].set_position(col, row)
+            a_m.replace_at_position(col, 
+                                    row, 
                                     r_npc.sprite)
             
             # On ajoute le monstre à la base de données des NPCs
-            npc_db.add_npc_to_db(r_npc)
+            test += 1
+            
+    print("---")
+    for n in npc_db.listof_dbnpc.values():
+        print(n.position)

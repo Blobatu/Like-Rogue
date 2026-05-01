@@ -107,7 +107,7 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
         
         # Après le déplacement du NPC, 
         # on vérifie si le joueur est dans son aura
-        detection_check(id)
+        #detection_check(id)
 
 
 def new_position_value(original_value: int, is_negative: bool, step: int = 1):

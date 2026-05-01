@@ -35,6 +35,7 @@ def react_to_player_movement():
             qui les fait se déplacer vers le joueur s'ils sont à proximité.
     """
     for id in npc_db:
+        print(str(id) + " : " + str(npc_db[id].position))
         npc_row = npc_db[id].get_row()
         min_row = npc_row - 6
         max_row = npc_row + 6
@@ -51,7 +52,7 @@ def react_to_player_movement():
                         # Le joueur est en dessous du NPC, 
                         # le NPC se déplace vers le bas
                         a_m.move_down(id)
-                        
+
                 elif 0 < Yplayer_distance(id) < 3:
                         # Le joueur est au dessus du NPC,
                         # le NPC se déplace vers le haut
@@ -66,3 +67,10 @@ def react_to_player_movement():
                         # Le joueur est à gauche du NPC,
                         # le NPC se déplace vers la gauche
                         a_m.move_left(id)
+
+                print(Xplayer_distance(id))
+                print(Yplayer_distance(id))
+                if (((npc_db[id].aura * -1) <= Yplayer_distance(id) <= npc_db[id].aura and 
+                     (npc_db[id].aura * -1)*2 <= Xplayer_distance(id) <= npc_db[id].aura*2)):
+                        p_i.lose_life(npc_db[id].damage)
+                        

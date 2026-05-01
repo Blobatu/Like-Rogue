@@ -1,7 +1,8 @@
 """
 Auteur : Luc Desforges
-Date : 14 avril 2026
-Description : TODO
+Date : 1 mai 2026
+Description :   Point d'entrée du jeu, qui initialise le donjon, 
+                le joueur et les monstres,
 """
 import sys
 import os
@@ -28,7 +29,7 @@ monster_spawn.spawn_monster()
 
 while(True):
     if p_i.is_alive():
-        print("\033[H\033[J", end="")
+        #print("\033[H\033[J", end="")
         print("".join(columns_legend()))
         print('\n'.join(dungeon))
         p_m.listen_to_keyboard()
