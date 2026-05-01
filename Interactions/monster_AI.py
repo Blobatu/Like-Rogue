@@ -10,7 +10,7 @@ def Yplayer_distance(id: int = -1):
 
 
 def Xplayer_distance(id: int = -1):
-    return npc_db[id].get_col() - p_i.get_col() * 2
+    return npc_db[id].get_col() - p_i.get_col()
 
 # valeur par défaut pour les positions de monstre
 
@@ -36,27 +36,29 @@ def algorithm():
     for id in npc_db:
         print(f"npc {id}: {npc_db[id].position}")
         npc_row = npc_db[id].get_row()
-        min_row = npc_row - 3
-        max_row = npc_row + 3
+        min_row = npc_row - 6
+        max_row = npc_row + 6
         npc_col = npc_db[id].get_col()
-        min_col = npc_col - 5
-        max_col = npc_col + 5
+        min_col = npc_col - 12
+        max_col = npc_col + 12
 
         if min_row <= p_i.get_row() <= max_row:
-            if(min_col <= p_i.get_col()*2 <= max_col):
-                if Yplayer_distance(id) < 2:
+            if(min_col <= p_i.get_col() <= max_col):
+                print(Yplayer_distance(id))
+                print(Xplayer_distance(id))
+                if 0 > Yplayer_distance(id) > -3:
                     if npc_db[id].get_row() + 1 != p_i.get_row():
                         a_m.move_down(id)
                         
-                elif Yplayer_distance(id) > -2:
+                elif 0 < Yplayer_distance(id) < 3:
                     if npc_db[id].get_row() - 1 != p_i.get_row():
                         a_m.move_up(id)
                         
-                if Xplayer_distance(id) < 2:
-                    if npc_db[id].get_col() + 1 != p_i.get_col()*2:
+                if 0 > Xplayer_distance(id) > -6:
+                    if npc_db[id].get_col() + 2 != p_i.get_col():
                         a_m.move_right(id)
                         
-                elif Xplayer_distance(id) > -2:
-                    if npc_db[id].get_col() - 1 != p_i.get_col():
+                elif 0 < Xplayer_distance(id) < 6:
+                    if npc_db[id].get_col() - 2 != p_i.get_col():
                         a_m.move_left(id)
                         

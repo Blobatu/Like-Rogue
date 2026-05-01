@@ -69,35 +69,33 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
         new_row = new_position_value(row, is_negative)
 
     else:
-        new_col = new_position_value(col, is_negative)
+        new_col = new_position_value(col, is_negative, step=2)
 
     if is_wall(new_col, new_row):
         message_wall()
         return
 
+    clear_old_position(col, row)
+
     if(id == -1):
-        clear_old_position(col, row)
         set_new_position(new_col, new_row, player_sprite)
         p_i.set_position(new_col, new_row)
 
     else:
-        #print(f"b {id} : {npc_db[id].position}")
-        replace_at_position(col+1, row, air_sprite)
-        replace_at_position(new_col, new_row, npc_db[id].sprite)
+        set_new_position(new_col, new_row, npc_db[id].sprite)
         print(npc_db[id].sprite)
         npc_db[id].set_position(new_col, new_row)
-        #print(f"a {id} : {npc_db[id].position}")
 
     # luc pourquoi tu as mis ça ?
     detection_check()
 
 
-def new_position_value(original_value: int, is_negative: bool):
+def new_position_value(original_value: int, is_negative: bool, step: int = 1):
     if(is_negative is True):
-        return original_value - 1
+        return original_value - step
     
     else:
-        return original_value + 1
+        return original_value + step
 
 
 def is_wall(col, row):
@@ -113,7 +111,7 @@ def is_wall(col, row):
         return True
     if(row < 0 or row >= len(console_tile)):
         return True
-    if(console_tile[row][col * 2 : col * 2 + 2] == wall_sprite):
+    if(console_tile[row][col: col+2] == wall_sprite):
         return True
         
     return False
@@ -124,17 +122,11 @@ def message_wall():
 
 
 def clear_old_position(col: int, row: int):
-    move_at_position(col, row, air_sprite)
+    replace_at_position(col, row, air_sprite)
 
 
 def set_new_position(col: int, row: int, value: str):
-    move_at_position(col, row, value)
-
-
-def move_at_position(col: int, row: int, value: str):
-    before_value = console_tile[row][:col*2]
-    after_value = console_tile[row][col*2+2:]
-    insert_at_position(row, before_value, after_value, value)
+    replace_at_position(col, row, value)
 
 
 def replace_at_position(col: int, row: int, value: str):

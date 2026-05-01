@@ -13,8 +13,8 @@ import keyboard as k
 mobs = ("player","other_monsters")
 
 global player_position
-player_position = (3, 24)  # col 5, row 3
-p_i.set_position(3, 24)
+player_position = (6, 24)  # col 5, row 3
+p_i.set_position(6, 24)
 
 def run():
     k.read_event()
