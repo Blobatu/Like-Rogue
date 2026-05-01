@@ -22,6 +22,7 @@ spike_trap_sprite = "△ "
 whitelist_sprites = [air_sprite, chest_sprite, barrel_sprite, exit_sprite, spike_trap_sprite]
 
 global console_tile
+console_tile = fl()
 # vieile map utilisée pour les tests.
 # console_tile = ["####################",
 #                 "##. . . . . . . . ##",
@@ -30,9 +31,6 @@ global console_tile
 #                 "##. . . . . . . . ##",
 #                 "####################"]
 
-console_tile = fl()
-
-console_tile = fl()
 
 def move_up(id: int = -1):
     move(is_vertical=True, 
@@ -75,7 +73,6 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
 
     if(is_vertical is True):
         new_row = new_position_value(row, is_negative)
-
     else:
         new_col = new_position_value(col, is_negative, step=2)
 
@@ -88,19 +85,16 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
     if(id == -1):
         set_new_position(new_col, new_row, player_sprite)
         p_i.set_position(new_col, new_row)
-
     else:
         set_new_position(new_col, new_row, npc_db[id].sprite)
         npc_db[id].set_position(new_col, new_row)
-        # luc pourquoi tu as mis ça ?
+        
         detection_check(id)
-
 
 
 def new_position_value(original_value: int, is_negative: bool, step: int = 1):
     if(is_negative is True):
         return original_value - step
-    
     else:
         return original_value + step
 

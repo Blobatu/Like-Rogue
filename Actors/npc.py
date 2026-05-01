@@ -6,7 +6,6 @@ Description : TODO
 from . import actor as a
 
 class NPC(a.Actor):
-    
     def __init__(self,
                  aura: int,
                  name: str,

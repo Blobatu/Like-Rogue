@@ -8,7 +8,6 @@ from Actors.npc_database import listof_dbnpc as npc_db
 from Actors.npc_repository import listof_npc as listof_type
 from . import actor_movement as a_m
 
-# nom = placeholder 
 
 def Yplayer_distance(id: int = -1):
     return npc_db[id].get_row() - p_i.get_row()
@@ -17,26 +16,27 @@ def Yplayer_distance(id: int = -1):
 def Xplayer_distance(id: int = -1):
     return npc_db[id].get_col() - p_i.get_col()
 
-# valeur par défaut pour les positions de monstre
 
 def search_sprite_by_line(line: str):
         for item in listof_type.values():
             col_found = line.find(item.sprite)
+
             if col_found == -1:
                 continue
+            
             return col_found
 
-def check_limit(i:int):
+
+def check_limit(i: int):
     if(i > 48):
         return a_m.console_tile[48].find(p_i.sprite)
-
     if(i < 0):
         return a_m.console_tile[0].find(p_i.sprite)
     
     return a_m.console_tile[i].find(p_i.sprite)
 
-def algorithm():
 
+def algorithm():
     for id in npc_db:
         npc_row = npc_db[id].get_row()
         min_row = npc_row - 6
@@ -58,4 +58,3 @@ def algorithm():
                         
                 elif 0 < Xplayer_distance(id) < 6:
                         a_m.move_left(id)
-                        
