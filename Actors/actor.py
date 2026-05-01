@@ -28,6 +28,13 @@ class Actor:
 
 
     def lose_life(self, amount: int):
+        """
+        But: Inflige des dégâts à l'acteur et vérifie s'il est mort.
+        Entrée: 
+            amount (int) - la quantité de dégâts à infliger.
+        Sortie:
+            bool - True si l'acteur est mort, False sinon.
+        """
         print(f"You lost {amount} health points!")
         self.health -= public.scale(amount)
         print(f"Health:{self.health}/{self.max_health}")
@@ -39,22 +46,44 @@ class Actor:
 
 
     def is_alive(self) -> bool:
+        """
+        But: Vérifie si l'acteur est encore en vie.
+        Sortie: bool - True si l'acteur est en vie, False sinon.
+        """
         return self.health > 0
     
 
     def set_position(self, position: tuple[int, int]):
+        """
+        But: Met à jour la position de l'acteur.
+        Entrée: position (tuple[int, int]) - la nouvelle position de l'acteur.
+        """
         self.position = position
         print(self.position)
 
 
     def set_position(self, col: int, row: int):
+        """
+        But: Met à jour la position de l'acteur.
+        Entrée: 
+            col (int) - la nouvelle colonne de l'acteur,
+            row (int) - la nouvelle rangée de l'acteur.
+        """
         self.position = (col, row)
         print(self.position)
 
 
     def get_col(self):
+        """
+        But: Récupère la colonne actuelle de l'acteur.
+        Sortie: int - la colonne actuelle de l'acteur.
+        """
         return self.position[0]
     
 
     def get_row(self):
+        """
+        But: Récupère la rangée actuelle de l'acteur.
+        Sortie: int - la rangée actuelle de l'acteur.
+        """
         return self.position[1]
