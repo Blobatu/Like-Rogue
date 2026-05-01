@@ -1,12 +1,20 @@
 """
 Auteur : Luc Desforges
-Date : 14 avril 2026
-Description : TODO
+Date : 1 mai 2026
+Description :  Comportement de l'aura des NPCs du jeu, 
+               qui inflige des dégâts au joueur s'il 
+               se trouve à proximité d'un NPC.
 """
 from Actors.npc_database import listof_dbnpc as npc_db
 from Actors import player as p
 
 def detection_check(id: int):
+    """
+    But: Vérifie si le joueur est dans l'aura d'un NPC et 
+    lui inflige des dégâts si c'est le cas.
+    
+    Entrée: id (int) - l'identifiant du NPC à vérifier.
+    """
     npc_col = npc_db[id].get_col()
     npc_row = npc_db[id].get_row()
     player_col = p.player_instance.get_col()

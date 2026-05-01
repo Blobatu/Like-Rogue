@@ -3,33 +3,15 @@ Auteur : Léonard  & Luc Desforges
 Date : 14 avril 2026
 Description : TODO
 """
-from pandas import col
-
-from Actors.player import player_instance as p_i
 from Interactions.aura_behavior import detection_check
-from Level.level_generation import full_level as fl
-from Actors.npc_database import listof_dbnpc as npc_db
 from Props.props_interaction import interaction_check
-
-wall_sprite = "##"
-player_sprite = "@ "
-air_sprite = ". "
-exit_sprite = "|"
-barrel_sprite = "⩉ "
-chest_sprite = "▤ "
-spike_trap_sprite = "△ "
-
-whitelist_sprites = [air_sprite, chest_sprite, barrel_sprite, exit_sprite, spike_trap_sprite]
-
-global console_tile
-console_tile = fl()
-# vieile map utilisée pour les tests.
-# console_tile = ["####################",
-#                 "##. . . . . . . . ##",
-#                 "##. . . . . . . . ##",
-#                 "##. . . . @ . . . ##",
-#                 "##. . . . . . . . ##",
-#                 "####################"]
+from Actors.npc_database import listof_dbnpc as npc_db
+from Actors.player import player_instance as p_i
+from .dungeon import dungeon_rows as dungeon
+from .dungeon import whitelist_sprites
+from .dungeon import player_sprite
+from .dungeon import wall_sprite
+from .dungeon import air_sprite
 
 
 def move_up(id: int = -1):
@@ -108,14 +90,14 @@ def is_wall(col, row):
         row: La rangée à vérifier,
     Sortie: Vrai si le joueur va vers un mur, sinon Faux
     """
-    if(col < 0 or col >= len(console_tile[0])):
+    if(col < 0 or col >= len(dungeon[0])):
         return True
-    if(row < 0 or row >= len(console_tile)):
+    if(row < 0 or row >= len(dungeon)):
         return True
-    if(console_tile[row][col: col+2] == wall_sprite):
+    if(dungeon[row][col: col+2] == wall_sprite):
         return True
     
-    sprite = console_tile[row][col]
+    sprite = dungeon[row][col]
     interaction_check(sprite+" ")
     
     if sprite+" " not in whitelist_sprites:
@@ -137,8 +119,8 @@ def set_new_position(col: int, row: int, value: str):
 
 
 def replace_at_position(col: int, row: int, value: str):
-    before_value = console_tile[row][:col]
-    after_value = console_tile[row][col+2:]
+    before_value = dungeon[row][:col]
+    after_value = dungeon[row][col+2:]
     insert_at_position(row, before_value, after_value, value)
 
 
@@ -146,4 +128,4 @@ def insert_at_position(row: int,
                        before_value: str, 
                        after_value: str, 
                        value: str):
-    console_tile[row] = before_value + value + after_value
+    dungeon[row] = before_value + value + after_value

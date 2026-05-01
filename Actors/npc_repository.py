@@ -1,10 +1,9 @@
 """
 Auteur : Luc Desforges
 Date : 1 mai 2026
-Description : Repository pour les type de NPCs du jeu.
+Description : Liste des types de NPCs du jeu.
 """
 from . import npc
-import public
 
 listof_npc = {
     "Goblin": npc.NPC(name = "Goblin",

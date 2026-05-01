@@ -1,21 +1,17 @@
 """
 Auteur : Léonard  & Luc Desforges
-Date : 14 avril 2026
-Description : TODO
+Date : 1 mai 2026
+Description : Module pour la gestion des déplacements du joueur dans le jeu.
 """
-from Actors.player import player_instance as p_i
-from Level.level_generation import full_level as fl
 from . import actor_movement as a_m
 import keyboard as k
 
-#player_position = player.position
-mobs = ("player","other_monsters")
-
-global player_position
-player_position = (6, 24)  # col 6, row 24
-p_i.set_position(6, 24)
-
-def run():
+def listen_to_keyboard():
+    """
+    But:    Permet au joueur de se déplacer dans le donjon en écoutant les
+            entrées du clavier (wasd pour les déplacements de base, 
+            QE pour les déplacements diagonaux).
+    """
     k.read_event()
     if k.is_pressed('a'):
         a_m.move_left()
