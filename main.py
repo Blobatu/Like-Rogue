@@ -4,6 +4,7 @@ from Interactions import player_interactions as p_i
 from Interactions import monster_spawn
 from Interactions import monster_AI
 from Interactions import actor_movement as a_m
+from Props import props_interaction as pr_i
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
@@ -27,7 +28,7 @@ while(True):
     #print("\033[H\033[J", end="")
     #print(p_i.r_npc.position)
     #print(p_i.p.player_instance.position)
-
+    
     print("".join(columns_legend()))
     print('\n'.join(a_m.console_tile))
     p_i.run()

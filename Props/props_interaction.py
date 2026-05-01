@@ -53,12 +53,11 @@ def interaction_check(player_pos:str):
             void()     
 async def bomb_interaction():
     bomb_position = p.player_instance.position
-    await asyncio.sleep(10)
+    await asyncio.sleep(r.randint(2,5))
     player_bomb_check = (p.player_instance.position[0]+5,p.player_instance.position[1]-5)
     if player_bomb_check[0] < bomb_position[0] > player_bomb_check[1] and player_bomb_check[0]<bomb_position[1]>player_bomb_check[1]:
-         print("yay")
-    else :
-         print("sad :(")
+         p.player_instance.lose_life(r.randint(2,5))
+
 
 chest_dic = {
 
