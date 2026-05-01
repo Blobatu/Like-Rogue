@@ -10,7 +10,7 @@ wall_sprite = "##"
 player_sprite = "@ "
 air_sprite = ". "
 exit_sprite = "|"
-barrel_sprite = "! "
+barrel_sprite = "⩉ "
 chest_sprite = "▤ "
 spike_trap_sprite = "△ "
 
