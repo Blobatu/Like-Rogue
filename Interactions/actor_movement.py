@@ -113,7 +113,11 @@ def is_wall(col, row):
         return True
     if(console_tile[row][col: col+2] == wall_sprite):
         return True
-        
+    
+    sprite = console_tile[row][col]
+    if sprite+" " != air_sprite:
+        return True
+    
     return False
 
 
