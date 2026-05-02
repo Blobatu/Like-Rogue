@@ -16,7 +16,7 @@ class Player(a.Actor):
                  name: str, 
                  sprite: str,
                  position: tuple[int, int], 
-                 health: int = 10, 
+                 health: int = 20, 
                  damage: int = 1,
                  size: int = 1):
         """

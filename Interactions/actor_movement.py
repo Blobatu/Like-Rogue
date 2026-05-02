@@ -12,6 +12,7 @@ from .dungeon import whitelist_sprites
 from .dungeon import player_sprite
 from .dungeon import wall_sprite
 from .dungeon import air_sprite
+from .dungeon import damage_sprite
 
 
 def move_up(id: int = -1):
@@ -103,6 +104,35 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
         # Si c'est un NPC qui se déplace,
         # on met à jour sa position
         replace_at_position(new_col, new_row, npc_db[id].sprite)
+        j = npc_db[id].aura * -1 - 1
+        k = npc_db[id].aura + 1
+        if(dungeon[new_row][new_col + j * 2: new_col + j * 2 + 2] == damage_sprite):
+            clear_old_position(new_col + j * 2, new_row)
+        if(dungeon[new_row][new_col + k * 2: new_col + k * 2 + 2] == damage_sprite):
+            clear_old_position(new_col + k * 2, new_row)
+
+        print(dungeon[new_row + j + 1])
+        print(dungeon[new_row + j + 1][new_col + j * 2])
+        print(dungeon[new_row + k - 1])
+        print(dungeon[new_row + k - 1][new_col + k * 2])
+        if(dungeon[new_row + j + 1][new_col] == damage_sprite):
+            clear_old_position(new_col, new_row + j + 1)
+        if(dungeon[new_row + k - 1][new_col] == damage_sprite):
+            clear_old_position(new_col, new_row + k - 1)
+
+        if(dungeon[new_row + j + 1][new_col + j * 2: new_col + j * 2 + 2] == damage_sprite):
+            clear_old_position(new_col + j * 2, new_row + j + 1)
+        if(dungeon[new_row + k - 1][new_col + k * 2: new_col + k * 2 + 2] == damage_sprite):
+            clear_old_position(new_col + k * 2, new_row + k - 1)
+
+        for i in range(npc_db[id].aura * -1, npc_db[id].aura + 1):
+            print("Aura:"+str(i))
+            if(i != 0):
+                if dungeon[new_row][new_col + i * 2: new_col + i * 2 + 2] == air_sprite: 
+                    replace_at_position(new_col + i * 2, new_row, damage_sprite)
+                if dungeon[new_row + i][new_col] == air_sprite:
+                    replace_at_position(new_col, new_row + i, damage_sprite)
+                
         npc_db[id].set_position(new_col, new_row)
         
         # Après le déplacement du NPC, 
