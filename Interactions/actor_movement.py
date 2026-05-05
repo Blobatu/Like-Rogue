@@ -188,6 +188,9 @@ def replace_around_position(col: int, row: int, aura: int, value: str):
     r_col = col+4+(2*aura)
     for i in range(l_col, r_col, 2):
         for j in range(-2*aura,aura+2):
+            temp_row = row+j
+            if 0 < temp_row >= len(dungeon):
+                continue
             if dungeon[row+j][i]+" " == damage_sprite:
                 clear_old_position(i, row+j)
     
@@ -195,6 +198,9 @@ def replace_around_position(col: int, row: int, aura: int, value: str):
     r_col = col+2+(2*aura)
     for i in range(l_col, r_col, 2):
         for j in range(-1*aura,aura+1):
+            temp_row = row+j
+            if 0 < temp_row >= len(dungeon):
+                continue
             if dungeon[row+j][i]+" " == air_sprite:
                 replace_at_position(i, row+j, value)
 
