@@ -122,6 +122,7 @@ def bomb_explodes():
     entrees:
     sorties:
     """
+    #initialisation du compteur pour savoir quelle bombe pop
     counter = 0
     for bombs in bomb_list:
         if bombs[1] > 5:
