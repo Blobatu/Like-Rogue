@@ -15,6 +15,15 @@ from .dungeon import air_sprite
 from .dungeon import damage_sprite
 
 
+def aura_damage():
+    npc_id = detection_check(-1)
+    if npc_id != -1:
+        npc = npc_db[npc_id]
+        if npc.health == 0:
+            move_around_position(npc.get_col(), npc.get_row(), npc.aura, air_sprite)
+            clear_old_position(npc.get_col(), npc.get_row())
+            npc_db[npc_id] = None
+
 def move_up(id: int = -1):
     """
     But: Permet de déplacer le npc vers le haut
@@ -212,7 +221,7 @@ def move_around_position(col: int, row: int, aura: int, value: str):
                                      l_col,
                                      r_col,
                                      aura,
-                                     damage_sprite,
+                                     value,
                                      air_sprite,
                                      range_number=1)    
 

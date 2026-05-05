@@ -35,6 +35,8 @@ def react_to_player_movement():
             qui les fait se déplacer vers le joueur s'ils sont à proximité.
     """
     for id in npc_db:
+        if(npc_db[id] is None):
+              continue 
         print(str(id) + " : " + str(npc_db[id].position))
         npc_row = npc_db[id].get_row()
         min_row = npc_row - 6

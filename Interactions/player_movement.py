@@ -36,4 +36,7 @@ def listen_to_keyboard():
         a_m.move_down()
         a_m.move_right()
         return
+    if k.is_pressed('x'):
+        a_m.aura_damage()
+        return
     

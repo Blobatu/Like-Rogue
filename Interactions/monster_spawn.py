@@ -23,7 +23,7 @@ def spawn_monster():
     """
     col = -1
     row = -1
-    test = 0
+    id = 0
     print('\n'.join(dungeon))
     print(len(dungeon))
     print(len(dungeon[0]))
@@ -40,20 +40,20 @@ def spawn_monster():
 
             # On crée une instance du monstre choisi et 
             # on la place de la position du spawn
-            npc_db.listof_dbnpc[test] = NPC(name = r_npc.name,
+            npc_db.listof_dbnpc[id] = NPC(name = r_npc.name,
                                             sprite = r_npc.sprite,
                                             health = r_npc.health,
                                             damage = r_npc.damage,
                                             size = r_npc.size,
                                             aura = r_npc.aura,)
-            npc_db.listof_dbnpc[test].set_position(col, row)
+            npc_db.listof_dbnpc[id].set_position(col, row)
             a_m.replace_around_position(col, row, r_npc.aura, damage_sprite)
             a_m.replace_at_position(col, 
                                     row, 
                                     r_npc.sprite)
             
             # On ajoute le monstre à la base de données des NPCs
-            test += 1
+            id += 1
             
     print("---")
     for n in npc_db.listof_dbnpc.values():
