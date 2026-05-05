@@ -1,9 +1,11 @@
 import random as r
 import pygame,time 
 from Actors import player as p
+from Actors import npc_database as npc_db
 import asyncio
-
+from Interactions import dungeon
 import public
+from Interactions import actor_movement as am
 #from UI.UI import Button
 """
 author : emmanuel Bissonnette
@@ -16,9 +18,10 @@ def chest():
         item = r.randint(0,3)
         path = "Props/chest_item_list"
         file = open(path)
-        file = file.readlines()
-        item = file[item]
+        lines = file.readlines()
+        item = lines[item]
         item.strip()
+        file.close()
         if item != "health_pot":
            current_weapon = p.player_instance.weapon
            awnser = input(f"Vous avez trouve {item} voulez vous remplacer votre {current_weapon} Y ou N")
@@ -54,49 +57,19 @@ def interaction_check(player_pos:str):
         case "  ":
             void()     
 async def bomb_interaction():
-    bomb_position = p.player_instance.position
-    await asyncio.sleep(r.randint(2,5))
-    player_bomb_check = (p.player_instance.position[0]+5,p.player_instance.position[1]-5)
-    if player_bomb_check[0] < bomb_position[0] > player_bomb_check[1] and player_bomb_check[0]<bomb_position[1]>player_bomb_check[1]:
-         p.player_instance.lose_life(r.randint(1,3))
-
-
-chest_dic = {
-
-    "sprite":"▤",
-    "interaction": chest,
+    if p.player_instance.bomb_count > 0:
+        p.player_instance.bomb_count -= 1
+        bomb_position = p.player_instance.position
+        await asyncio.sleep(r.randint(2,5))
+        player_bomb_check = (p.player_instance.position[0]+5,p.player_instance.position[1]-5)
+        if player_bomb_check[0] < bomb_position[0] > player_bomb_check[1] and player_bomb_check[0]<bomb_position[1]>player_bomb_check[1]:
+            p.player_instance.lose_life(r.randint(1,3))
+        for key,npc in npc_db.listof_dbnpc.items():
+            if npc.position[0] < bomb_position[0] > npc.position[1] and npc.position[0]<bomb_position[1]>npc.position[1]:
+                npc.lose_life(r.randint(1,5))
+        am.replace_around_position(bomb_position[0],bomb_position[1],3,dungeon.air_sprite)
+        
+    
+    
     
 
-
-}
-barrel_dic = {
-    "sprite":"⩉",
-    "interaction": barrel,
-
-
-}
-door_dic = {
-    "sprite":"|",
-    "interaction": door,
-
-}
-spike_trap_dic = {
-    
-    "sprite":"△",
-    "interaction": spike_trap,
-}
-void_dic = {
-    "sprite":" ",
-    "interaction": void,
-}
-props = {
-
-    "▤":chest_dic,
-    "⩉":barrel_dic,
-    "|":door_dic,
-    "△":spike_trap_dic,
-    " ":void_dic,
-
-
-
-}
