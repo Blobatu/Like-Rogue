@@ -14,7 +14,7 @@ class Progression:
         
         # Niveau de départ
         self.level = 1
-        
+        self._unlock = False
         # XP actuel
         self.xp = 0
         
@@ -39,7 +39,7 @@ class Progression:
         if self.xp >= self.xp_to_next:
             
           # Augmenter le niveau
-            self.level = self.level + 1
+            
             
           # Enlever l'XP utilisé pour le niveau
             self.xp = self.xp - self.xp_to_next
@@ -49,6 +49,9 @@ class Progression:
 
           # Message de niveau gagné
             print("Bravo ! Niveau", self.level)
+
+            return True
+        return False
 
     def afficher(self):
         # Affiche les informations du joueur
