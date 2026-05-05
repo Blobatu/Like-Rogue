@@ -1,13 +1,13 @@
 # Like-Rogue
 projet 3 de prog 1
 
-## dépendances
+## Dépendances
 imports externes nécéssaires:
 - pygame community edition
 - pygame-menu comunity edition
 - keyboard
 
-pour les installer:
+Pour les installer:
 ```cmd
 py -3.14 -m pip install pygame-ce
 py -3.14 -m pip install pygame-menu-ce
@@ -18,9 +18,9 @@ py -3.14 -m pip install keyboard
 ### Niveaux
 Tous les niveaux sont générés aléatoirement de manière à ce que chaque partie soient uniques.
 ### Progression
-Une fois que vous avez tué assez d'ennemis, une porte "|" s'ouvrira et vous pourrez passer au prochain niveau.
+Une fois que vous avez tué assez d'ennemis, une porte "X" s'ouvrira "|" et vous pourrez passer au prochain niveau.
 ## Interactions avec le jeux
-Avant le premier mouvement le joueur est invisible et apparait toujours dans le haut en gauche de l'écran. 
+Avant le premier mouvement le joueur apparait toujours au milieu à gauche de l'écran. 
 ### Contrôles
 **Déplacement**: le joueurs fonctionne avec le controle WASD
 
@@ -41,7 +41,10 @@ Voici d'autres commandes pour les actions supplémentaires qui ne sont pas des d
 *B* Déposer une bombe
 
 ### Interactions avec les monstres
----
+
+- Attaquer fait du dégat autours du joueurs à une distance de 2 (donc ne passe pas à travers les murs comme le aura farmer)
+- Déposer une bombe fait apparaitre une bombe à la position du joueur et vous avez 5 déplacement avant que la bombe explose à une distance de 3 (comme le aura farmer)
+PS: les bombes détruisent les murs
 
 ### Déplacement
 
