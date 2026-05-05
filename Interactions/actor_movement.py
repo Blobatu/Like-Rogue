@@ -8,7 +8,7 @@ from Actors.npc_database import listof_dbnpc as npc_db
 from Actors.player import player_instance as p_i
 from .dungeon import levels
 from .dungeon import whitelist_sprites
-from .dungeon import exit_opened_sprite
+from .dungeon import exit_closed_sprite
 from .dungeon import player_sprite
 from .dungeon import wall_sprite
 from .dungeon import air_sprite
@@ -61,6 +61,9 @@ def move_right(id: int = -1 ):
     move(is_vertical=False, 
          is_negative=False,
          id=id)
+    if(p_i.get_col() == 222 and p_i.get_row() == 24):
+        p_i.set_position(6, 24)
+        replace_at_position(222, 24, exit_closed_sprite)
 
 
 def move(is_vertical: bool, is_negative: bool, id: int = -1):

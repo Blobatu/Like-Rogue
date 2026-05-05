@@ -15,15 +15,6 @@ from Interactions import dungeon
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-def columns_legend():
-    legend: list[str] = []
-    for i in range(dungeon.levels[p_i.level-1].__len__()):
-        index = str(i)[-1]
-        if(index == '0'):
-            index = '-'
-        legend.append(index)
-    return legend
-
 p_i.set_position(6, 24)
 monster_spawn.spawn_monster()
 
@@ -31,13 +22,15 @@ is_pressed = True
 while(True):
     if p_i.is_alive():
         if is_pressed is True:    
-            #print("\033[H\033[J", end="")        
-            print("".join(columns_legend()))
-            print(p_i.position)
-            print(p_i.level)
-            print(str(p_i.health)+"/"+str(p_i.max_health)+"HP")
-            print(str(p_i.bomb_count)+" bomb(s)")
-            print(str(p_i.potion_count)+" potion(s)")
+            print("\033[H\033[J", end="") 
+            print(
+f"""
+    Level: {p_i.level}
+    XP: {p_i.progression.xp}/{p_i.progression.xp_to_next}
+    Health: {p_i.health}/{p_i.max_health}   
+    Potions: {p_i.potion_count}  
+    Bombs: {p_i.bomb_count}
+ """)
             print('\n'.join(dungeon.levels[p_i.level-1]))
         is_pressed = p_m.listen_to_keyboard(is_pressed)
         monster_AI.react_to_player_movement()
