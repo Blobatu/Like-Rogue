@@ -1,7 +1,4 @@
 
-from asyncio import events
-from turtle import pos
-from typing import Self
 
 import pygame
 import pygame_menu
@@ -31,7 +28,7 @@ settings = {
 }
 
 # Retour de fonction de settings
-def set_difficulty(self, value, difficulty):
+def set_difficulty( value, difficulty):
     settings["Difficulty"] = difficulty
     print(f"Difficulty set to: {settings['Difficulty']})")
 
@@ -99,16 +96,9 @@ class Button:
             self.dynamic_elev = self.elevation
             self.top_color = "#038D05"
 
-           
-#Création du bouton + loop d'affichage
-buttons = [
-    Button('Play!', 200, 40, (545, 400), 5),
-    Button('Settings!', 300, 40, (495, 450), 5),
-    Button('Stats!', 150, 40, (570, 500), 5),
-    Button('Quit!', 150, 40, (570, 550), 5)
-]
 
-# Dummy game loop
+
+# Loop d'affichage
 def start_game():
     running = True
     clock = pygame.time.Clock()
@@ -134,35 +124,36 @@ stats_menu.add.button("Back", pygame_menu.events.BACK)
 
 #Création du menu de principal
 main_menu = pygame_menu.Menu('Rogue-Like', 1300, 750, theme=pygame_menu.themes.THEME_DARK)
-main_menu.add.button("Play!", start_game)
-main_menu.add.button("Settings!", settings_menu)
-main_menu.add.button("Stats!", stats_menu)
-main_menu.add.button("Quit!", pygame_menu.events.EXIT)
-
+buttons = [
+main_menu.add.button("Play!", start_game, 200, 40, (545, 400), 5,),
+main_menu.add.button("Settings!", settings_menu, 300, 40, (495, 450), 5,),
+main_menu.add.button("Stats!", stats_menu, 150, 40, (570, 500), 5),
+main_menu.add.button("Quit!", pygame_menu.events.EXIT, 150, 40, (570, 550), 5)
+]
 
 running = True
 while running:
-        for menu in [settings_menu, stats_menu]:
-            if menu.is_enabled():
-                menu.update(pygame.event.get())
-                menu.draw(screen)
                   
-            
+            events = pygame.event.get()
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                exit()
+            for event in events:
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
                 
+            screen.fill("#000000")
+
+            if main_menu.is_enabled():
+                main_menu.update(events)
+                main_menu.draw(screen)
 
 
-        screen.fill("#000000")
-        screen.blit(text, (1300 // 2 - text.get_width() // 2, 750 // 4 - text.get_height() // 2))
-        for btn in buttons:
-            btn.draw()
+            screen.blit(text, (1300 // 2 - text.get_width() // 2, 750 // 4 - text.get_height() // 2))
         
-
-
-        pygame.display.update()
+            pygame.display.update()
+            pygame.display.flip()
+            
  
 
 
