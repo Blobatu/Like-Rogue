@@ -127,7 +127,8 @@ def bomb_explodes():
     for bombs in bomb_list:
         if bombs[1] > 5:
             damage = r.randint(1,3)
-            #le if verifie que le joueur se situe bien dans la range de 5 de la bombe
+            #le if verifie que le joueur se situe bien dans la range de 5 de la bombe 
+            # pour savoir si il faut lui faire des degats
             if ((-5 <= bombs[0][1] - p.player_instance.get_row() <= 5 and 
                  -5*2 <= p.player_instance.get_col() <= 5*2)):
                 p.player_instance.lose_life(damage)
