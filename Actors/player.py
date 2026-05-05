@@ -15,13 +15,13 @@ class Player(a.Actor):
                  weapon: Weapon,
                  potion_count: int,
                  bomb_count: int,
-                 level: int,
                  damage_done: int,
                  damage_received: int,
                  name: str, 
                  sprite: str,
                  position: tuple[int, int], 
-                 health: int = 20, 
+                 level: int = 1,
+                 health: int = 200, 
                  damage: int = 1,
                  size: int = 1):
         """
@@ -49,8 +49,7 @@ class Player(a.Actor):
 
 player_instance: Player = Player(weapon=None,
                                  potion_count=3,
-                                 bomb_count=5,
-                                 level=1, 
+                                 bomb_count=50, 
                                  damage_received=0, 
                                  damage_done=0,
                                  name="Nard", 

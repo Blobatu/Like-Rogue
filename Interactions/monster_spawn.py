@@ -6,10 +6,11 @@ Description : Module pour la gestion de l'apparition des monstres dans le jeu.
 """
 import random
 
+from Actors.player import player_instance as p_i
 from Actors.npc import NPC
 from . import actor_movement as a_m
 from Actors import npc_database as npc_db
-from .dungeon import dungeon_rows as dungeon
+from . import dungeon
 from .dungeon import damage_sprite
 
 from Actors.npc_repository import listof_npc as l
@@ -27,7 +28,7 @@ def spawn_monster():
     #print('\n'.join(dungeon))
     #print(len(dungeon))
     #print(len(dungeon[0]))
-    for line in dungeon:
+    for line in dungeon.levels[p_i.level-1]:
         # On parcourt le donjon ligne par ligne pour 
         # trouver les positions de spawn des monstres
         row += 1

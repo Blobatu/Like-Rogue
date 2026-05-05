@@ -6,7 +6,7 @@ Description : Module pour la gestion des déplacements des acteurs dans le jeu.
 from Props.props_interaction import interaction_check
 from Actors.npc_database import listof_dbnpc as npc_db
 from Actors.player import player_instance as p_i
-from .dungeon import dungeon_rows as dungeon
+from .dungeon import levels
 from .dungeon import whitelist_sprites
 from .dungeon import exit_opened_sprite
 from .dungeon import player_sprite
@@ -96,6 +96,7 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
     
 
     if(id == -1):
+        print("bonjour")
         # Si c'est le joueur qui se déplace, 
         # on met à jour sa position
         replace_at_position(new_col, new_row, player_sprite)
@@ -141,14 +142,14 @@ def is_wall(col, row):
         row: La rangée à vérifier,
     Sortie: Vrai si le joueur va vers un mur, sinon Faux
     """
-    if(col < 0 or col >= len(dungeon[0])):
+    if(col < 0 or col >= len(levels[p_i.level-1][0])):
         return True
-    if(row < 0 or row >= len(dungeon)):
+    if(row < 0 or row >= len(levels[p_i.level-1])):
         return True
-    if(dungeon[row][col: col+2] == wall_sprite):
+    if(levels[p_i.level-1][row][col: col+2] == wall_sprite):
         return True
     
-    sprite = dungeon[row][col]
+    sprite = levels[p_i.level-1][row][col]
     interaction_check(sprite+" ")
     
     if sprite+" " not in whitelist_sprites:
@@ -180,12 +181,12 @@ def replace_at_position(col: int, row: int, value: str):
         row: La rangée de la position à remplacer,
         value: Le sprite à placer à la position donnée
     """
-    before_value = dungeon[row][:col]
-    after_value = dungeon[row][col+2:]
+    before_value = levels[p_i.level-1][row][:col]
+    after_value = levels[p_i.level-1][row][col+2:]
     insert_at_position(row, before_value, after_value, value)
 
 
-def replace_around_position(col: int, row: int, aura: int, value: str):
+def replace_around_position(col: int, row: int, aura: int, value: str, targeted_value: str = air_sprite):
     l_col = col-1*(2*aura)
     r_col = col+2+(2*aura)
     replace_around_position_cols(row,
@@ -193,7 +194,7 @@ def replace_around_position(col: int, row: int, aura: int, value: str):
                                      r_col,
                                      aura,
                                      value,
-                                     air_sprite,
+                                     targeted_value,
                                      range_number=1)
 
 def move_around_position(col: int, row: int, aura: int, value: str):
@@ -239,11 +240,12 @@ def replace_around_position_rows(row: int,
                                  range_number: int):
         for indent in range(-range_number*aura, aura+range_number):
             selected_row = row + indent
-            if 0 < selected_row >= len(dungeon):
+            if 0 < selected_row >= len(levels[p_i.level-1]):
                 return
-            if 0 < col >= len(dungeon[selected_row]):
+            if 0 < col >= len(levels[p_i.level-1][selected_row]):
                 return
-            if dungeon[selected_row][col]+" " == check_value:
+            if ((levels[p_i.level-1][selected_row][col]+"#" == check_value) or 
+                (levels[p_i.level-1][selected_row][col]+" " == check_value)):
                 replace_at_position(col, selected_row, value)
 
 def insert_at_position(row: int, 
@@ -258,4 +260,4 @@ def insert_at_position(row: int,
         after_value: La partie de la ligne après la position à remplacer,
         value: Le sprite à placer à la position donnée
     """
-    dungeon[row] = before_value + value + after_value
+    levels[p_i.level-1][row] = before_value + value + after_value

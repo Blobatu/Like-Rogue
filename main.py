@@ -6,18 +6,18 @@ Description :   Point d'entrée du jeu, qui initialise le donjon,
 """
 import sys
 import os
-from Interactions.dungeon import dungeon_rows as dungeon
 from Actors.player import player_instance as p_i
 from Interactions import player_movement as p_m
 from Interactions import monster_spawn
 from Interactions import monster_AI
+from Interactions import dungeon
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 def columns_legend():
     legend: list[str] = []
-    for i in range(dungeon[0].__len__()):
+    for i in range(dungeon.levels[p_i.level-1].__len__()):
         index = str(i)[-1]
         if(index == '0'):
             index = '-'
@@ -31,7 +31,9 @@ while(True):
     if p_i.is_alive():
         #print("\033[H\033[J", end="")
         print("".join(columns_legend()))
-        print('\n'.join(dungeon))
+        print(p_i.position)
+        print(p_i.level)
+        print('\n'.join(dungeon.levels[p_i.level-1]))
         p_m.listen_to_keyboard()
         monster_AI.react_to_player_movement()
     else:

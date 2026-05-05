@@ -51,15 +51,6 @@ class Actor:
         Sortie: bool - True si l'acteur est en vie, False sinon.
         """
         return self.health > 0
-    
-
-    def set_position(self, position: tuple[int, int]):
-        """
-        But: Met à jour la position de l'acteur.
-        Entrée: position (tuple[int, int]) - la nouvelle position de l'acteur.
-        """
-        self.position = position
-        #print(self.position)
 
 
     def set_position(self, col: int, row: int):

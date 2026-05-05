@@ -71,7 +71,14 @@ def detection_check(col: int, row: int, aura: int, damage: int):
                for j in range(row-aura, row+aura+1):
                     if obj.position == (i, j):
                          if npc_db[key].lose_life(damage) is True:
-                              return key
+                              npc = npc_db[key]
+                              if npc.health == 0:
+                                   move_around_position(npc.get_col(), npc.get_row(), npc.aura, air_sprite)
+                                   clear_old_position(npc.get_col(), npc.get_row())
+                                   p_i.listof_npc_killed[p_i.npc_killed_count] = npc_db[key]
+                                   if p_i.progression.gain_xp(True) is True:
+                                        replace_at_position(222, 24, exit_opened_sprite)
+                                   npc_db[key] = None
 
      return -1
 
