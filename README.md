@@ -71,3 +71,12 @@ zone de dégats:1
 dégats:1
 
 ___
+
+
+# Jeu par:
+- **Luc Desforges** - joueur et ennemies - organisation générale
+- **Antoine D-C** - génération de niveaux
+- **Léonard Lefebvre** - joueur et ennemies
+- **Emmanuel Bissonnette** - interactions 
+- **James Bergeron** - interface visuel
+- **Marvyn Mbeugmo** - progression
