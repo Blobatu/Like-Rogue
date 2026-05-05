@@ -1,8 +1,12 @@
 # Like-Rogue
 projet 3 de prog 1
 
-Exemple de commande pour rouler un fichier:
-```python -m Interactions.npc_interactions```
+## Niveaux et progression
+### Niveaux
+tous les niveaux sont générés aléatoirement de manière à ce que chaque pasrtie soit unique.
+### Progression
+une fois que vous avez tué assez d'ennemies, la porte du niveau s'ouvreira et vous pourrez passer au prochain.
+
 ## interactions avec le jeux
 avant le premier mouvement le joueur est invisible et apparait toujours dans le haut en gauche de l'écran. 
 ### Contrôle
