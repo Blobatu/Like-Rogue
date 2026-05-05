@@ -16,22 +16,20 @@ from Props import props_interaction as pr_i
 from Interactions import aura_behavior
 import UI.pygame_display as disp
 
-# Setup paths
+# preparation des chemins
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-# Initialize game
+# Initialisation du jeu
 p_i.set_position(6, 24)
 monster_spawn.spawn_monster()
 
-# Initialize display
+# Initialisation du display
 disp.init_display()
 font = pygame.font.SysFont('Consolas', 11)
 
-# Function to render centered text
 def draw_centered_text_block(text_lines, screen, font):
-    """Draw all lines centered horizontally and vertically."""
-    line_height = font.get_height() + 2  # Font height + smaller gap
+    line_height = font.get_height() + 2
     rendered_texts = [font.render(str(text), True, (255, 255, 255)) for text in text_lines]
     total_height = len(rendered_texts) * line_height
     start_y = (screen.get_height() - total_height) // 2
@@ -48,7 +46,6 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             is_pressed = True
-            # Handle keys
             if event.key in (pygame.K_a, pygame.K_LEFT):
                 a_m.move_left()
                 monster_AI.react_to_player_movement()
@@ -77,32 +74,27 @@ while running:
                 pr_i.bomb_interaction()
     
     if p_i.is_alive():
-        # Bomb logic
         pr_i.is_actor_on_bomb()
         pr_i.bomb_counter()
         pr_i.bomb_explodes()
         
         if is_pressed:
-            # Clear screen
             disp.screen.fill((0, 0, 0))
             
-            # Prepare text lines
             stats_lines = [
                 f"Level: {p_i.level}",
                 f"XP: {p_i.progression.xp}/{p_i.progression.xp_to_next}",
                 f"Health: {p_i.health}/{p_i.max_health}",
                 f"Potions: {p_i.potion_count}",
                 f"Bombs: {p_i.bomb_count}",
-                ""  # Empty line
+                ""
             ]
             dungeon_lines = dungeon.levels[p_i.level - 1]
             all_lines = stats_lines + dungeon_lines
             
-            # Draw centered
             draw_centered_text_block(all_lines, disp.screen, font)
             is_pressed = False
     else:
-        # Show death
         disp.screen.fill((0, 0, 0))
         death_text = f"{p_i.name} is dead"
         text_surface = font.render(death_text, True, (255, 0, 0))
