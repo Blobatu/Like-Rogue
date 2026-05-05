@@ -13,7 +13,7 @@ from Actors import npc_database as npc_db
 from . import dungeon
 from .dungeon import damage_sprite
 from .dungeon import monster_spawn
-from Actors.npc_repository import listof_npc as l
+from Actors.npc_types import listof_npc as l
 
 
 def spawn_monster():
