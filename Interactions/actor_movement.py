@@ -104,35 +104,9 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
         # Si c'est un NPC qui se déplace,
         # on met à jour sa position
         replace_at_position(new_col, new_row, npc_db[id].sprite)
-        j = npc_db[id].aura * -1 - 1
-        k = npc_db[id].aura + 1
-        if(dungeon[new_row][new_col + j * 2: new_col + j * 2 + 2] == damage_sprite):
-            clear_old_position(new_col + j * 2, new_row)
-        if(dungeon[new_row][new_col + k * 2: new_col + k * 2 + 2] == damage_sprite):
-            clear_old_position(new_col + k * 2, new_row)
 
-        print(dungeon[new_row + j + 1])
-        print(dungeon[new_row + j + 1][new_col + j * 2])
-        print(dungeon[new_row + k - 1])
-        print(dungeon[new_row + k - 1][new_col + k * 2])
-        if(dungeon[new_row + j + 1][new_col] == damage_sprite):
-            clear_old_position(new_col, new_row + j + 1)
-        if(dungeon[new_row + k - 1][new_col] == damage_sprite):
-            clear_old_position(new_col, new_row + k - 1)
-
-        if(dungeon[new_row + j + 1][new_col + j * 2: new_col + j * 2 + 2] == damage_sprite):
-            clear_old_position(new_col + j * 2, new_row + j + 1)
-        if(dungeon[new_row + k - 1][new_col + k * 2: new_col + k * 2 + 2] == damage_sprite):
-            clear_old_position(new_col + k * 2, new_row + k - 1)
-
-        for i in range(npc_db[id].aura * -1, npc_db[id].aura + 1):
-            print("Aura:"+str(i))
-            if(i != 0):
-                if dungeon[new_row][new_col + i * 2: new_col + i * 2 + 2] == air_sprite: 
-                    replace_at_position(new_col + i * 2, new_row, damage_sprite)
-                if dungeon[new_row + i][new_col] == air_sprite:
-                    replace_at_position(new_col, new_row + i, damage_sprite)
-                
+        replace_around_position(new_col, new_row, npc_db[id].aura, damage_sprite)
+        
         npc_db[id].set_position(new_col, new_row)
         
         # Après le déplacement du NPC, 
@@ -208,6 +182,21 @@ def replace_at_position(col: int, row: int, value: str):
     before_value = dungeon[row][:col]
     after_value = dungeon[row][col+2:]
     insert_at_position(row, before_value, after_value, value)
+
+def replace_around_position(col: int, row: int, aura: int, value: str):
+    l_col = col-2-(2*aura)
+    r_col = col+4+(2*aura)
+    for i in range(l_col, r_col, 2):
+        for j in range(-2*aura,aura+2):
+            if dungeon[row+j][i]+" " == damage_sprite:
+                clear_old_position(i, row+j)
+    
+    l_col = col-1*(2*aura)
+    r_col = col+2+(2*aura)
+    for i in range(l_col, r_col, 2):
+        for j in range(-1*aura,aura+1):
+            if dungeon[row+j][i]+" " == air_sprite:
+                replace_at_position(i, row+j, value)
 
 
 def insert_at_position(row: int, 
