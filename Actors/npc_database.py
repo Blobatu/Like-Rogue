@@ -10,7 +10,12 @@ dbnpc_id: int = 0
 listof_dbnpc: dict[int, npc.NPC] = {
 }
 
+
 def add_npc_to_db(npc: npc.NPC):
+    """
+    But:    Ajoute un NPC à la liste de NPC
+    Entrée: Le NPC à ajouter à la liste
+    """
     global dbnpc_id
     listof_dbnpc[dbnpc_id] = npc
     dbnpc_id += 1

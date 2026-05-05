@@ -39,7 +39,6 @@ def door ():
     entrees:
     sorties:
     """
-    #print("\033[H\033[J", end="")
     col, row = p.player_instance.position
     p.player_instance.level +=1 
     am.replace_at_position(col, row, dungeon.exit_closed_sprite)

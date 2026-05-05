@@ -5,10 +5,10 @@ Description :  Comportement de l'aura des NPCs du jeu,
                qui inflige des dégâts au joueur s'il 
                se trouve à proximité d'un NPC.
 """
-from Actors.npc_database import listof_dbnpc as npc_db
-from Actors.player import player_instance as p_i
 from . import actor_movement as a_m
 from .dungeon import exit_opened_sprite, air_sprite
+from Actors.npc_database import listof_dbnpc as npc_db
+from Actors.player import player_instance as p_i
 
 def handle_dead_npc(key: int):
      npc = npc_db[key]
@@ -39,8 +39,8 @@ def aura_damage(is_player: bool,
         for key, obj in npc_db.items():
           if obj is None:
                continue
-          for i in range(col-aura * 2, col+aura * 2 + 2):
-               for j in range(row-aura, row + aura + 1):
+          for i in range(col - aura * 2, col + aura * 2 + 2):
+               for j in range(row - aura, row + aura + 1):
                     if obj.position == (i, j):
                          if npc_db[key].lose_life(damage) is True:
                               handle_dead_npc(key)
@@ -86,14 +86,13 @@ def detection_check(col: int, row: int, aura: int, damage: int):
      for key, obj in npc_db.items():
           if obj is None:
                continue
-          for i in range(col-aura*2, col+aura*2+2):
-               for j in range(row-aura, row+aura+1):
+          for i in range(col - aura * 2, col + aura * 2 + 2):
+               for j in range(row - aura, row + aura + 1):
                     if obj.position == (i, j):
                          if npc_db[key].lose_life(damage) is True:
                               handle_dead_npc(key)
 
      return -1
-
 
 
 def check_surrounding(col: int, row: int, 

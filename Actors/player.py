@@ -3,12 +3,10 @@ Auteur : Luc Desforges
 Date : 1 mai 2026
 Description : Classe pour le joueur du jeu, héritant de la classe Actor.
 """
-from Progression import Simulation as s
 import public
-
 from . import npc
-
 from . import actor as a
+from Progression import Simulation as s
 
 class Player(a.Actor):
     def __init__(self, 

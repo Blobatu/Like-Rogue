@@ -159,10 +159,6 @@ def is_wall(col, row):
     return False
 
 
-def message_wall():
-    print("You can't move there")
-
-
 def clear_old_position(col: int, row: int):
     """
     But:    Permet d'effacer l'ancienne position de 

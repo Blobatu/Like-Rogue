@@ -9,7 +9,6 @@ utilisés pour les différentes entités.
 from Level.level_generation import full_level as fl, generate_maze, make_level
 from Level import level_generation
 
-
 def generate_them_all():
     """
     But: Génère tous les niveaux dès le début
@@ -25,7 +24,6 @@ def generate_them_all():
     return testlist
 
 levels: list[list[str]] = generate_them_all()
-
 
 wall_sprite = "##"
 player_sprite = "@ "

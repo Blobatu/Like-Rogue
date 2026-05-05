@@ -34,7 +34,6 @@ class Actor:
             bool - True si l'acteur est mort, False sinon.
         """
         self.health -= public.scale(amount)
-        print(f"Health:{self.health}/{self.max_health}")
 
         if(self.health <= 0):
             self.health = 0
