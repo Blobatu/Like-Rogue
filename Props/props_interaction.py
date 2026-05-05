@@ -1,11 +1,10 @@
 import random as r
-import pygame,time 
 from Actors import player as p
 from Actors import npc_database as npc_db
-import asyncio
 from Interactions import dungeon
-import public
 from Interactions import actor_movement as am
+from Level.level_generation import full_level as fl
+from Interactions import monster_spawn
 #from UI.UI import Button
 """
 author : emmanuel Bissonnette
@@ -22,6 +21,7 @@ def chest():
         item = lines[item]
         item.strip()
         file.close()
+        """
         if item != "health_pot":
            current_weapon = p.player_instance.weapon
            awnser = input(f"Vous avez trouve {item} voulez vous remplacer votre {current_weapon} Y ou N")
@@ -29,12 +29,17 @@ def chest():
                 p.player_instance.weapon = item
            elif awnser == "N":
                 p.player_instance.weapon = current_weapon
-        elif item == "health_pot":
-            p.player_instance.potion_count +=1 
+            """
+        if item == "health_pot":
+            p.player_instance.potion_count += 2
         elif item == "bomb":
-             p.player_instance.bomb_count += 1
+             p.player_instance.bomb_count += 2
 def door ():
    p.player_instance.level +=1 
+   dungeon.dungeon_rows = fl()
+   p.player_instance.position(6,24)
+   monster_spawn.spawn_monster()
+
 
 def spike_trap():
         p.player_instance.lose_life(r.randint(1,3))
