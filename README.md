@@ -88,9 +88,9 @@ ___
 
 
 # Jeu par:
-- **Luc Desforges** - joueur et ennemies - organisation générale
-- **Antoine D-C** - génération de niveaux
-- **Léonard Lefebvre** - interactions des joueur et ennemies
-- **Emmanuel Bissonnette** - interactions des objets
-- **James Bergeron** - interface visuel
-- **Marvyn Mbeugmo** - progression
+- **Luc Desforges** - Structure de classe pour les Acteurs: joueur et ennemis - Dégat de zone - Interactions intermodules - Coordination - Structure de fichier
+- **Antoine D-C** - Génération de niveaux (Labyrinthe - Pièges - Spawns - Coffre - Joueur - Sortie)
+- **Léonard Lefebvre** - Interactions des Acteurs: joueur et ennemis (Distance entre acteurs - Déplacements acteurs - AI ennemis - Spawns)
+- **Emmanuel Bissonnette** - Interactions des objets (Pièges - Bombe - Coffre - Sortie - Joueur - Ennemis)
+- **James Bergeron** - Interface visuel (Menus - Boutons)
+- **Marvyn Mbeugmo** - Progression (Principe XP - Déclenchement prochain niveau - Planification)
