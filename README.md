@@ -125,6 +125,8 @@ ___
 - **James Bergeron**
   - Interface visuel
     - Menus
+      - Difficultés
+      - Statistiques
     - Boutons
 - **Marvyn Mbeugmo**
   - Progression
