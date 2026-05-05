@@ -39,9 +39,11 @@ def door ():
     entrees:
     sorties:
     """
-    print("\033[H\033[J", end="")
-    p.player_instance.set_position(6, 24)
+    #print("\033[H\033[J", end="")
+    col, row = p.player_instance.position
     p.player_instance.level +=1 
+    am.replace_at_position(col, row, dungeon.exit_closed_sprite)
+    p.player_instance.set_position(6, 24)
     monster_spawn.spawn_monster()
 
 

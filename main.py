@@ -27,17 +27,18 @@ def columns_legend():
 p_i.set_position(6, 24)
 monster_spawn.spawn_monster()
 
-is_pressed = False
+is_pressed = True
 while(True):
     if p_i.is_alive():
-        #print("\033[H\033[J", end="")
-        print("".join(columns_legend()))
-        print(p_i.position)
-        print(p_i.level)
-        print(str(p_i.health)+"/"+str(p_i.max_health)+"HP")
-        print(str(p_i.bomb_count)+" bomb(s)")
-        print(str(p_i.potion_count)+" potion(s)")
-        print('\n'.join(dungeon.levels[p_i.level-1]))
+        if is_pressed is True:    
+            #print("\033[H\033[J", end="")        
+            print("".join(columns_legend()))
+            print(p_i.position)
+            print(p_i.level)
+            print(str(p_i.health)+"/"+str(p_i.max_health)+"HP")
+            print(str(p_i.bomb_count)+" bomb(s)")
+            print(str(p_i.potion_count)+" potion(s)")
+            print('\n'.join(dungeon.levels[p_i.level-1]))
         is_pressed = p_m.listen_to_keyboard(is_pressed)
         monster_AI.react_to_player_movement()
     else:
