@@ -90,17 +90,43 @@ ___
 # Jeu par:
 - **Luc Desforges**
   - Classes des Acteurs: joueur et ennemis
+    - Coordonnées
+    - Vie, Dégat, Zone
+    - Compteur de potions/bombes
+  - Repertoire et Types de NPC
   - Dégat de zone
   - Interactions intermodules
   - Coordination
   - Structure générale
 - **Antoine D-C**
-   - Génération de niveaux (Labyrinthe - Pièges - Spawns - Coffre - Joueur - Sortie)
+   - Génération de niveaux
+     - Labyrinthe
+     - Pièges
+     - Spawns
+     - Coffres
+     - Joueur
+     - Sortie
 - **Léonard Lefebvre**
-  - Interactions des Acteurs: joueur et ennemis (Distance entre acteurs - Déplacements acteurs - AI ennemis - Spawns)
+  - Interactions des Acteurs: joueur et ennemis
+    - Distance entre acteurs
+    - Déplacements acteurs
+    - AI ennemis
+    - Spawns
 - **Emmanuel Bissonnette**
-  - Interactions des objets (Pièges - Bombe - Coffre - Sortie - Niveaux - Joueur - Ennemis)
+  - Interactions des objets
+    - Pièges
+    - Bombes
+    - Coffres
+    - Sortie
+    - Niveaux
+    - Joueur
+    - Ennemis
 - **James Bergeron**
-  - Interface visuel (Menus - Boutons)
+  - Interface visuel
+    - Menus
+    - Boutons
 - **Marvyn Mbeugmo**
-  - Progression (Principe XP - Déclenchement prochain niveau - Planification)
+  - Progression
+    - Principe XP
+    - Logique de prochain niveau
+    - Planification de progression en profondeur
