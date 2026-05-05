@@ -50,9 +50,10 @@ def door ():
     entrees:
     sorties:
     """
+    print("\033[H\033[J", end="")
+    print("wow")
+    p.player_instance.set_position(6, 24)
     p.player_instance.level +=1 
-    dungeon.dungeon_rows = fl()
-    p.player_instance.position(6,24)
     monster_spawn.spawn_monster()
 
 
@@ -134,15 +135,18 @@ def bomb_explodes():
     counter = 0
     for bombs in bomb_list:
         if bombs[1] > 5:
+            damage = r.randint(1,3)
             if ((-5 <= bombs[0][1] - p.player_instance.get_row() <= 5 and 
                  -5*2 <= p.player_instance.get_col() <= 5*2)):
-                p.player_instance.lose_life(r.randint(1,3))
+                p.player_instance.lose_life(damage)
             col, row = bombs[0]
-            aura_behavior.aura_damage(False, col, row, 5, r.randint(1,5))
+            aura_behavior.aura_damage(False, col, row, 5, damage)
             bomb_list.pop(counter)
             # cette fonction fait le dommage autour de la bombe en remplacent les tiles autour
             am.replace_around_position(bombs[0][0],bombs[0][1],3,dungeon.air_sprite)
             #celle ci retire la bombe elle meme 
+            am.replace_around_position(bombs[0][0],bombs[0][1],3,dungeon.air_sprite,dungeon.wall_sprite)
+
             am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.air_sprite)
         counter += 1
 
