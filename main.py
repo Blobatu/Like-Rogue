@@ -7,7 +7,7 @@ Description :   Point d'entrée du jeu, qui initialise le donjon,
 import sys
 import os
 from Actors.player import player_instance as p_i
-from Interactions import player_movement as p_m
+from Interactions import player_events as p_e
 from Interactions import monster_spawn
 from Interactions import monster_AI
 from Interactions import dungeon
@@ -32,7 +32,7 @@ f"""
     Bombs: {p_i.bomb_count}
  """)
             print('\n'.join(dungeon.levels[p_i.level-1]))
-        is_pressed = p_m.listen_to_keyboard(is_pressed)
+        is_pressed = p_e.listen_to_keyboard(is_pressed)
         monster_AI.react_to_player_movement()
     else:
         print(f"{p_i.name} is dead")
