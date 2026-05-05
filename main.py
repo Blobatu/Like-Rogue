@@ -4,6 +4,7 @@ Date : 1 mai 2026
 Description :   Point d'entrée du jeu, qui initialise le donjon, 
                 le joueur et les monstres,
 """
+import asyncio
 import sys
 import os
 from Interactions.dungeon import dungeon_rows as dungeon
@@ -24,17 +25,21 @@ def columns_legend():
         legend.append(index)
     return legend
 
-p_i.set_position(6, 24)
-monster_spawn.spawn_monster()
+async def main():
 
-while(True):
-    if p_i.is_alive():
-        #print("\033[H\033[J", end="")
-        print("".join(columns_legend()))
-        print('\n'.join(dungeon))
-        p_m.listen_to_keyboard()
-        monster_AI.react_to_player_movement()
-    else:
-        print(f"{p_i.name} is dead")
-        break
+    p_i.set_position(6, 24)
+    monster_spawn.spawn_monster()
+
+    while(True):
+        if p_i.is_alive():
+            #print("\033[H\033[J", end="")
+            print("".join(columns_legend()))
+            print('\n'.join(dungeon))
+            await p_m.listen_to_keyboard()
+            monster_AI.react_to_player_movement()
+        else:
+            print(f"{p_i.name} is dead")
+            break
     
+if __name__ == "__main__":
+    asyncio.run(main())
