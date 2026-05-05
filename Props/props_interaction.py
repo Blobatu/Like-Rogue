@@ -21,27 +21,13 @@ def chest():
         entrees:
         sorties:
         """
-        
-        path = "Props/chest_item_list"
-        file = open(path)
-        lines = file.readlines()
-        item = r.randint(0,len(lines)-1)
-        item = lines[item]
-        item.strip()
-        file.close()
-        """
-        if item != "health_pot":
-           current_weapon = p.player_instance.weapon
-           awnser = input(f"Vous avez trouve {item} voulez vous remplacer votre {current_weapon} Y ou N")
-           if awnser == "Y" :
-                p.player_instance.weapon = item
-           elif awnser == "N":
-                p.player_instance.weapon = current_weapon
-            """
-        if item == "health_pot":
-            p.player_instance.potion_count += 2
-        elif item == "bomb":
-             p.player_instance.bomb_count += 2
+        chest_content = ["bomb","potion","potion"]
+        random_item = r.randint(0,2)
+        if chest_content[random_item] == "bomb":
+            p.player_instance.bomb_count += 1
+        if chest_content[random_item] == "potion":
+            p.player_instance.potion_count +=1
+       
 def door ():
     """
     Description: cette fonction augmente le niveau au quel se trouve le joueur et
@@ -99,6 +85,7 @@ def bomb_interaction():
     #Verifie si le joueur a assez de bombe
     if p.player_instance.bomb_count > 0:
         p.player_instance.bomb_count -= 1
+        # pose la bombe au coordonee du joueur
         bomb_position = p.player_instance.position
         #ajoute la bombe a la liste de bombe tout en initialisant le compteur
         bomb_info = [bomb_position,0]
