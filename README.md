@@ -13,6 +13,19 @@ py -3.14 -m pip install pygame-ce
 py -3.14 -m pip install pygame-menu-ce
 py -3.14 -m pip install keyboard
 ```
+## Démarrer
+- Ajustez la taille de police de votre terminal
+<img width="1537" height="542" alt="image" src="https://github.com/user-attachments/assets/2a16e2ed-acf5-4e02-9c25-0959b822a0e1" />
+
+- Faites la commande suivante sur votre clavier pour avoir un terminal dans une autre fenêtre:
+  - Ctrl+Alt+Shift+`
+- Maximizez la nouvelle fenêtre
+- Inscrivez la commande suivante dans votre terminal
+  - py main.py
+<img width="806" height="113" alt="image" src="https://github.com/user-attachments/assets/16eb6405-b02d-416f-a21e-cf9d944e3413" />
+
+- Vous pouvez maintenant jouer au jeu
+<img width="1918" height="1106" alt="image" src="https://github.com/user-attachments/assets/510807d8-b344-459f-bed8-947c54c5bbbf" />
 
 ## Niveaux et progression
 ### Niveaux
