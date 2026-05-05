@@ -27,13 +27,31 @@ text = font.render('Like-Rogue', True, ("#FFFFFFFF"))
 
 # Création de variables de settings
 settings = {
-    "difficulty": "Normal"
+    "Difficulty": "Normal"
 }
 
 # Retour de fonction de settings
-def set_difficulty(value, difficulty):
-    settings["difficulty"] = difficulty
-    print(f"Difficulty set to: {settings['difficulty']}")
+def set_difficulty(self, value, difficulty):
+    settings["Difficulty"] = difficulty
+    print(f"Difficulty set to: {settings['Difficulty']})")
+
+# Création de variables de stats
+stats = {
+    "character_name": "Nard",
+    "level_progression": 0,
+    "Xp level progression": 0
+}
+
+# Retour de fonctions de stats
+def get_character_name():
+        return stats["character_name"]
+
+def get_level_progression():
+    return stats["level_progression"]
+
+def get_xp_level_progression():
+    return stats["Xp level progression"]
+
 
 class Button:
     def __init__(self, text, width, height, pos, elevation):
@@ -88,6 +106,7 @@ buttons = [
     Button('Stats!', 150, 40, (570, 500), 5)
 ]
 
+
 #Création du menu de settings
 settings_menu = pygame_menu.Menu('Settings!', 600, 400, theme=pygame_menu.themes.THEME_DARK)
 settings_menu.add.selector("Difficulty", [("Easy", "Easy"), ("Normal", "Normal"), ("Hard", "Hard")], onchange=set_difficulty)
@@ -95,12 +114,19 @@ settings_menu.add.button("Back", pygame_menu.events.BACK)
 
 #Création du menu de stats
 stats_menu = pygame_menu.Menu('Stats!', 600, 400, theme=pygame_menu.themes.THEME_DARK)
+stats_menu.add.label(f"Character name: {get_character_name()}")
+stats_menu.add.progress_bar("Level progression:", default=get_level_progression())
+stats_menu.add.progress_bar("XP progression:", default=get_xp_level_progression())
+stats_menu.add.button("Back", pygame_menu.events.BACK)
 
 running = True
 while running:
-        if settings_menu.is_enabled():
-            settings_menu.update(pygame.event.get())
-            settings_menu.draw(screen)
+        for menu in [settings_menu, stats_menu]:
+            if menu.is_enabled():
+                menu.update(pygame.event.get())
+                menu.draw(screen)
+                
+            
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -112,6 +138,8 @@ while running:
         screen.blit(text, (width // 2 - text.get_width() // 2, height // 4 - text.get_height() // 2))
         for btn in buttons:
             btn.draw()
+        
+
 
         pygame.display.update()
 
