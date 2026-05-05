@@ -54,7 +54,7 @@ def detection_check_player(npc_id: int):
      Entrée: id (int) - l'identifiant du NPC à vérifier.
      """
      if npc_id == -1:
-          detection_check(p_i.get_col(), p_i.get_row(), 3, p_i.damage)
+          detection_check(p_i.get_col(), p_i.get_row(), 2, p_i.damage)
      else:
           col = npc_db[npc_id].get_col()
           row = npc_db[npc_id].get_row()

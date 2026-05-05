@@ -33,7 +33,6 @@ class Actor:
         Sortie:
             bool - True si l'acteur est mort, False sinon.
         """
-        print(f"You lost {amount} health points!")
         self.health -= public.scale(amount)
         print(f"Health:{self.health}/{self.max_health}")
 
@@ -59,7 +58,6 @@ class Actor:
             row (int) - la nouvelle rangée de l'acteur.
         """
         self.position = (col, row)
-        #print(self.position)
 
 
     def get_col(self):
