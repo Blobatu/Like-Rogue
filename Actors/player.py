@@ -4,6 +4,7 @@ Date : 1 mai 2026
 Description : Classe pour le joueur du jeu, héritant de la classe Actor.
 """
 from Progression import Simulation as s
+import public
 
 from . import npc
 
@@ -36,6 +37,9 @@ class Player(a.Actor):
         self.listof_npc_killed: dict[int, npc.NPC] = {}
         self.progression = s.Progression(self.name)
         self.npc_killed_count = 0
+
+    def drink_health_potion(self, value: int):
+        self.health += public.scale(value)
 
 
 player_instance: Player = Player(weapon=None,
