@@ -93,9 +93,11 @@ def bomb_interaction():
     entrees:
     sorties:
     """
+    #Verifie si le joueur a assez de bombe
     if p.player_instance.bomb_count > 0:
         p.player_instance.bomb_count -= 1
         bomb_position = p.player_instance.position
+        #ajoute la bombe a la liste de bombe tout en initialisant le compteur
         bomb_info = [bomb_position,0]
         bomb_list.append(bomb_info)
         
@@ -122,7 +124,7 @@ def bomb_explodes():
     entrees:
     sorties:
     """
-
+    counter = 0
     for bombs in bomb_list:
         if bombs[1] > 5:
             player_bomb_check = (p.player_instance.position[0]+5,p.player_instance.position[1]-5)
@@ -131,8 +133,9 @@ def bomb_explodes():
             for key,npc in npc_db.listof_dbnpc.items():
                 if npc.position[0] < bombs[0][0] > npc.position[1] and npc.position[0]<bombs[0][1]>npc.position[1]:
                     npc.lose_life(r.randint(1,5))
-            bomb_list.pop(bombs)
+            bomb_list.pop(counter)
             am.replace_around_position(bombs[0][0],bombs[0][1],3,dungeon.air_sprite)
+        counter += 1
 
 
 def bomb_counter():
