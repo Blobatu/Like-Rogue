@@ -36,24 +36,6 @@ def make_lvl_data(maze):
     return lvl_data
 
 
-def print_room(maze: list[list[str]]):
-    """
-    affiche le niveau tel qu'il apparaîtra dans le jeu
-    Entrée : liste de listes de salles générées par le générateur de labyrinthes
-    Sortie : lignes du niveau affichées une par une
-    """
-    for i in make_lvl_data(maze):
-        print(i)
-    
-    
-def print_room_as_list(maze: list[list[str]]):
-    """
-    Pour le débogage, affiche simplement le résultat de "maze_to_lvl_data" ; c'est un peu inutile, mais l'étiquetage est clair
-    Entrée : liste de listes de salles provenant du générateur de labyrinthes
-    Sortie : liste de string, chaque liste correspondant à une ligne du niveau 
-    """
-    print(make_lvl_data(maze))
-
 def generate_maze(width, height):
     """
     Génère un labyrinthe aléatoire de la taille spécifiée en utilisant un algorithme de backtracking.
@@ -120,6 +102,7 @@ def check_around(maze, pos):
     
     return neighbors
 
+
 def make_level(maze=generate_maze(size[0], size[1])):
     """
     génère le niveau à partir du labyrinthe en utilisant les règles définies pour chaque type de tuile
@@ -163,16 +146,6 @@ def make_level(maze=generate_maze(size[0], size[1])):
     return level_grid
 
 
-
-
-def print_level(maze: list[list[str]] = make_level()):
-    """
-    affiche le niveau tel qu'il apparaîtra dans le jeu
-    entrée : liste de listes de salles générées par le générateur de labyrinthes
-    sortie : lignes du niveau affichées une par une
-    """
-    for i in make_lvl_data(maze):
-        print(i)
 
 def full_level(maze: list[list[str]] = make_level(), 
                enn_spwn = int(lv[current_level]['difficulty'] * 2.5), 
@@ -231,6 +204,7 @@ def full_level(maze: list[list[str]] = make_level(),
     new_data[exit_line][player_start_col:player_start_col+2] = ['@',' ']
     return [''.join(line) for line in new_data]
 
+
 def print_full():
     """
     affiche le niveau complet
@@ -240,13 +214,8 @@ def print_full():
     for i in full_level():
         print(i)
 
-# test
 
-fullscreen_layout_template = [[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]]
-test_1 = [['end_b','','','','crnr_rb','3way_lrb','3way_lrb','strgt_horz','end_l','crnr_wall_rb','wall_t','crnr_wall_lb','crnr_rb','3way_lrb','crnr_lb',''], ['strgt_vert','','end_r','3way_lrb','crnr_lt','crnr_rt','cross-rb','wall_t','wall_t','empty+lt','pillar','empty+rt','cross-lb','cross_pillar','3way_ltb',''], ['3way_rtb','strgt_horz','strgt_horz','cross','strgt_horz','3way_lrb','door_l','empty','empty','empty','empty','empty','cross-lt','3way_lrt','crnr_lt',''], ['3way_ltb','crnr_wall_rb','wall_t','door_t','crnr_wall_lb','end_t','wall_l','empty','full','full','empty','empty','end_t','crnr_wall_rb','wall_t','crnr_wall_lb'], ['strgt_vert','crnr_wall_rt','door_b','empty+lb','door_r','crnr_lb','wall_l','empty','empty','empty+rb','wall_b','empty+lb','empty','empty','empty','wall_r'], ['strgt_vert','hollow','strgt_vert','crnr_wall_rt','crnr_wall_lt','strgt_vert','crnr_wall_rt','door_b','wall_b','crnr_wall_lt','crnr_rb','cross-rt','wall_b','empty+lb','empty','wall_r'], ['crnr_rt','strgt_horz','3way_lrt','strgt_horz','strgt_horz','3way_lrt','strgt_horz','crnr_lt','','crnr_rb','3way_lrt','3way_lrt','end_l','crnr_wall_rt','wall_b','crnr_wall_lt']]
-
-#print_room(test_1)
-#print_room_as_list(test_1)
+# code 
 
 if __name__ == "__main__":
     print_full()
