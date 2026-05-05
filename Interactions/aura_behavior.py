@@ -22,7 +22,6 @@ def detection_check(npc_id: int):
           for key, obj in npc_db.items():
                if obj is None:
                     continue
-               print(f"test {obj.position}")
                for i in range(col-aura*2, col+aura*2+2):
                     for j in range(row-aura, row+aura+1):
                          if obj.position == (i, j):

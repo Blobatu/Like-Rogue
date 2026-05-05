@@ -59,7 +59,7 @@ class Actor:
         Entrée: position (tuple[int, int]) - la nouvelle position de l'acteur.
         """
         self.position = position
-        print(self.position)
+        #print(self.position)
 
 
     def set_position(self, col: int, row: int):
@@ -70,7 +70,7 @@ class Actor:
             row (int) - la nouvelle rangée de l'acteur.
         """
         self.position = (col, row)
-        print(self.position)
+        #print(self.position)
 
 
     def get_col(self):
