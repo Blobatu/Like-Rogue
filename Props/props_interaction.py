@@ -33,13 +33,9 @@ def chest():
             p.player_instance.potion_count +=1 
         elif item == "bomb":
              p.player_instance.bomb_count += 1
-    
-    
-def barrel ():
-    
-    pass
 def door ():
    p.player_instance.level +=1 
+
 def spike_trap():
         p.player_instance.lose_life(r.randint(1,3))
 def void ():
@@ -50,8 +46,6 @@ def interaction_check(player_pos:str):
     match player_pos:
         case "▤ ":
             chest()
-        case "⩉ ":
-            barrel()
         case "| ":
             door()
         case "△ ":
@@ -67,7 +61,12 @@ def bomb_interaction():
         
         
 def is_actor_on_bomb():
-     pass
+     for bombs in bomb_list:
+        if bombs[0] != p.player_instance.position:
+             am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.barrel_sprite)
+        for key,npc in npc_db.listof_dbnpc.items():
+             if bombs[0]  != npc.position:
+                  am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.barrel_sprite)
 def bomb_explodes():
 
     for bombs in bomb_list:
@@ -79,6 +78,7 @@ def bomb_explodes():
                 if npc.position[0] < bombs[0][0] > npc.position[1] and npc.position[0]<bombs[0][1]>npc.position[1]:
                     npc.lose_life(r.randint(1,5))
             am.replace_around_position(bombs[0][0],bombs[0][1],3,dungeon.air_sprite)
+
 
 def bomb_counter():
      for bombs in bomb_list:
