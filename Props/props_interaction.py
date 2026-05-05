@@ -125,18 +125,19 @@ def bomb_explodes():
     counter = 0
     for bombs in bomb_list:
         if bombs[1] > 5:
+            aura = 3
             damage = r.randint(1,3)
             #le if verifie que le joueur se situe bien dans la range de 5 de la bombe 
             # pour savoir si il faut lui faire des degats
-            if ((-5 <= bombs[0][1] - p.player_instance.get_row() <= 5 and 
-                 -5*2 <= p.player_instance.get_col() <= 5*2)):
+            if ((-aura <= bombs[0][1] - p.player_instance.get_row() <= aura and 
+                 -aura*2 <= bombs[0][0] - p.player_instance.get_col() <= aura*2)):
                 p.player_instance.lose_life(damage)
             col, row = bombs[0]
-            aura_behavior.aura_damage(False, col, row, 5, damage)
+            aura_behavior.aura_damage(False, col, row, 3, damage)
             bomb_list.pop(counter)
             # cette fonction fait le dommage autour de la bombe en remplacent les tiles autour
-            am.replace_around_position(bombs[0][0],bombs[0][1],3,dungeon.air_sprite)
-            am.replace_around_position(bombs[0][0],bombs[0][1],3,dungeon.air_sprite,dungeon.wall_sprite)
+            am.replace_around_position(bombs[0][0],bombs[0][1],aura,dungeon.air_sprite)
+            am.replace_around_position(bombs[0][0],bombs[0][1],aura,dungeon.air_sprite,dungeon.wall_sprite)
              #celle ci retire la bombe elle meme 
             am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.air_sprite)
         counter += 1
