@@ -5,7 +5,6 @@ from Interactions import dungeon
 from Interactions import actor_movement as am
 from Level.level_generation import full_level as fl
 from Interactions import monster_spawn
-#from UI.UI import Button
 """
 author : emmanuel Bissonnette
 Goal : ce fichier contien les fonctions dinteraction avec les props 
@@ -85,7 +84,7 @@ def interaction_check(player_pos:str):
             door()
         case "△ ":
             spike_trap()
-        case "  ":
+        case "":
             void()     
 def bomb_interaction():
     """
