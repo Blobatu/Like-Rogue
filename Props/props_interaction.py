@@ -107,13 +107,15 @@ def is_actor_on_bomb():
         #cette ligne compare les coordonee du joueur avec celle de la bombe pour eviter de 
         # supprimer le joueur
         if bombs[0] != p.player_instance.position:
-             am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.barrel_sprite)
+             am.replace_at_position(bombs[0][0], bombs[0][1],
+                                    dungeon.barrel_sprite)
         # cette boucle verifie que aucun enemi dans la list de npc se trouve sur la bombe
         # pour eviter de le remplacer
         for key,npc in npc_db.listof_dbnpc.items():
              if npc is not None:
                 if bombs[0]  != npc.position:
-                    am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.barrel_sprite)
+                    am.replace_at_position(bombs[0][0], bombs[0][1], 
+                                           dungeon.barrel_sprite)
 def bomb_explodes():
     """
     Description: cette fonction attend que le conteur de la bombe soit a 5
@@ -131,15 +133,19 @@ def bomb_explodes():
             damage = r.randint(1,3)
             #le if verifie que le joueur se situe bien dans la range de 5 de la bombe 
             # pour savoir si il faut lui faire des degats
-            if ((-aura <= bombs[0][1] - p.player_instance.get_row() <= aura and 
-                 -aura*2 <= bombs[0][0] - p.player_instance.get_col() <= aura*2)):
+            col, row = p.player_instance.position
+            if ((-aura <= bombs[0][1] - row <= aura and 
+                 -aura * 2 <= bombs[0][0] - col <= aura * 2)):
                 p.player_instance.lose_life(damage)
             col, row = bombs[0]
             aura_behavior.aura_damage(False, col, row, 3, damage)
             bomb_list.pop(counter)
             # cette fonction fait le dommage autour de la bombe en remplacent les tiles autour
-            am.replace_around_position(bombs[0][0],bombs[0][1],aura,dungeon.air_sprite)
-            am.replace_around_position(bombs[0][0],bombs[0][1],aura,dungeon.air_sprite,dungeon.wall_sprite)
+            am.replace_around_position(bombs[0][0], bombs[0][1], 
+                                       aura, dungeon.air_sprite)
+            am.replace_around_position(bombs[0][0], bombs[0][1],
+                                       aura, dungeon.air_sprite,
+                                       dungeon.wall_sprite)
              #celle ci retire la bombe elle meme 
             am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.air_sprite)
         counter += 1

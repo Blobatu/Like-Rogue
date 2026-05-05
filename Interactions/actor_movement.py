@@ -187,7 +187,8 @@ def replace_at_position(col: int, row: int, value: str):
     insert_at_position(row, before_value, after_value, value)
 
 
-def replace_around_position(col: int, row: int, aura: int, value: str, targeted_value: str = air_sprite):
+def replace_around_position(col: int, row: int, aura: int, 
+                            value: str, targeted_value: str = air_sprite):
     l_col = col-1*(2*aura)
     r_col = col+2+(2*aura)
     replace_around_position_cols(row,

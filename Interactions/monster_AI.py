@@ -70,9 +70,8 @@ def react_to_player_movement():
                         # le NPC se déplace vers la gauche
                         a_m.move_left(id)
 
-                #print(Xplayer_distance(id))
-                #print(Yplayer_distance(id))
-                if (((npc_db[id].aura * -1) <= Yplayer_distance(id) <= npc_db[id].aura and 
-                     (npc_db[id].aura * -1)*2 <= Xplayer_distance(id) <= npc_db[id].aura*2)):
+                aura = npc_db[id].aura
+                if (((aura * -1) <= Yplayer_distance(id) <= aura and 
+                     (aura * -1)*2 <= Xplayer_distance(id) <= aura*2)):
                         p_i.lose_life(npc_db[id].damage)
                         
