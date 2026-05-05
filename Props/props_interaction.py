@@ -21,10 +21,11 @@ def chest():
         entrees:
         sorties:
         """
-        item = r.randint(0,3)
+        
         path = "Props/chest_item_list"
         file = open(path)
         lines = file.readlines()
+        item = r.randint(0,len(lines)-1)
         item = lines[item]
         item.strip()
         file.close()
@@ -111,8 +112,12 @@ def is_actor_on_bomb():
     sorties:
     """
      for bombs in bomb_list:
+        #cette ligne compare les coordonee du joueur avec celle de la bombe pour eviter de 
+        # supprimer le joueur
         if bombs[0] != p.player_instance.position:
              am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.barrel_sprite)
+        # cette boucle verifie que aucun enemi dans la list de npc se trouve sur la bombe
+        # pour eviter de le remplacer
         for key,npc in npc_db.listof_dbnpc.items():
              if npc is not None:
                 if bombs[0]  != npc.position:
