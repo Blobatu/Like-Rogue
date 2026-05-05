@@ -24,9 +24,9 @@ def spawn_monster():
     col = -1
     row = -1
     id = 0
-    print('\n'.join(dungeon))
-    print(len(dungeon))
-    print(len(dungeon[0]))
+    #print('\n'.join(dungeon))
+    #print(len(dungeon))
+    #print(len(dungeon[0]))
     for line in dungeon:
         # On parcourt le donjon ligne par ligne pour 
         # trouver les positions de spawn des monstres
@@ -55,6 +55,6 @@ def spawn_monster():
             # On ajoute le monstre à la base de données des NPCs
             id += 1
             
-    print("---")
-    for n in npc_db.listof_dbnpc.values():
-        print(n.position)
+    #print("---")
+    #for n in npc_db.listof_dbnpc.values():
+        #print(n.position)

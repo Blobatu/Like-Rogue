@@ -37,7 +37,7 @@ def react_to_player_movement():
     for id in npc_db:
         if(npc_db[id] is None):
               continue 
-        print(str(id) + " : " + str(npc_db[id].position))
+        #print(str(id) + " : " + str(npc_db[id].position))
         npc_row = npc_db[id].get_row()
         min_row = npc_row - 6
         max_row = npc_row + 6
@@ -70,8 +70,8 @@ def react_to_player_movement():
                         # le NPC se déplace vers la gauche
                         a_m.move_left(id)
 
-                print(Xplayer_distance(id))
-                print(Yplayer_distance(id))
+                #print(Xplayer_distance(id))
+                #print(Yplayer_distance(id))
                 if (((npc_db[id].aura * -1) <= Yplayer_distance(id) <= npc_db[id].aura and 
                      (npc_db[id].aura * -1)*2 <= Xplayer_distance(id) <= npc_db[id].aura*2)):
                         p_i.lose_life(npc_db[id].damage)
