@@ -119,7 +119,7 @@ ___
     - Bombes
     - Coffres
     - Sortie
-    - Niveaux
+      - Changement de niveau
     - Joueur
     - Ennemis
 - **James Bergeron**
