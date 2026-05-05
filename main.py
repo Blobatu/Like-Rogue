@@ -25,21 +25,17 @@ def columns_legend():
         legend.append(index)
     return legend
 
-async def main():
+p_i.set_position(6, 24)
+monster_spawn.spawn_monster()
 
-    p_i.set_position(6, 24)
-    monster_spawn.spawn_monster()
-
-    while(True):
-        if p_i.is_alive():
-            #print("\033[H\033[J", end="")
-            print("".join(columns_legend()))
-            print('\n'.join(dungeon))
-            await p_m.listen_to_keyboard()
-            monster_AI.react_to_player_movement()
-        else:
-            print(f"{p_i.name} is dead")
-            break
+while(True):
+    if p_i.is_alive():
+        #print("\033[H\033[J", end="")
+        print("".join(columns_legend()))
+        print('\n'.join(dungeon))
+        p_m.listen_to_keyboard()
+        monster_AI.react_to_player_movement()
+    else:
+        print(f"{p_i.name} is dead")
+        break
     
-if __name__ == "__main__":
-    asyncio.run(main())

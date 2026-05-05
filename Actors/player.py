@@ -39,7 +39,12 @@ class Player(a.Actor):
         self.npc_killed_count = 0
 
     def drink_health_potion(self, value: int):
-        self.health += public.scale(value)
+        if self.potion_count > 0:
+            if self.health < self.max_health:
+                self.health += public.scale(value)
+                self.potion_count -= 1
+                return True
+        return False
 
 
 player_instance: Player = Player(weapon=None,

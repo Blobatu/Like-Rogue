@@ -3,13 +3,12 @@ Auteur : Léonard  & Luc Desforges
 Date : 1 mai 2026
 Description : Module pour la gestion des déplacements du joueur dans le jeu.
 """
-import asyncio
 
 from . import actor_movement as a_m
 from Props import props_interaction as p_i
 import keyboard as k
 
-async def listen_to_keyboard():
+def listen_to_keyboard():
     """
     But:    Permet au joueur de se déplacer dans le donjon en écoutant les
             entrées du clavier (wasd pour les déplacements de base, 
