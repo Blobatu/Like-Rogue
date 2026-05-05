@@ -105,7 +105,7 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
         # on met à jour sa position
         replace_at_position(new_col, new_row, npc_db[id].sprite)
 
-        replace_around_position(new_col, new_row, npc_db[id].aura, damage_sprite)
+        move_around_position(new_col, new_row, npc_db[id].aura, damage_sprite)
         
         npc_db[id].set_position(new_col, new_row)
         
@@ -186,6 +186,17 @@ def replace_at_position(col: int, row: int, value: str):
 
 
 def replace_around_position(col: int, row: int, aura: int, value: str):
+    l_col = col-1*(2*aura)
+    r_col = col+2+(2*aura)
+    replace_around_position_cols(row,
+                                     l_col,
+                                     r_col,
+                                     aura,
+                                     damage_sprite,
+                                     air_sprite,
+                                     range_number=1)
+
+def move_around_position(col: int, row: int, aura: int, value: str):
     l_col = col-2-(2*aura)
     r_col = col+4+(2*aura)
     replace_around_position_cols(row,
@@ -203,8 +214,7 @@ def replace_around_position(col: int, row: int, aura: int, value: str):
                                      aura,
                                      damage_sprite,
                                      air_sprite,
-                                     range_number=1)
-
+                                     range_number=1)    
 
 def replace_around_position_cols(row:int, 
                                      l_col: int, 
