@@ -9,13 +9,6 @@ utilisés pour les différentes entités.
 from Level.level_generation import full_level as fl
 
 dungeon_rows: list[str] = fl()
-# vieile map utilisée pour les tests.
-# dungeon_rows = ["####################",
-#                 "##. . . . . . . . ##",
-#                 "##. . . . . . . . ##",
-#                 "##. . . . @ . . . ##",
-#                 "##. . . . . . . . ##",
-#                 "####################"]
 
 
 wall_sprite = "##"
