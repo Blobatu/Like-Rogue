@@ -1,3 +1,8 @@
+"""
+Auteur : Luc Desforges
+Date : 1 mai 2026
+Description : Base de données pour les NPCs du jeu.
+"""
 from . import npc
 
 dbnpc_id: int = 0

@@ -1,10 +1,12 @@
 """
 Auteur : Luc Desforges
-Date : 14 avril 2026
-Description : TODO
+Date : 1 mai 2026
+Description :   Classe de base pour les acteurs du jeu, 
+                incluant le joueur et les NPCs.
 """
-class Actor:
+import public
 
+class Actor:
     def __init__(self, 
                  name: str,
                  sprite: str,
@@ -18,17 +20,70 @@ class Actor:
         self.name = name
         self.sprite = sprite
         self.position = position
-        self.health = health
-        self.damage = damage
+        self.health = public.scale(health)
+        self.damage = public.scale(damage)
         self.size = size
 
-        self.max_health = health
+        self.max_health = public.scale(health)
+
 
     def lose_life(self, amount: int):
-        self.health -= amount
+        """
+        But: Inflige des dégâts à l'acteur et vérifie s'il est mort.
+        Entrée: 
+            amount (int) - la quantité de dégâts à infliger.
+        Sortie:
+            bool - True si l'acteur est mort, False sinon.
+        """
+        print(f"You lost {amount} health points!")
+        self.health -= public.scale(amount)
         print(f"Health:{self.health}/{self.max_health}")
+
         if(self.health <= 0):
             self.health = 0
-            print(f"{self.name} is dead")
             return True
         return False
+
+
+    def is_alive(self) -> bool:
+        """
+        But: Vérifie si l'acteur est encore en vie.
+        Sortie: bool - True si l'acteur est en vie, False sinon.
+        """
+        return self.health > 0
+    
+
+    def set_position(self, position: tuple[int, int]):
+        """
+        But: Met à jour la position de l'acteur.
+        Entrée: position (tuple[int, int]) - la nouvelle position de l'acteur.
+        """
+        self.position = position
+        #print(self.position)
+
+
+    def set_position(self, col: int, row: int):
+        """
+        But: Met à jour la position de l'acteur.
+        Entrée: 
+            col (int) - la nouvelle colonne de l'acteur,
+            row (int) - la nouvelle rangée de l'acteur.
+        """
+        self.position = (col, row)
+        #print(self.position)
+
+
+    def get_col(self):
+        """
+        But: Récupère la colonne actuelle de l'acteur.
+        Sortie: int - la colonne actuelle de l'acteur.
+        """
+        return self.position[0]
+    
+
+    def get_row(self):
+        """
+        But: Récupère la rangée actuelle de l'acteur.
+        Sortie: int - la rangée actuelle de l'acteur.
+        """
+        return self.position[1]

@@ -1,72 +1,78 @@
+"""
+Auteur : Léonard  & Luc Desforges
+Date : 1 mai 2026
+Description : Module pour la gestion de l'IA des monstres du jeu, 
+qui les fait se déplacer vers le joueur s'ils sont à proximité.
+"""
+from . import actor_movement as a_m
 from Actors.player import player_instance as p_i
 from Actors.npc_database import listof_dbnpc as npc_db
-from Actors.npc_repository import listof_npc as listof_type
-from . import actor_movement as a_m
 
-# nom = placeholder 
 
 def Yplayer_distance(id: int = -1):
-    return npc_db[id].position[1] - p_i.position[1]
+    """
+    But:    Calcul la distance verticale entre le joueur et 
+            un NPC donné par son id.
+    Entrée: id (int) - l'identifiant du NPC à vérifier.
+    Sortie: int - la distance verticale entre le joueur et le NPC.
+    """
+    return npc_db[id].get_row() - p_i.get_row()
 
 
 def Xplayer_distance(id: int = -1):
-    return npc_db[id].position[0] - p_i.position[0]
-
-# valeur par défaut pour les positions de monstre
-
-def search_sprite_by_line(line: str):
-        for item in listof_type.values():
-            col_found = line.find(item.sprite)
-            print(f"{item.sprite}")
-            if col_found == -1:
-                continue
-            return col_found
+    """
+    But:    Calcul la distance horizontale entre le joueur et 
+            un NPC donné par son id.
+    Entrée: id (int) - l'identifiant du NPC à vérifier.
+    Sortie: int - la distance horizontale entre le joueur et le NPC.
+    """
+    return npc_db[id].get_col() - p_i.get_col()
 
 
-def algorithm():
-    col_wow = -1
-    row_wow = -1
-    row_count = -1
-    for line in a_m.console_tile:
-        print(f"{line}")
-        row_count += 1
+def react_to_player_movement():
+    """
+    But:    Algorithme de déplacement des NPCs du jeu, 
+            qui les fait se déplacer vers le joueur s'ils sont à proximité.
+    """
+    for id in npc_db:
+        if(npc_db[id] is None):
+              continue 
+        #print(str(id) + " : " + str(npc_db[id].position))
+        npc_row = npc_db[id].get_row()
+        min_row = npc_row - 6
+        max_row = npc_row + 6
+        npc_col = npc_db[id].get_col()
+        min_col = npc_col - 12
+        max_col = npc_col + 12
 
-        col_wow = search_sprite_by_line(line)
-        print(f"{col_wow}, {row_count}")
+        if min_row <= p_i.get_row() <= max_row:
+            # Le joueur est dans la zone verticale du NPC
+            if(min_col <= p_i.get_col() <= max_col):
+                # Le joueur est dans la zone horizontale du NPC
 
-        if col_wow == -1:
-            continue
+                if 0 > Yplayer_distance(id) > -3:
+                        # Le joueur est en dessous du NPC, 
+                        # le NPC se déplace vers le bas
+                        a_m.move_down(id)
 
-        if col_wow != -1:
-            row_wow = row_count
+                elif 0 < Yplayer_distance(id) < 3:
+                        # Le joueur est au dessus du NPC,
+                        # le NPC se déplace vers le haut
+                        a_m.move_up(id)
+                        
+                if 0 > Xplayer_distance(id) > -6:
+                        # Le joueur est à droite du NPC,
+                        # le NPC se déplace vers la droite
+                        a_m.move_right(id)
+                        
+                elif 0 < Xplayer_distance(id) < 6:
+                        # Le joueur est à gauche du NPC,
+                        # le NPC se déplace vers la gauche
+                        a_m.move_left(id)
 
-        for id in npc_db:
-            print(f"npc {id}: {npc_db[id].position}")
-            
-            if -2 < Yplayer_distance(id) <2 and -4 < Xplayer_distance(id) < 0:
-                if npc_db[id].position[1] + 1 != p_i.position[1]:
-                    print("move down")
-                    a_m.move_down(id)
-                break
-                #move down
-    
-            if -2 < Yplayer_distance(id) <2 and 0 < Xplayer_distance(id) < 4:
-                if npc_db[id].position[1] - 1 != p_i.position[1] :
-                    print("move up")
-                    a_m.move_up(id)
-                break
-                #move up
-    
-            if -2 < Xplayer_distance(id) < 2 and -4 < Yplayer_distance(id) < 0:
-                if npc_db[id].position[0] - 1 != p_i.position[0]:
-                    print("move right")
-                    a_m.move_right(id)
-                break
-                #move right
-    
-            if -2 < Xplayer_distance(id) < 2 and 0 < Yplayer_distance(id) < 4:
-                if npc_db[id].position[1] + 1 != p_i.position[1]:
-                    print("move left")
-                    a_m.move_left(id)
-                break
-                #move_left
+                #print(Xplayer_distance(id))
+                #print(Yplayer_distance(id))
+                if (((npc_db[id].aura * -1) <= Yplayer_distance(id) <= npc_db[id].aura and 
+                     (npc_db[id].aura * -1)*2 <= Xplayer_distance(id) <= npc_db[id].aura*2)):
+                        p_i.lose_life(npc_db[id].damage)
+                        

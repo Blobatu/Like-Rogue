@@ -1,14 +1,15 @@
 """
 Auteur : Luc Desforges
-Date : 14 avril 2026
-Description : TODO
+Date : 1 mai 2026
+Description : Classe pour le joueur du jeu, héritant de la classe Actor.
 """
+from Progression import Simulation as s
+
+from . import npc
+
 from . import actor as a
 
-instanciated = False
-
 class Player(a.Actor):
-
     def __init__(self, 
                  weapon: Weapon,
                  potion_count: int,
@@ -19,7 +20,7 @@ class Player(a.Actor):
                  name: str, 
                  sprite: str,
                  position: tuple[int, int], 
-                 health: int = 1, 
+                 health: int = 20, 
                  damage: int = 1,
                  size: int = 1):
         """
@@ -32,6 +33,9 @@ class Player(a.Actor):
         self.weapon = weapon
         self.potion_count = potion_count
         self.bomb_count = bomb_count
+        self.listof_npc_killed: dict[int, npc.NPC] = {}
+        self.progression = s.Progression(self.name)
+        self.npc_killed_count = 0
 
 
 player_instance: Player = Player(weapon=None,

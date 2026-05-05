@@ -1,29 +1,33 @@
+"""
+Auteur : Luc Desforges
+Date : 1 mai 2026
+Description : Liste des types de NPCs du jeu.
+"""
 from . import npc
-import public
 
 listof_npc = {
     "Goblin": npc.NPC(name = "Goblin",
-                      sprite = "oB",
-                      health = public.scale(1),
-                      damage = public.scale(1), 
+                      sprite = "¤ ",
+                      health = 1,
+                      damage = 1, 
                       size = 1,
-                      zone = 1),
+                      aura = 1),
     "Orc": npc.NPC(name = "Orc",
-                   sprite = "oC",
-                   health = public.scale(2),
-                   damage = public.scale(2),
+                   sprite = "Θ ",
+                   health = 2,
+                   damage = 2,
                    size = 1,
-                   zone = 1),
-    "Ogre": npc.NPC(name = "Ogre",
-                    sprite = "oG",
-                    health = public.scale(5),
-                    damage = public.scale(3),
-                    size = 2,
-                    zone = 1),
+                   aura = 1),
+    # "Ogre": npc.NPC(name = "Ogre",
+    #                 sprite = "G ",
+    #                 health = 5,
+    #                 damage = 3,
+    #                 size = 2,
+    #                 aura = 2),
     "AuraFarmer": npc.NPC(name = "Aura Farmer",
-                          sprite = "oA",
-                          health = public.scale(2),
-                          damage = public.scale(1),
+                          sprite = "Ω ",
+                          health = 2,
+                          damage = 1,
                           size = 1,
-                          zone = 2)
+                          aura = 3)
 }
