@@ -4,7 +4,6 @@ Date : 1 mai 2026
 Description :   Point d'entrée du jeu, qui initialise le donjon, 
                 le joueur et les monstres,
 """
-import asyncio
 import sys
 import os
 from Interactions.dungeon import dungeon_rows as dungeon

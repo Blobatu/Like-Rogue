@@ -7,8 +7,32 @@ Description :  Comportement de l'aura des NPCs du jeu,
 """
 from Actors.npc_database import listof_dbnpc as npc_db
 from Actors.player import player_instance as p_i
+from .actor_movement import clear_old_position, move_around_position, replace_at_position
+from .dungeon import exit_opened_sprite, air_sprite
 
-def detection_check(npc_id: int):
+def aura_damage(is_player: bool, 
+                col: int = 0, row: int = 0, aura: int = 0, damage: int = 0):
+    if(is_player is True):
+        npc_id = detection_check_player(-1)
+    else:
+        for key, obj in npc_db.items():
+          if obj is None:
+               continue
+          for i in range(col-aura*2, col+aura*2+2):
+               for j in range(row-aura, row+aura+1):
+                    if obj.position == (i, j):
+                         if npc_db[key].lose_life(damage) is True:
+                            npc = npc_db[key]
+                            if npc.health == 0:
+                                move_around_position(npc.get_col(), npc.get_row(), npc.aura, air_sprite)
+                                clear_old_position(npc.get_col(), npc.get_row())
+                                p_i.listof_npc_killed[p_i.npc_killed_count] = npc_db[key]
+                                if p_i.progression.gain_xp(True) is True:
+                                    replace_at_position(222, 24, exit_opened_sprite)
+                                npc_db[key] = None
+
+
+def detection_check_player(npc_id: int):
      """
      But: Vérifie si le joueur est dans l'aura d'un NPC et 
      lui inflige des dégâts si c'est le cas.
@@ -16,17 +40,7 @@ def detection_check(npc_id: int):
      Entrée: id (int) - l'identifiant du NPC à vérifier.
      """
      if npc_id == -1:
-          aura = 3
-          col, row = p_i.position
-
-          for key, obj in npc_db.items():
-               if obj is None:
-                    continue
-               for i in range(col-aura*2, col+aura*2+2):
-                    for j in range(row-aura, row+aura+1):
-                         if obj.position == (i, j):
-                                   if npc_db[key].lose_life(p_i.damage) is True:
-                                        return key
+          detection_check(p_i.get_col(), p_i.get_row(), 3, p_i.damage)
      else:
           col = npc_db[npc_id].get_col()
           row = npc_db[npc_id].get_row()
@@ -37,6 +51,31 @@ def detection_check(npc_id: int):
           if check_surrounding(col, row, target_col, target_row, aura) is True:
                p_i.lose_life(npc_db[npc_id].damage)
      return -1
+
+
+def detection_check(position: tuple[int, int], aura: int, damage: int):
+     return detection_check(position[0], position[1])
+
+
+def detection_check(col: int, row: int, aura: int, damage: int):
+     """
+     But: Vérifie si le joueur est dans l'aura d'un event et 
+     lui inflige des dégâts si c'est le cas.
+
+     Entrée: id (int) - l'identifiant du NPC à vérifier.
+     """
+     for key, obj in npc_db.items():
+          if obj is None:
+               continue
+          for i in range(col-aura*2, col+aura*2+2):
+               for j in range(row-aura, row+aura+1):
+                    if obj.position == (i, j):
+                         if npc_db[key].lose_life(damage) is True:
+                              return key
+
+     return -1
+
+
 
 def check_surrounding(col: int, row: int, 
                       target_col: int, target_row: int, aura: int):

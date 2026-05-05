@@ -5,6 +5,7 @@ from Interactions import dungeon
 from Interactions import actor_movement as am
 from Level.level_generation import full_level as fl
 from Interactions import monster_spawn
+from Interactions import aura_behavior
 """
 author : emmanuel Bissonnette
 Goal : ce fichier contien les fonctions dinteraction avec les props 
@@ -113,8 +114,9 @@ def is_actor_on_bomb():
         if bombs[0] != p.player_instance.position:
              am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.barrel_sprite)
         for key,npc in npc_db.listof_dbnpc.items():
-             if bombs[0]  != npc.position:
-                  am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.barrel_sprite)
+             if npc is not None:
+                if bombs[0]  != npc.position:
+                    am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.barrel_sprite)
 def bomb_explodes():
     """
     Description: cette fonction attend que le conteur de la bombe soit a 5
@@ -127,14 +129,14 @@ def bomb_explodes():
     counter = 0
     for bombs in bomb_list:
         if bombs[1] > 5:
-            player_bomb_check = (p.player_instance.position[0]+5,p.player_instance.position[1]-5)
-            if player_bomb_check[0] < bombs[0][0] > player_bomb_check[1] and player_bomb_check[0]<bombs[0][1]>player_bomb_check[1]:
+            if ((-5 <= bombs[0][1] - p.player_instance.get_row() <= 5 and 
+                 -5*2 <= p.player_instance.get_col() <= 5*2)):
                 p.player_instance.lose_life(r.randint(1,3))
-            for key,npc in npc_db.listof_dbnpc.items():
-                if npc.position[0] < bombs[0][0] > npc.position[1] and npc.position[0]<bombs[0][1]>npc.position[1]:
-                    npc.lose_life(r.randint(1,5))
+            col, row = bombs[0]
+            aura_behavior.aura_damage(False, col, row, 5, r.randint(1,5))
             bomb_list.pop(counter)
             am.replace_around_position(bombs[0][0],bombs[0][1],3,dungeon.air_sprite)
+            am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.air_sprite)
         counter += 1
 
 

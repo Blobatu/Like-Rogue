@@ -3,7 +3,6 @@ Auteur : Léonard  & Luc Desforges
 Date : 1 mai 2026
 Description : Module pour la gestion des déplacements des acteurs dans le jeu.
 """
-from Interactions.aura_behavior import detection_check
 from Props.props_interaction import interaction_check
 from Actors.npc_database import listof_dbnpc as npc_db
 from Actors.player import player_instance as p_i
@@ -15,18 +14,6 @@ from .dungeon import wall_sprite
 from .dungeon import air_sprite
 from .dungeon import damage_sprite
 
-
-def aura_damage():
-    npc_id = detection_check(-1)
-    if npc_id != -1:
-        npc = npc_db[npc_id]
-        if npc.health == 0:
-            move_around_position(npc.get_col(), npc.get_row(), npc.aura, air_sprite)
-            clear_old_position(npc.get_col(), npc.get_row())
-            p_i.listof_npc_killed[p_i.npc_killed_count] = npc_db[npc_id]
-            if p_i.progression.gain_xp(True) is True:
-                replace_at_position(222, 24, exit_opened_sprite)
-            npc_db[npc_id] = None
 
 def move_up(id: int = -1):
     """
@@ -205,7 +192,7 @@ def replace_around_position(col: int, row: int, aura: int, value: str):
                                      l_col,
                                      r_col,
                                      aura,
-                                     damage_sprite,
+                                     value,
                                      air_sprite,
                                      range_number=1)
 

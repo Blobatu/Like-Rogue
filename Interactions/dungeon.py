@@ -15,7 +15,7 @@ wall_sprite = "##"
 player_sprite = "@ "
 air_sprite = ". "
 damage_sprite = ": "
-exit_openned_sprite = "| "
+exit_opened_sprite = "| "
 exit_closed_sprite = "X "
 barrel_sprite = "⩉ "
 chest_sprite = "▤ "
@@ -25,5 +25,5 @@ whitelist_sprites = [air_sprite,
                      damage_sprite,
                      chest_sprite, 
                      barrel_sprite, 
-                     exit_openned_sprite, 
+                     exit_opened_sprite, 
                      spike_trap_sprite]
