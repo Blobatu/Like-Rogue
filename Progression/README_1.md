@@ -42,8 +42,8 @@ Ce module fait partie d'un projet collaboratif composé de :
 ### Création d'un acteur
 
 ```python
-actor = Progression("Alice")
-# Output: Alice a été créé au niveau 1.
+actor = Progression("Nard")
+# Output: Nard a été créé au niveau 1.
 ```
 
 ### Faire gagner de l'XP (via une action)
