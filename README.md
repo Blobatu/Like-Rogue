@@ -119,12 +119,14 @@ ___
     - Bombes
     - Coffres
     - Sortie
-    - Niveaux
+      - Changement de niveau
     - Joueur
     - Ennemis
 - **James Bergeron**
   - Interface visuel
     - Menus
+      - Difficultés
+      - Statistiques
     - Boutons
 - **Marvyn Mbeugmo**
   - Progression
