@@ -171,6 +171,7 @@ def clear_old_position(col: int, row: int):
     """
     replace_at_position(col, row, air_sprite)
 
+
 def replace_at_position(col: int, row: int, value: str):
     """
     But:    Permet de remplacer le sprite à une position donnée
@@ -183,27 +184,57 @@ def replace_at_position(col: int, row: int, value: str):
     after_value = dungeon[row][col+2:]
     insert_at_position(row, before_value, after_value, value)
 
+
 def replace_around_position(col: int, row: int, aura: int, value: str):
     l_col = col-2-(2*aura)
     r_col = col+4+(2*aura)
-    for i in range(l_col, r_col, 2):
-        for j in range(-2*aura,aura+2):
-            temp_row = row+j
-            if 0 < temp_row >= len(dungeon):
-                continue
-            if dungeon[row+j][i]+" " == damage_sprite:
-                clear_old_position(i, row+j)
-    
+    replace_around_position_cols(row,
+                                 l_col,
+                                 r_col,
+                                 aura,
+                                 air_sprite,
+                                 damage_sprite,
+                                 range_number=2)
     l_col = col-1*(2*aura)
     r_col = col+2+(2*aura)
-    for i in range(l_col, r_col, 2):
-        for j in range(-1*aura,aura+1):
-            temp_row = row+j
-            if 0 < temp_row >= len(dungeon):
-                continue
-            if dungeon[row+j][i]+" " == air_sprite:
-                replace_at_position(i, row+j, value)
+    replace_around_position_cols(row,
+                                     l_col,
+                                     r_col,
+                                     aura,
+                                     damage_sprite,
+                                     air_sprite,
+                                     range_number=1)
 
+
+def replace_around_position_cols(row:int, 
+                                     l_col: int, 
+                                     r_col: int, 
+                                     aura: int, 
+                                     value: str,
+                                     check_value: str,
+                                     range_number: int):
+    for col in range(l_col, r_col, 2):
+        replace_around_position_rows(row, 
+                                     col, 
+                                     aura, 
+                                     value, 
+                                     check_value,
+                                     range_number)
+
+def replace_around_position_rows(row: int,
+                                 col: int,
+                                 aura: int,
+                                 value: str,
+                                 check_value: str,
+                                 range_number: int):
+        for indent in range(-range_number*aura, aura+range_number):
+            selected_row = row + indent
+            if 0 < selected_row >= len(dungeon):
+                return
+            if 0 < col >= len(dungeon[selected_row]):
+                return
+            if dungeon[selected_row][col]+" " == check_value:
+                replace_at_position(col, selected_row, value)
 
 def insert_at_position(row: int, 
                        before_value: str, 
