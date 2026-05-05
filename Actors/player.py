@@ -49,7 +49,7 @@ class Player(a.Actor):
 
 player_instance: Player = Player(weapon=None,
                                  potion_count=3,
-                                 bomb_count=0, 
+                                 bomb_count=10, 
                                  damage_received=0, 
                                  damage_done=0,
                                  name="Nard", 

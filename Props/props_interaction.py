@@ -40,7 +40,6 @@ def door ():
     sorties:
     """
     print("\033[H\033[J", end="")
-    print("wow")
     p.player_instance.set_position(6, 24)
     p.player_instance.level +=1 
     monster_spawn.spawn_monster()

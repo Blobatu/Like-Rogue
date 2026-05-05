@@ -96,7 +96,6 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
     
 
     if(id == -1):
-        print("bonjour")
         # Si c'est le joueur qui se déplace, 
         # on met à jour sa position
         replace_at_position(new_col, new_row, player_sprite)
