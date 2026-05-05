@@ -41,7 +41,7 @@ Voici d'autres commandes pour les actions supplémentaires qui ne sont pas des d
 *B* Déposer une bombe
 
 ### Interactions avec les monstres
-
+- Les monstres appliquent du dégat à chaque fois que le joueur fait une action s'il se retrouve dans la zone à la fin de son action.
 - Attaquer fait du dégat autours du joueurs à une distance de 2 (donc ne passe pas à travers les murs comme le aura farmer)
 - Déposer une bombe fait apparaitre une bombe à la position du joueur et vous avez 5 déplacement avant que la bombe explose à une distance de 3 (comme le aura farmer)
 PS: les bombes détruisent les murs
