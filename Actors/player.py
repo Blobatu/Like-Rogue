@@ -3,6 +3,10 @@ Auteur : Luc Desforges
 Date : 1 mai 2026
 Description : Classe pour le joueur du jeu, héritant de la classe Actor.
 """
+from Progression import Simulation as s
+
+from . import npc
+
 from . import actor as a
 
 class Player(a.Actor):
@@ -29,6 +33,9 @@ class Player(a.Actor):
         self.weapon = weapon
         self.potion_count = potion_count
         self.bomb_count = bomb_count
+        self.listof_npc_killed: dict[int, npc.NPC] = {}
+        self.progression = s.Progression(self.name)
+        self.npc_killed_count = 0
 
 
 player_instance: Player = Player(weapon=None,
