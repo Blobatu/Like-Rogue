@@ -38,11 +38,10 @@ def spawn_monster():
             # On crée une instance du monstre choisi et 
             # on la place de la position du spawn
             npc_db.listof_dbnpc[id] = NPC(name = r_npc.name,
-                                            sprite = r_npc.sprite,
-                                            health = r_npc.health,
-                                            damage = r_npc.damage,
-                                            size = r_npc.size,
-                                            aura = r_npc.aura,)
+                                          sprite = r_npc.sprite,
+                                          health = r_npc.health,
+                                          damage = r_npc.damage,
+                                          aura = r_npc.aura,)
             npc_db.listof_dbnpc[id].set_position(col, row)
             a_m.replace_around_position(col, row, r_npc.aura, damage_sprite)
             a_m.replace_at_position(col, 

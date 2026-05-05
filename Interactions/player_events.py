@@ -17,7 +17,7 @@ def listen_to_keyboard(is_pressed: bool):
             d'attaquer les monstres, 
             de déposer des bombes et, 
             de boire des potions de vie
-    Sortie: is une clée a été appuyée
+    Sortie et entrée: si une clée a été appuyée
     """
     event = k.read_event()
     # Regarde si une ou plusieurs bombes sont déposés

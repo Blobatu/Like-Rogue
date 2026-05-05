@@ -126,7 +126,7 @@ def bomb_explodes():
     #initialisation du compteur pour savoir quelle bombe pop
     counter = 0
     for bombs in bomb_list:
-        if bombs[1] > 5:
+        if bombs[1] > 10:
             aura = 3
             damage = r.randint(1,3)
             #le if verifie que le joueur se situe bien dans la range de 5 de la bombe 

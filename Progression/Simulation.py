@@ -27,10 +27,10 @@ class Progression:
     def gain_xp(self, success):
         # Si l'action est réussie
         if success:
-            print("Action réussie +50 XP")
+            print("Action réussie +20 XP")
             
-            # Ajouter 50 XP
-            self.xp = self.xp + 50
+            # Ajouter 2 XP
+            self.xp = self.xp + 20
         else:
             # Si l'action échoue
             print("Action échouée")

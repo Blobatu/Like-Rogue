@@ -12,8 +12,7 @@ class Actor:
                  sprite: str,
                  position: tuple[int, int], 
                  health: int, 
-                 damage: int,
-                 size: int):
+                 damage: int):
         """
         description: Constructeur
         """
@@ -22,7 +21,6 @@ class Actor:
         self.position = position
         self.health = public.scale(health)
         self.damage = public.scale(damage)
-        self.size = size
 
         self.max_health = public.scale(health)
 

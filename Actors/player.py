@@ -12,26 +12,19 @@ from . import actor as a
 
 class Player(a.Actor):
     def __init__(self, 
-                 weapon: Weapon,
                  potion_count: int,
                  bomb_count: int,
-                 damage_done: int,
-                 damage_received: int,
                  name: str, 
                  sprite: str,
                  position: tuple[int, int], 
                  level: int = 1,
-                 health: int = 200, 
-                 damage: int = 1,
-                 size: int = 1):
+                 health: int = 10, 
+                 damage: int = 1):
         """
         description: Constructeur
         """
-        super().__init__(name, sprite, position, health, damage, size)
+        super().__init__(name, sprite, position, health, damage)
         self.level = level
-        self.damage_done = damage_done
-        self.damage_received = damage_received
-        self.weapon = weapon
         self.potion_count = potion_count
         self.bomb_count = bomb_count
         self.listof_npc_killed: dict[int, npc.NPC] = {}
@@ -39,24 +32,22 @@ class Player(a.Actor):
         self.npc_killed_count = 0
 
     def drink_health_potion(self, value: int):
+        """
+        But:    Redonne de la vie au joueur
+        Sortie: si le joueur a but la potion
+        """
         if self.potion_count > 0:
             if self.health < self.max_health:
                 self.health += public.scale(value)
+                if self.health > self.max_health:
+                    self.health = self.max_health
                 self.potion_count -= 1
                 return True
         return False
 
 
-player_instance: Player = Player(weapon=None,
-                                 potion_count=3,
-                                 bomb_count=10, 
-                                 damage_received=0, 
-                                 damage_done=0,
+player_instance: Player = Player(potion_count=0,
+                                 bomb_count=0,
                                  name="Nard", 
                                  sprite="@ ",
-                                 position=(0, 0))
-
-
-class Weapon:
-    def __init__(self, name: str,):
-        self.name = name
+                                 position=(6, 24))

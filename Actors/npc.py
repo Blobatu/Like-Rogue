@@ -12,10 +12,9 @@ class NPC(a.Actor):
                  sprite: str,
                  position: tuple[int, int] = (0, 0), 
                  health: int = 1, 
-                 damage: int = 1,
-                 size: int = 1):
+                 damage: int = 1):
         """
         description: Constructeur
         """
-        super().__init__(name, sprite, position, health, damage, size)
+        super().__init__(name, sprite, position, health, damage)
         self.aura = aura

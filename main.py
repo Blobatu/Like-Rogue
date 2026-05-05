@@ -33,7 +33,8 @@ f"""
  """)
             print('\n'.join(dungeon.levels[p_i.level-1]))
         is_pressed = p_e.listen_to_keyboard(is_pressed)
-        monster_AI.react_to_player_movement()
+        if is_pressed is True:
+            monster_AI.react_to_player_movement()
     else:
         print(f"{p_i.name} is dead")
         break
