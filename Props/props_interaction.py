@@ -15,18 +15,21 @@ bomb_list: list[list] = []
 
 def chest():
         """
-        Description: Une fonction qui utilise un fichier pour recuperer une liste
+        Description: Une fonction qui utilise  une liste
             d'item a donner au joueur elle choisi aleatoirement et donne soit deux potions 
-            ou deux bombes
+            ou une bombes
         entrees:
         sorties:
         """
+        #liste contenu possible du coffre
         chest_content = ["bomb","potion","potion"]
         random_item = r.randint(0,2)
+        # verifie si cest une bombe si oui bombe +1
         if chest_content[random_item] == "bomb":
             p.player_instance.bomb_count += 1
+        #verifie si cest une potion si oui potion +2
         if chest_content[random_item] == "potion":
-            p.player_instance.potion_count +=1
+            p.player_instance.potion_count += 2
        
 def door ():
     """
