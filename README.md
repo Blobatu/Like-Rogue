@@ -1,6 +1,17 @@
 # Like-Rogue
 projet 3 de prog 1
 
+## dépendances
+imports externes nécéssaires:
+- pygame community edition
+- pygame-menu comunity edition
+
+pour les installer:
+```cmd
+py -3.14 -m pip install pygame-ce
+py -3.14 -m pip install pygame-menu-ce
+```
+
 ## Niveaux et progression
 ### Niveaux
 tous les niveaux sont générés aléatoirement de manière à ce que chaque pasrtie soit unique.
