@@ -21,9 +21,7 @@ Voice autres autres commande pour les actions supplémentaire qui ne sont pas de
 *X* Attaquer
 
 *Z* Boire une potion
-### le premier mouvement 
 
-Lors du premier mouvement du joueurs, le joueur devient visible et les monstre se génère aléatoirement a chaque endroit ou un "&" se situe
 
 ### interactions avec les monstres
 ---

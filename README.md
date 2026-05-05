@@ -25,9 +25,6 @@ Voice autres autres commande pour les actions supplémentaire qui ne sont pas de
 *X* Attaquer
 
 *Z* Boire une potion
-### le premier mouvement 
-
-Lors du premier mouvement du joueurs, le joueur devient visible et les monstre se génère aléatoirement a chaque endroit ou un "&" se situe
 
 ### interactions avec les monstres
 ---
@@ -71,3 +68,12 @@ zone de dégats:1
 dégats:1
 
 ___
+
+
+# Jeu par:
+- **Luc Desforges** - joueur et ennemies - organisation générale
+- **Antoine D-C** - génération de niveaux
+- **Léonard Lefebvre** - joueur et ennemies
+- **Emmanuel Bissonnette** - interactions 
+- **James Bergeron** - interface visuel
+- **Marvyn Mbeugmo** - progression

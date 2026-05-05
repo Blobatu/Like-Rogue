@@ -9,6 +9,7 @@ from Actors.npc_database import listof_dbnpc as npc_db
 from Actors.player import player_instance as p_i
 from .dungeon import dungeon_rows as dungeon
 from .dungeon import whitelist_sprites
+from .dungeon import exit_opened_sprite
 from .dungeon import player_sprite
 from .dungeon import wall_sprite
 from .dungeon import air_sprite
@@ -23,7 +24,8 @@ def aura_damage():
             move_around_position(npc.get_col(), npc.get_row(), npc.aura, air_sprite)
             clear_old_position(npc.get_col(), npc.get_row())
             p_i.listof_npc_killed[p_i.npc_killed_count] = npc_db[npc_id]
-            p_i.progression.gain_xp(True)
+            if p_i.progression.gain_xp(True) is True:
+                replace_at_position(222, 24, exit_opened_sprite)
             npc_db[npc_id] = None
 
 def move_up(id: int = -1):
