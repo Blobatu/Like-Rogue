@@ -150,7 +150,7 @@ def make_level(maze=generate_maze(size[0], size[1])):
 def full_level(maze: list[list[str]] = make_level(), 
                enn_spwn = int(lv[current_level]['difficulty'] * 2.5), 
                loot = int(lv[current_level]['difficulty'] + 1), 
-               traps = int(lv[current_level]['difficulty'] * 1.5)):
+               traps = int(lv[current_level]['difficulty'] * 6)):
     """
     prend le niveau vide et le modifie afin d'avoir des pie`ges, des ennemies et des coffres dans le niveau complet
     entrée: le niveau vide, la quantitée d'ennemies, de pièges et de coffres
