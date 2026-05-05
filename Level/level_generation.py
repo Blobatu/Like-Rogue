@@ -21,9 +21,9 @@ PATH = ' '
 
 def make_lvl_data(maze):
     """
-    gets a list from the maze generator and stitches rooms together to create the actual level data
-    in: list of lists of rooms from maze generator
-    out: list of strings, each list is a line of the level
+    récupère une liste fournie par le générateur de labyrinthes et assemble les salles pour créer les données du niveau
+    Entrée : liste de listes de salles provenant du générateur de labyrinthes
+    Sortie : liste de string, chaque string correspondant à une ligne du niveau
     """
     lvl_data = []
     for line in maze:
@@ -38,9 +38,9 @@ def make_lvl_data(maze):
 
 def print_room(maze: list[list[str]]):
     """
-    prints the actual level as it will appears in the game
-    in: list of lists of rooms from maze generator
-    out: lines of the level being printed out one by one
+    affiche le niveau tel qu'il apparaîtra dans le jeu
+    Entrée : liste de listes de salles générées par le générateur de labyrinthes
+    Sortie : lignes du niveau affichées une par une
     """
     for i in make_lvl_data(maze):
         print(i)
@@ -48,13 +48,18 @@ def print_room(maze: list[list[str]]):
     
 def print_room_as_list(maze: list[list[str]]):
     """
-    to debug, simply prints the result of maze_to_lvl_data, kinda useless but has clear labeling
-    in: list of lists of rooms from maze generator
-    out: list of strings, each list is a line of the level 
+    Pour le débogage, affiche simplement le résultat de "maze_to_lvl_data" ; c'est un peu inutile, mais l'étiquetage est clair
+    Entrée : liste de listes de salles provenant du générateur de labyrinthes
+    Sortie : liste de string, chaque liste correspondant à une ligne du niveau 
     """
     print(make_lvl_data(maze))
 
 def generate_maze(width, height):
+    """
+    Génère un labyrinthe aléatoire de la taille spécifiée en utilisant un algorithme de backtracking.
+    entrée : largeure et hauteur du labyrinthe désiré
+    sortie : liste de listes de caractères représentant le labyrinthe, où '#' représente un mur et ' ' représente un chemin
+    """
     maze_width = width * 3
     maze_height = height * 3
     maze = [[WALL for _ in range(maze_width)] for _ in range(maze_height)]
@@ -93,6 +98,11 @@ def generate_maze(width, height):
 
 
 def check_around(maze, pos):
+    """
+    vérifie les murs autour d'une position donnée dans le labyrinthe et retourne un dictionnaire indiquant la présence de murs dans les quatre directions
+    entrée : le labyrinthe sous forme de liste de listes de caractères et la position (x, y) à vérifier
+    sortie : dictionnaire avec les clés 'u', 'd', 'l', 'r
+    """
     height = len(maze)
     width = len(maze[0])
     x, y = pos 
@@ -111,6 +121,11 @@ def check_around(maze, pos):
     return neighbors
 
 def make_level(maze=generate_maze(size[0], size[1])):
+    """
+    génère le niveau à partir du labyrinthe en utilisant les règles définies pour chaque type de tuile
+    entrée : le labyrinthe sous forme de liste de listes de caractères
+    sortie : liste de listes de chaînes de caractères représentant les tuiles du niveau
+    """
     center_rows = [row for i, row in enumerate(maze) if i % 3 == 1]
     
     center_positions = []
@@ -152,21 +167,22 @@ def make_level(maze=generate_maze(size[0], size[1])):
 
 def print_level(maze: list[list[str]] = make_level()):
     """
-    prints the actual level as it will appears in the game
-    in: list of lists of rooms from maze generator
-    out: lines of the level being printed out one by one
+    affiche le niveau tel qu'il apparaîtra dans le jeu
+    entrée : liste de listes de salles générées par le générateur de labyrinthes
+    sortie : lignes du niveau affichées une par une
     """
     for i in make_lvl_data(maze):
         print(i)
-
-def level(maze: list[list[str]] = make_level()):
-    level = make_lvl_data(maze)
-    return level
 
 def full_level(maze: list[list[str]] = make_level(), 
                enn_spwn = int(lv[current_level]['difficulty'] * 2.5), 
                loot = int(lv[current_level]['difficulty'] + 1), 
                traps = int(lv[current_level]['difficulty'] * 1.5)):
+    """
+    prend le niveau vide et le modifie afin d'avoir des pie`ges, des ennemies et des coffres dans le niveau complet
+    entrée: le niveau vide, la quantitée d'ennemies, de pièges et de coffres
+    sortie: le niveau complet
+    """
     lvl_data = make_lvl_data(maze)
 
 
@@ -198,8 +214,7 @@ def full_level(maze: list[list[str]] = make_level(),
             all_selected.extend(rd.sample(available, min(trap_count, len(available))))
     
     new_data = [list(line) for line in lvl_data]
-    enemy_positions = all_selected[:enn_count]
-    chest_selected = all_selected[enn_count:enn_count + chest_count]
+
     
     for y, tile_x in all_selected:
         if (y, tile_x) in chest_positions:
@@ -217,6 +232,11 @@ def full_level(maze: list[list[str]] = make_level(),
     return [''.join(line) for line in new_data]
 
 def print_full():
+    """
+    affiche le niveau complet
+    entrée : rien
+    sortie : rien
+    """
     for i in full_level():
         print(i)
 
@@ -229,5 +249,4 @@ test_1 = [['end_b','','','','crnr_rb','3way_lrb','3way_lrb','strgt_horz','end_l'
 #print_room_as_list(test_1)
 
 if __name__ == "__main__":
-    #print_level()
     print_full()

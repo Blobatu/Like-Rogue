@@ -1,7 +1,9 @@
+"""
+tout ce qui est relafif aux tuiles servant à la génération des niveaux, incluant les grandes salles
+Par Antoine D-C
+"""
 
-# tileset library
-
-
+# Bibliothèque complète de tuiles
 tileset = {
     'void': {
         1: '              ',
@@ -464,9 +466,7 @@ tileset = {
     },
 }
 
-
-# rules for all the tiles, where their exits are and what type they are
-
+# Règles applicables à toutes les tuiles : emplacement de leurs sorties et type de celles-ci
 tile_rules = {
     'void': {
         'gen': '',

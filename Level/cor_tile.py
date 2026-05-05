@@ -1,7 +1,9 @@
+"""
+tout ce qui est relafif aux tuiles servant à la génération des niveaux
+Par Antoine D-C
+"""
 
-# tileset library
-
-
+# Bibliothèque de tuiles
 tileset = {
     'void': {
         1: '              ',
@@ -168,8 +170,7 @@ tileset = {
 }
 
 
-# rules for all the tiles, where their exits are and what type they are
-
+# Règles applicables à toutes les tuiles : emplacement de leurs sorties et type de celles-ci
 tile_rules = {
     'cross': {
         'gen': ['up', 'down', 'left', 'right'],
