@@ -5,6 +5,7 @@ projet 3 de prog 1
 imports externes nécéssaires:
 - pygame community edition
 - pygame-menu comunity edition
+- keyboard
 
 pour les installer:
 ```cmd
