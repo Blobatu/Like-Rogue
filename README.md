@@ -16,13 +16,12 @@ py -3.14 -m pip install keyboard
 
 ## Niveaux et progression
 ### Niveaux
-tous les niveaux sont générés aléatoirement de manière à ce que chaque pasrtie soit unique.
+Tous les niveaux sont générés aléatoirement de manière à ce que chaque partie soient uniques.
 ### Progression
-une fois que vous avez tué assez d'ennemies, la porte du niveau s'ouvrira et vous pourrez passer au prochain.
-
-## interactions avec le jeux
-avant le premier mouvement le joueur est invisible et apparait toujours dans le haut en gauche de l'écran. 
-### Contrôle
+Une fois que vous avez tué assez d'ennemis, une porte "|" s'ouvrira et vous pourrez passer au prochain niveau.
+## Interactions avec le jeux
+Avant le premier mouvement le joueur est invisible et apparait toujours dans le haut en gauche de l'écran. 
+### Contrôles
 **Déplacement**: le joueurs fonctionne avec le controle WASD
 
 *W* Déplacement vers le haut
@@ -33,52 +32,54 @@ avant le premier mouvement le joueur est invisible et apparait toujours dans le 
 
 *D* Déplacement vers la droite
 
-Voice autres autres commande pour les actions supplémentaire qui ne sont pas des déplacements
+Voici d'autres commandes pour les actions supplémentaires qui ne sont pas des déplacements
 
 *X* Attaquer
 
 *Z* Boire une potion
 
-### interactions avec les monstres
+*B* Déposer une bombe
+
+### Interactions avec les monstres
 ---
 
-### déplacement
+### Déplacement
 
-Chaque déplacement ennemie est lié a un algorythme qui réagit selon la distance entre le monstre et le joueur
+Chaque déplacement ennemi est lié a un algorithme qui réagit selon la distance entre le monstre et le joueur
 
 ### Les monstres
 
-Chaque monstres a une pparticularité et une apparance sur l'interface
-____
-Nom: Aura Farmer
-
-Apparence sur l'interface:Ω
-
-Vie:2
-
-zone de dégats:3
-
-dégats:1
+Chaque monstre a une particularité et une apparence sur l'interface
 ___
 Nom: Goblin
 
-Apparence sur l'interface:¤ 
+Apparence sur l'interface: ¤ 
 
-Vie:1
+Vie: 1
 
-zone de dégats:1
+Zone de dégats: 1
 
-dégats:1
-___
+Dégats: 1
+____
+Nom: Aura Farmer
+
+Apparence sur l'interface: Ω
+
+Vie: 2
+
+Zone de dégats: 3
+
+Dégats: 1
+____
 Nom: Orc
 
-Apparence sur l'interface:Θ
+Apparence sur l'interface: Θ
 
-Vie:2
+Vie: 2
 
-zone de dégats:1
+Zone de dégats: 2
 
-dégats:1
+Dégats: 2
 
 ___
 
