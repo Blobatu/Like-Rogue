@@ -17,6 +17,7 @@ def listen_to_keyboard(is_pressed: bool):
             d'attaquer les monstres, 
             de déposer des bombes et, 
             de boire des potions de vie
+    Sortie: is une clée a été appuyée
     """
     event = k.read_event()
     # Regarde si une ou plusieurs bombes sont déposés
@@ -96,8 +97,14 @@ def listen_to_keyboard(is_pressed: bool):
     # déterminer la direction du déplacement
         
 def is_keydown(event, is_pressed: bool):
+    """
+    But: Retourne si une clé du clavier a été appuyé
+    """
     return event.event_type == k.KEY_DOWN and not is_pressed
 
 def is_keyup(event):
+    """
+    But: Retourne si une clé du clavier a été laché
+    """
     return event.event_type == k.KEY_UP
     

@@ -90,8 +90,7 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
 
     if is_wall(new_col, new_row):
         # Si le joueur va vers un mur,
-        # on ne bouge pas et on affiche un message
-        message_wall()
+        # on ne bouge pas 
         return
 
     # Si le mouvement est valide, on efface l'ancienne position de l'acteur

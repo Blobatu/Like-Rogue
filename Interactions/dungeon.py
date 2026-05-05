@@ -10,8 +10,12 @@ from Level.level_generation import full_level as fl, generate_maze, make_level
 from Level import level_generation
 
 
-
 def generate_them_all():
+    """
+    But: Génère tous les niveaux dès le début
+
+    Sortie: la liste de tous les niveaux
+    """
     testlist = []
     level_generation.current_level = "level_1"
     testlist.append(fl())
@@ -32,6 +36,7 @@ exit_closed_sprite = "X "
 barrel_sprite = "⩉ "
 chest_sprite = "▤ "
 spike_trap_sprite = "△ "
+monster_spawn = "& "
 
 whitelist_sprites = [air_sprite, 
                      damage_sprite,

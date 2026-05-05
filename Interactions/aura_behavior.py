@@ -7,29 +7,43 @@ Description :  Comportement de l'aura des NPCs du jeu,
 """
 from Actors.npc_database import listof_dbnpc as npc_db
 from Actors.player import player_instance as p_i
-from .actor_movement import clear_old_position, move_around_position, replace_at_position
+from . import actor_movement as a_m
 from .dungeon import exit_opened_sprite, air_sprite
+
+def handle_dead_npc(key: int):
+     npc = npc_db[key]
+     if npc.health == 0:
+          a_m.move_around_position(npc.get_col(), npc.get_row(), 
+                                   npc.aura, air_sprite)
+          a_m.clear_old_position(npc.get_col(), npc.get_row())
+          p_i.listof_npc_killed[p_i.npc_killed_count] = npc_db[key]
+          if p_i.progression.gain_xp(True) is True:
+               a_m.replace_at_position(222, 24, exit_opened_sprite)
+          npc_db[key] = None
 
 def aura_damage(is_player: bool, 
                 col: int = 0, row: int = 0, aura: int = 0, damage: int = 0):
+    """
+    But: Vérifie si un acteur est dans la zone de dégat et 
+    lui inflige des dégâts si c'est le cas.
+
+    Entrée:    is_player (bool) - si la source de dégat est le joueur.
+               col (int) - la colonne de la source de dégat
+               row (int) - la rangée de la source de dégat
+               aura (int) - la taille de la zone de dégat
+               damage (int) - le nombre de dégat de la zone
+    """
     if(is_player is True):
-        npc_id = detection_check_player(-1)
+        detection_check_player(-1)
     else:
         for key, obj in npc_db.items():
           if obj is None:
                continue
-          for i in range(col-aura*2, col+aura*2+2):
-               for j in range(row-aura, row+aura+1):
+          for i in range(col-aura * 2, col+aura * 2 + 2):
+               for j in range(row-aura, row + aura + 1):
                     if obj.position == (i, j):
                          if npc_db[key].lose_life(damage) is True:
-                            npc = npc_db[key]
-                            if npc.health == 0:
-                                move_around_position(npc.get_col(), npc.get_row(), npc.aura, air_sprite)
-                                clear_old_position(npc.get_col(), npc.get_row())
-                                p_i.listof_npc_killed[p_i.npc_killed_count] = npc_db[key]
-                                if p_i.progression.gain_xp(True) is True:
-                                    replace_at_position(222, 24, exit_opened_sprite)
-                                npc_db[key] = None
+                              handle_dead_npc(key)
 
 
 def detection_check_player(npc_id: int):
@@ -48,7 +62,8 @@ def detection_check_player(npc_id: int):
           target_row = p_i.get_row()
           aura = npc_db[npc_id].aura
 
-          if check_surrounding(col, row, target_col, target_row, aura) is True:
+          if check_surrounding(col, row, 
+                               target_col, target_row, aura) is True:
                p_i.lose_life(npc_db[npc_id].damage)
      return -1
 
@@ -62,7 +77,11 @@ def detection_check(col: int, row: int, aura: int, damage: int):
      But: Vérifie si le joueur est dans l'aura d'un event et 
      lui inflige des dégâts si c'est le cas.
 
-     Entrée: id (int) - l'identifiant du NPC à vérifier.
+     Entrée: 
+               col (int) - la colonne de la source de dégat
+               row (int) - la rangée de la source de dégat
+               aura (int) - la taille de la zone de dégat
+               damage (int) - le nombre de dégat de la zone
      """
      for key, obj in npc_db.items():
           if obj is None:
@@ -71,14 +90,7 @@ def detection_check(col: int, row: int, aura: int, damage: int):
                for j in range(row-aura, row+aura+1):
                     if obj.position == (i, j):
                          if npc_db[key].lose_life(damage) is True:
-                              npc = npc_db[key]
-                              if npc.health == 0:
-                                   move_around_position(npc.get_col(), npc.get_row(), npc.aura, air_sprite)
-                                   clear_old_position(npc.get_col(), npc.get_row())
-                                   p_i.listof_npc_killed[p_i.npc_killed_count] = npc_db[key]
-                                   if p_i.progression.gain_xp(True) is True:
-                                        replace_at_position(222, 24, exit_opened_sprite)
-                                   npc_db[key] = None
+                              handle_dead_npc(key)
 
      return -1
 

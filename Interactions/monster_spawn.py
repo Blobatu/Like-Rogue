@@ -12,10 +12,9 @@ from . import actor_movement as a_m
 from Actors import npc_database as npc_db
 from . import dungeon
 from .dungeon import damage_sprite
-
+from .dungeon import monster_spawn
 from Actors.npc_repository import listof_npc as l
 
-monster_spawn = "& "
 
 def spawn_monster():
     """
@@ -25,9 +24,6 @@ def spawn_monster():
     col = -1
     row = -1
     id = 0
-    #print('\n'.join(dungeon))
-    #print(len(dungeon))
-    #print(len(dungeon[0]))
     for line in dungeon.levels[p_i.level-1]:
         # On parcourt le donjon ligne par ligne pour 
         # trouver les positions de spawn des monstres
@@ -55,7 +51,3 @@ def spawn_monster():
             
             # On ajoute le monstre à la base de données des NPCs
             id += 1
-            
-    #print("---")
-    #for n in npc_db.listof_dbnpc.values():
-        #print(n.position)

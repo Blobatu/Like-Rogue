@@ -17,7 +17,7 @@ py -3.14 -m pip install keyboard
 ### Niveaux
 tous les niveaux sont générés aléatoirement de manière à ce que chaque pasrtie soit unique.
 ### Progression
-une fois que vous avez tué assez d'ennemies, la porte du niveau s'ouvreira et vous pourrez passer au prochain.
+une fois que vous avez tué assez d'ennemies, la porte du niveau s'ouvrira et vous pourrez passer au prochain.
 
 ## interactions avec le jeux
 avant le premier mouvement le joueur est invisible et apparait toujours dans le haut en gauche de l'écran. 
@@ -85,7 +85,7 @@ ___
 # Jeu par:
 - **Luc Desforges** - joueur et ennemies - organisation générale
 - **Antoine D-C** - génération de niveaux
-- **Léonard Lefebvre** - joueur et ennemies
-- **Emmanuel Bissonnette** - interactions 
+- **Léonard Lefebvre** - interactions des joueur et ennemies
+- **Emmanuel Bissonnette** - interactions des objets
 - **James Bergeron** - interface visuel
 - **Marvyn Mbeugmo** - progression
