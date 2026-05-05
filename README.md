@@ -10,6 +10,7 @@ pour les installer:
 ```cmd
 py -3.14 -m pip install pygame-ce
 py -3.14 -m pip install pygame-menu-ce
+py -3.14 -m pip install keyboard
 ```
 
 ## Niveaux et progression
