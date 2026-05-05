@@ -135,7 +135,9 @@ def bomb_explodes():
             col, row = bombs[0]
             aura_behavior.aura_damage(False, col, row, 5, r.randint(1,5))
             bomb_list.pop(counter)
+            # cette fonction fait le dommage autour de la bombe en remplacent les tiles autour
             am.replace_around_position(bombs[0][0],bombs[0][1],3,dungeon.air_sprite)
+            #celle ci retire la bombe elle meme 
             am.replace_at_position(bombs[0][0],bombs[0][1],dungeon.air_sprite)
         counter += 1
 
