@@ -94,6 +94,7 @@ ___
     - Vie, Dégat, Zone
     - Compteur de potions/bombes
   - Repertoire et Types de NPC
+  - Déplacements acteurs
   - Dégat de zone
   - Interactions intermodules
   - Coordination
