@@ -1,3 +1,6 @@
+"""
+Ce code NE DOIT PAS ÊTRE CORRIGÉ, c'est seulement oi, Antoine qui essais de voir ce qu'il peut faire avec les window de pygame 
+"""
 import pygame
 import sys
 

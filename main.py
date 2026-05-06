@@ -1,8 +1,5 @@
 """
-Auteur : Luc Desforges
-Date : 1 mai 2026
-Description :   Point d'entrée du jeu, qui initialise le donjon, 
-                le joueur et les monstres,
+Ce code NE DOIT PAS ÊTRE CORRIGÉ, c'est seulement oi, Antoine qui essais de voir ce qu'il peut faire avec les window de pygame 
 """
 import sys
 import os
