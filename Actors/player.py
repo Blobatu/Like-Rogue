@@ -44,7 +44,7 @@ class Player(a.Actor):
         return False
 
 
-player_instance: Player = Player(potion_count=0,
+player_instance: Player = Player(potion_count=2,
                                  bomb_count=0,
                                  name="Nard", 
                                  sprite="@ ",

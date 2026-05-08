@@ -38,33 +38,33 @@ def react_to_player_movement():
         if(npc_db[id] is None):
               continue 
         npc_row = npc_db[id].get_row()
-        min_row = npc_row - 6
-        max_row = npc_row + 6
+        min_row = npc_row - 8
+        max_row = npc_row + 8
         npc_col = npc_db[id].get_col()
-        min_col = npc_col - 12
-        max_col = npc_col + 12
+        min_col = npc_col - 16
+        max_col = npc_col + 16
 
         if min_row <= p_i.get_row() <= max_row:
             # Le joueur est dans la zone verticale du NPC
             if(min_col <= p_i.get_col() <= max_col):
                 # Le joueur est dans la zone horizontale du NPC
 
-                if 0 > Yplayer_distance(id) > -3:
+                if 0 > Yplayer_distance(id) > -8:
                         # Le joueur est en dessous du NPC, 
                         # le NPC se déplace vers le bas
                         a_m.move_down(id)
 
-                elif 0 < Yplayer_distance(id) < 3:
+                elif 0 < Yplayer_distance(id) < 8:
                         # Le joueur est au dessus du NPC,
                         # le NPC se déplace vers le haut
                         a_m.move_up(id)
                         
-                if 0 > Xplayer_distance(id) > -6:
+                if 0 > Xplayer_distance(id) > -16:
                         # Le joueur est à droite du NPC,
                         # le NPC se déplace vers la droite
                         a_m.move_right(id)
                         
-                elif 0 < Xplayer_distance(id) < 6:
+                elif 0 < Xplayer_distance(id) < 16:
                         # Le joueur est à gauche du NPC,
                         # le NPC se déplace vers la gauche
                         a_m.move_left(id)

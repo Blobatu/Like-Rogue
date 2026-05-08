@@ -126,9 +126,13 @@ def bomb_explodes():
     """
     #initialisation du compteur pour savoir quelle bombe pop
     counter = 0
+    aura = 3
     for bombs in bomb_list:
+        if bombs[1] > 8:
+            am.replace_around_position(bombs[0][0], bombs[0][1], 
+                                       aura, dungeon.damage_sprite)
+            
         if bombs[1] > 10:
-            aura = 3
             damage = r.randint(1,3)
             #le if verifie que le joueur se situe bien dans la range de 5 de la bombe 
             # pour savoir si il faut lui faire des degats
@@ -140,6 +144,9 @@ def bomb_explodes():
             aura_behavior.aura_damage(False, col, row, 3, damage)
             bomb_list.pop(counter)
             # cette fonction fait le dommage autour de la bombe en remplacent les tiles autour
+            am.replace_around_position(bombs[0][0], bombs[0][1], 
+                                       aura, dungeon.air_sprite, 
+                                       dungeon.damage_sprite)
             am.replace_around_position(bombs[0][0], bombs[0][1], 
                                        aura, dungeon.air_sprite)
             am.replace_around_position(bombs[0][0], bombs[0][1],

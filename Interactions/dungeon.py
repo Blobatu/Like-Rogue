@@ -16,17 +16,10 @@ def generate_them_all():
     Sortie: la liste de tous les niveaux
     """
     testlist = []
-    level_generation.current_level = "level_1"
-    testlist.append(fl())
-    level_generation.current_level = "level_2"
-    testlist.append(fl(make_level(generate_maze(level_generation.size[0], 
-                                                level_generation.size[1]))))
-    level_generation.current_level = "level_3"
-    testlist.append(fl(make_level(generate_maze(level_generation.size[0], 
-                                                level_generation.size[1]))))
-    level_generation.current_level = "level_4"
-    testlist.append(fl(make_level(generate_maze(level_generation.size[0], 
-                                                level_generation.size[1]))))
+    for i in range(1, 5):
+        level_generation.current_level = "level_"+str(i)
+        testlist.append(fl(make_level(generate_maze(level_generation.size[0], 
+                                                    level_generation.size[1]))))
     return testlist
 
 levels: list[list[str]] = generate_them_all()

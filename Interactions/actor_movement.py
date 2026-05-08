@@ -111,9 +111,10 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
         
         npc_db[id].set_position(new_col, new_row)
         
-        # Après le déplacement du NPC, 
-        # on vérifie si le joueur est dans son aura
-        #detection_check(id)
+    for key, npc in npc_db.items():    
+        if npc is not None:
+            replace_around_position(npc.get_col(), npc.get_row(), 
+                                    npc.aura, damage_sprite)
 
 
 def new_position_value(original_value: int, is_negative: bool, step: int = 1):
