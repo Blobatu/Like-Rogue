@@ -1,4 +1,7 @@
+from pathlib import Path
 import random as r
+
+import pygame
 from Actors import player as p
 from Actors import npc_database as npc_db
 from Interactions import dungeon
@@ -27,9 +30,9 @@ def chest():
         # verifie si cest une bombe si oui bombe +1
         if chest_content[random_item] == "bomb":
             p.player_instance.bomb_count += 1
-        #verifie si cest une potion si oui potion +2
+        #verifie si cest une potion si oui potion +1
         if chest_content[random_item] == "potion":
-            p.player_instance.potion_count += 2
+            p.player_instance.potion_count += 1
        
 def door ():
     """
@@ -53,7 +56,9 @@ def spike_trap():
     sorties:
     """
     p.player_instance.lose_life(r.randint(1,3))
-def void ():
+
+
+def void():
     """
     Description: une fonction qui retire la totalite de la vie du joueur
     entrees:
@@ -61,22 +66,24 @@ def void ():
     """
     remaining_life = p.player_instance.health
     p.player_instance.lose_life(remaining_life)
+            
         
-def interaction_check(player_pos:str):
+def interaction_check(col, row):
     """
     Description: cette fonction verifie si le joueur est sur un prop
         si oui il appelle la fonction lie a se prop
     entrees: la position du joueur en str
     sorties:
     """
-    match player_pos:
+    sprite = dungeon.levels[p.player_instance.level-1][row][col] + " "
+    match sprite:
         case "▤ ":
             chest()
         case "| ":
             door()
         case "△ ":
             spike_trap()
-        case "":
+        case "  ":
             void()     
 def bomb_interaction():
     """
@@ -143,6 +150,9 @@ def bomb_explodes():
             col, row = bombs[0]
             aura_behavior.aura_damage(False, col, row, 3, damage)
             bomb_list.pop(counter)
+            current_file = str(Path(__file__).resolve().parent.parent) + '\Actors\\boom.mp3'
+            pygame.mixer.music.load(current_file)
+            pygame.mixer.music.play()
             # cette fonction fait le dommage autour de la bombe en remplacent les tiles autour
             am.replace_around_position(bombs[0][0], bombs[0][1], 
                                        aura, dungeon.air_sprite, 

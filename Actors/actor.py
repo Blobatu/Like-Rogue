@@ -4,8 +4,13 @@ Date : 1 mai 2026
 Description :   Classe de base pour les acteurs du jeu, 
                 incluant le joueur et les NPCs.
 """
-import public
+import time
+from pathlib import Path
 
+import pygame
+
+import public
+from playsound3 import playsound
 class Actor:
     def __init__(self, 
                  name: str,
@@ -34,7 +39,10 @@ class Actor:
             bool - True si l'acteur est mort, False sinon.
         """
         self.health -= public.scale(amount)
-
+        current_file = str(Path(__file__).resolve().parent.parent) + '\Actors\dmg.mp3'
+        
+        pygame.mixer.music.load(current_file)
+        pygame.mixer.music.play()
         if(self.health <= 0):
             self.health = 0
             return True

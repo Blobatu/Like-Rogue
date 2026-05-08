@@ -5,10 +5,16 @@ Description :  Comportement de l'aura des NPCs du jeu,
                qui inflige des dégâts au joueur s'il 
                se trouve à proximité d'un NPC.
 """
+from pathlib import Path
+
+import pygame
+
 from . import actor_movement as a_m
 from .dungeon import exit_opened_sprite, air_sprite
 from Actors.npc_database import listof_dbnpc as npc_db
 from Actors.player import player_instance as p_i
+
+from Interactions import dungeon
 
 def handle_dead_npc(key: int):
      npc = npc_db[key]
@@ -18,7 +24,8 @@ def handle_dead_npc(key: int):
           a_m.clear_old_position(npc.get_col(), npc.get_row())
           p_i.listof_npc_killed[p_i.npc_killed_count] = npc_db[key]
           if p_i.progression.gain_xp(True) is True:
-               a_m.replace_at_position(222, 24, exit_opened_sprite)
+               a_m.replace_at_position(222, dungeon.get_middle_row(), 
+                                       exit_opened_sprite)
           npc_db[key] = None
 
 def aura_damage(is_player: bool, 
@@ -34,6 +41,9 @@ def aura_damage(is_player: bool,
                damage (int) - le nombre de dégat de la zone
     """
     if(is_player is True):
+        current_file = str(Path(__file__).resolve().parent.parent) + '\Actors\\attack.mp3'
+        pygame.mixer.music.load(current_file)
+        pygame.mixer.music.play()
         detection_check_player(-1)
     else:
         for key, obj in npc_db.items():
@@ -54,7 +64,8 @@ def detection_check_player(npc_id: int):
      Entrée: id (int) - l'identifiant du NPC à vérifier.
      """
      if npc_id == -1:
-          detection_check(p_i.get_col(), p_i.get_row(), 2, p_i.damage)
+          col, row = p_i.position
+          detection_check(col, row, 2, p_i.damage)
      else:
           col = npc_db[npc_id].get_col()
           row = npc_db[npc_id].get_row()

@@ -42,6 +42,7 @@ def generate_maze(width, height):
     entrée : largeure et hauteur du labyrinthe désiré
     sortie : liste de listes de caractères représentant le labyrinthe, où '#' représente un mur et ' ' représente un chemin
     """
+    print(width)
     maze_width = width * 3
     maze_height = height * 3
     maze = [[WALL for _ in range(maze_width)] for _ in range(maze_height)]

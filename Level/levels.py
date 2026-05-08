@@ -4,23 +4,23 @@
 
 levels = {
     'level_1' : {
-        'size' : (16, 7),
-        'difficulty' : 10,
+        'size' : (16, 3),
+        'difficulty' : 8,
         'custom' : False,
     },
     'level_2' : {
-        'size' : (16, 7),
-        'difficulty' : 14,
+        'size' : (16, 4),
+        'difficulty' : 10,
         'custom' : False,
     },
     'level_3' : {
-        'size' : (16, 7),
-        'difficulty' : 18,
+        'size' : (16, 5),
+        'difficulty' : 12,
         'custom' : False,
     },
     'level_4' : {
-        'size' : (16, 7),
-        'difficulty' : 22,
+        'size' : (16, 6),
+        'difficulty' : 14,
         'custom' : False,
     },
 }

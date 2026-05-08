@@ -7,7 +7,8 @@ qui contient la carte du donjon et les sprites
 utilisés pour les différentes entités.
 """
 from Level.level_generation import full_level as fl, generate_maze, make_level
-from Level import level_generation
+from Level import level_generation as l_g
+from Actors.player import player_instance as p_i
 
 def generate_them_all():
     """
@@ -17,10 +18,18 @@ def generate_them_all():
     """
     testlist = []
     for i in range(1, 5):
-        level_generation.current_level = "level_"+str(i)
-        testlist.append(fl(make_level(generate_maze(level_generation.size[0], 
-                                                    level_generation.size[1]))))
+        l_g.current_level = "level_"+str(i)
+        l_g.size = l_g.lv[l_g.current_level]['size']
+        diff = l_g.lv[l_g.current_level]['difficulty']
+        testlist.append(fl(make_level(generate_maze(l_g.size[0], 
+                                                    l_g.size[1])),
+                           enn_spwn = int(diff * 2.5), 
+                           loot = int(diff + 1), 
+                           traps = int(diff * 6)))
     return testlist
+
+def get_middle_row():
+    return len(levels[p_i.level-1])//2
 
 levels: list[list[str]] = generate_them_all()
 

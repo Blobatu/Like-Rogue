@@ -20,5 +20,10 @@ listof_npc = {
                           sprite = "Ω ",
                           health = 2,
                           damage = 1,
-                          aura = 3)
+                          aura = 3),
+    "Assassin": npc.NPC(name = "Assassin",
+                          sprite = "  ",
+                          health = 1,
+                          damage = 1,
+                          aura = 0)
 }

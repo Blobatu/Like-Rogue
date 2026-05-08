@@ -25,7 +25,7 @@ def listen_to_keyboard(is_pressed: bool):
     p_i.is_actor_on_bomb()
     p_i.bomb_counter()
     p_i.bomb_explodes()
-
+    
     if event.name == 'a':
         if is_keydown(event, is_pressed):
             a_m.move_left()

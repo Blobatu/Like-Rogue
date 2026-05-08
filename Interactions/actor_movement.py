@@ -3,6 +3,11 @@ Auteur : Léonard  & Luc Desforges
 Date : 1 mai 2026
 Description : Module pour la gestion des déplacements des acteurs dans le jeu.
 """
+from pathlib import Path
+
+from playsound3 import playsound
+import pygame
+
 from Props.props_interaction import interaction_check
 from Actors.npc_database import listof_dbnpc as npc_db
 from Actors.player import player_instance as p_i
@@ -77,6 +82,10 @@ def move(is_vertical: bool, is_negative: bool, id: int = -1):
     if(id == -1):
         col, row = p_i.position
     else:
+        current_file = str(Path(__file__).resolve().parent.parent) + '\Actors\sus.mp3'
+        pygame.mixer.music.load(current_file)
+        pygame.mixer.music.play()
+
         col, row = npc_db[id].position
 
     new_col, new_row = col, row
@@ -152,7 +161,7 @@ def is_wall(col, row):
         return True
     
     sprite = levels[p_i.level-1][row][col]
-    interaction_check(sprite+" ")
+    interaction_check(col, row)
     
     if sprite+" " not in whitelist_sprites:
         return True

@@ -45,7 +45,7 @@ class Player(a.Actor):
 
 
 player_instance: Player = Player(potion_count=2,
-                                 bomb_count=0,
+                                 bomb_count=1,
                                  name="Nard", 
                                  sprite="@ ",
                                  position=(6, 24))
