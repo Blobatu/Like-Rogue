@@ -223,12 +223,13 @@ def replace_around_position_cols(row:int,
                                      check_value: str,
                                      range_number: int):
     for col in range(l_col, r_col, 2):
-        replace_around_position_rows(row, 
-                                     col, 
-                                     aura, 
-                                     value, 
-                                     check_value,
-                                     range_number)
+        if(col > 0):
+            replace_around_position_rows(row,
+                                         col,
+                                         aura,
+                                         value,
+                                         check_value,
+                                         range_number)
 
 def replace_around_position_rows(row: int,
                                  col: int,
